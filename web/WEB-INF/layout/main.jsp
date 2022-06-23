@@ -38,8 +38,8 @@
         <!-- Header End -->
 
         <!-- View -->
-        <jsp:include page="${context}/WEB-INF/views/shop-grid.jsp"/>
-        <%--<jsp:include page="${context}/WEB-INF/views/shoping-cart.jsp"/>--%>
+        <%--<jsp:include page="${context}/WEB-INF/views/shop-grid.jsp"/>--%>
+        <jsp:include page="${context}/WEB-INF/views/shoping-cart.jsp"/>
         <%--<jsp:include page="${context}/WEB-INF/views/shop-details.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
         <!-- View End-->
