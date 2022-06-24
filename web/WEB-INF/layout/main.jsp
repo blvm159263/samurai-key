@@ -44,6 +44,7 @@
         <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
         Le Nguyen NhatMin
         Hoang Nhan Duc Duc 1 2 3 4 5 6
+        Minh Bui
         <!-- View End-->
 
         <!-- Footer Section Begin -->
