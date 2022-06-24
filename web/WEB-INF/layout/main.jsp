@@ -42,9 +42,8 @@
         <%--<jsp:include page="${context}/WEB-INF/views/shoping-cart.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/shop-details.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
-        Bui Le Van Minh asdasdasdasdasdsad
         Le Nguyen NhatMin
-        Hoang Nhan Duc Duc 1 2 3 4
+        Hoang Nhan Duc Duc 1 2 3 4 5 6
         <!-- View End-->
 
         <!-- Footer Section Begin -->
