@@ -40,7 +40,7 @@
         <!-- controller đã lấy từ Servlet -> chỉ cần 1 dòng có thể hiện dc cả 4 trang không cần câu điều kiện  -->
         <jsp:include page="${context}/WEB-INF/views/${controller}/${action}.jsp"/>
         <!-- View End-->
-
+        fefefefwfsdfadfwef
         <!-- Footer Section Begin -->
         <jsp:include page="${context}/WEB-INF/layout/footer.jsp"/>
         <!-- Footer Section End -->
