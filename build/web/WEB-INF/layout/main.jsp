@@ -42,6 +42,7 @@
         <%--<jsp:include page="${context}/WEB-INF/views/shoping-cart.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/shop-details.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
+        Le Nguyen NhatMin
         <!-- View End-->
 
         <!-- Footer Section Begin -->
