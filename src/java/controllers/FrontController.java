@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author buile
+ * @author Admin
  */
-@WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
+@WebServlet(name = "FrontController", urlPatterns = {"*.do"})
 public class FrontController extends HttpServlet {
 
     /**
@@ -31,19 +31,19 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FrontController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FrontController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String url=request.getServletPath();
+        String controller=url.substring(0, url.lastIndexOf("/"));
+        String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
+        
+        System.out.println("ServletPath: "+url);
+        System.out.println("Controller: "+controller);
+        System.out.println("Action: "+action);
+        
+        request.setAttribute("controller", controller);
+        request.setAttribute("action", action);
+        
+        //this.getServletContext().getRequestDispatcher(controller).forward(request, response);
+        request.getRequestDispatcher(controller).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
