@@ -43,6 +43,7 @@
         <%--<jsp:include page="${context}/WEB-INF/views/shop-details.jsp"/>--%>
         <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
         Bui Le Van Minh asdasdasdasdasdsad
+        Le Nguyen NhatMin
         <!-- View End-->
 
         <!-- Footer Section Begin -->
