@@ -1284,9 +1284,10 @@ ol {
 }
 
 .product__discount__item__pic {
-    height: 270px;
+    
     position: relative;
     overflow: hidden;
+    height: 135px;
 }
 
 .product__discount__item__pic .product__discount__percent {
