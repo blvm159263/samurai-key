@@ -38,15 +38,8 @@
         <!-- Header End -->
 
         <!-- View -->
-        <jsp:include page="${context}/WEB-INF/views/shop-grid.jsp"/>
-        <%--<jsp:include page="${context}/WEB-INF/views/shoping-cart.jsp"/>--%>
-        <%--<jsp:include page="${context}/WEB-INF/views/shop-details.jsp"/>--%>
-        <%--<jsp:include page="${context}/WEB-INF/views/checkout.jsp"/>--%>
-        Le Nguyen NhatMin
-        Hoang Nhan Duc Duc 1 2 3 4 5 6
-        Bui Le Van Minh
-        Minh Bui
-        nakanld nasnk aspnd 
+        <!-- controller đã lấy từ Servlet -> chỉ cần 1 dòng có thể hiện dc cả 4 trang không cần câu điều kiện  -->
+        <jsp:include page="${context}/WEB-INF/views${controller}.jsp"/>
         <!-- View End-->
 
         <!-- Footer Section Begin -->

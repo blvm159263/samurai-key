@@ -28,12 +28,6 @@ public class DBUtil {
         return con;
 
     }
-    
-    public static void main(String[] args) {
-        DBUtil db = new DBUtil();
-        Connection con = db.getConnection();
-        System.out.println(con);
-    }
 }
 
 

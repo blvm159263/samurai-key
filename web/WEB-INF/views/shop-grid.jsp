@@ -2,14 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
-<div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-    <div class="hero__text">
-        <span>GAME KEY</span>
-        <h2>REPUTATION <br />100% </h2>
-        <p>7 days return and exchange</p>
-        <a href="#" class="primary-btn">SHOP NOW</a>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="img/bread.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Vegetable?s Package</h2>
+                    <div class="breadcrumb__option">
+                        <a href="index.jsp">Home</a>
+                        <a href="index.jsp">Vegetables</a>
+                        <span>Vegetable?s Package</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+<!-- Breadcrumb Section End -->
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
@@ -241,9 +251,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <c:set var="i" value="0"/>
-                    <c:forEach begin="${i}" end="${i+12}" var="pro" items="${listAll}" >
-                        <div id="demo" class="col-lg-4 col-md-6 col-sm-6 collapse">
+                    <c:forEach var="pro" items="${listAll}" >
+                        <div  class="col-lg-4 col-md-6 col-sm-6 ">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                                     <ul class="product__item__pic__hover">
@@ -256,23 +265,22 @@
                                 </div>
                             </div>
                         </div>
-                         <c:set var="i" value="${i+12}"/>       
                     </c:forEach>
                 </div>
                 <!-- List Product End -->
-                
+
                 <div class="product__pagination">
-                    <button type="button" class="btn btn-primary more" data-toggle="collapse" data-target="#demo">More</button>
+                    <a href="#">All</a>
                 </div>
-                
-                
-                
-<!--                <div class="product__pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                </div>-->
+
+
+
+                <!--                <div class="product__pagination">
+                                    <a href="#">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                                </div>-->
             </div>
         </div>
     </div>

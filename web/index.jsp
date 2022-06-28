@@ -8,5 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="" var="context"/>
 <!DOCTYPE html>
-
-<jsp:forward page="${context}/WEB-INF/layout/main.jsp"/>
+<%-- cú pháp là : .../[controller]/[action].do
+  ->  đưa tới FrontController xử lý tiếp
+--%>
+<jsp:forward page="${context}/home/list.do"/>

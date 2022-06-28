@@ -31,8 +31,11 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Lấy URL
         String url=request.getServletPath();
+        //Lấy controller
         String controller=url.substring(0, url.lastIndexOf("/"));
+        //Lấy action 
         String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
         
         System.out.println("ServletPath: "+url);
@@ -42,7 +45,7 @@ public class FrontController extends HttpServlet {
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         
-        //this.getServletContext().getRequestDispatcher(controller).forward(request, response);
+        //truyền tới controller để xử lý
         request.getRequestDispatcher(controller).forward(request, response);
     }
 

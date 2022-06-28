@@ -5,20 +5,29 @@
  */
 package controllers;
 
+import DAO.ConsolesDAO;
+import DAO.GenreDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.Consoles;
+import models.Genre;
+import models.Product;
 
 /**
  *
  * @author buile
  */
-@WebServlet(name = "ShopgridController", urlPatterns = {"/shop-grid"})
-public class ShopgridController extends HttpServlet {
+@WebServlet(name = "ShopgridController", urlPatterns = {"/home"})
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,13 +41,32 @@ public class ShopgridController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        ProductDAO pd = new ProductDAO();
+        GenreDAO gd = new GenreDAO();
+        ConsolesDAO cd = new ConsolesDAO();
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
+        switch (action) {
+            case "list":
+                List<Product> listNew = new ArrayList<>();
+                listNew = pd.listNew();
+                List<Product> listAll = new ArrayList<>();
+                listAll = pd.listHome();
+                List<Genre> listGenre = new ArrayList<>();
+                listGenre = gd.list();
+                List<Consoles> listConsoles = new ArrayList<>();
+                listConsoles = cd.list();
+                int size = listAll.size();
+                request.setAttribute("listConsoles", listConsoles);
+                request.setAttribute("listGenre", listGenre);
+                request.setAttribute("size", size);
+                request.setAttribute("listAll", listAll);
+                request.setAttribute("listNew", listNew);
+                break;
+        }
 
-
-        
         request.setAttribute("controller", controller);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }
