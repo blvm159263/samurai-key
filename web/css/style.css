@@ -959,6 +959,7 @@ ol {
     font-weight: 700;
     color: #1c1c1c;
     margin-bottom: 45px;
+    margin-top: 25px;
 }
 
 .latest-product__slider.owl-carousel .owl-nav {
@@ -3508,4 +3509,6 @@ ol {
 
 .rating:hover > input:checked ~ label:before{ opacity: 0.4; }
 
-
+.search-btn{
+    margin-bottom: 10px;
+}
