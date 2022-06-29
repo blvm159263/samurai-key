@@ -17,7 +17,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
@@ -27,7 +26,7 @@ import models.Product;
  * @author buile
  */
 @WebServlet(name = "ShopgridController", urlPatterns = {"/shop-grid"})
-public class Shop_gridController extends HttpServlet {
+public class ShopgridController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,7 +62,6 @@ public class Shop_gridController extends HttpServlet {
                 request.setAttribute("listAll", listAll);
                 break;
         }
-
         request.setAttribute("controller", controller);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Vegetable?s Package</h2>
+                    <h2>Every Game You're Finding</h2>
                     <div class="breadcrumb__option">
                         <a href="index.jsp">Home</a>
                         <a href="index.jsp">Vegetables</a>
@@ -28,18 +28,11 @@
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>Department</h4>
+                        <h4>Genre</h4>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
+                            <c:forEach var="genre" items="${listGenre}">
+                                <li><a href="#">${genre.genreName}</a></li>
+                                </c:forEach>
                         </ul>
                     </div>
                     <div class="sidebar__item">
@@ -59,133 +52,52 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar__item sidebar__item__color--option">
-                        <h4>Colors</h4>
-                        <div class="sidebar__item__color sidebar__item__color--white">
-                            <label for="white">
-                                White
-                                <input type="radio" id="white">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--gray">
-                            <label for="gray">
-                                Gray
-                                <input type="radio" id="gray">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--red">
-                            <label for="red">
-                                Red
-                                <input type="radio" id="red">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--black">
-                            <label for="black">
-                                Black
-                                <input type="radio" id="black">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--blue">
-                            <label for="blue">
-                                Blue
-                                <input type="radio" id="blue">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--green">
-                            <label for="green">
-                                Green
-                                <input type="radio" id="green">
-                            </label>
-                        </div>
+                    <div class="sidebar__item">
+                        <h4>Consoles</h4>
+                        <ul class="console__item row" >
+                            <c:forEach var="consoles" items="${listConsoles}" >
+                                <li class="col-md-5">
+                                    <label class="console__option">
+                                        <input type="radio" name="console" value="${consoles.consolesName}">
+                                        ${consoles.consolesName}
+                                    </label>
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </div>
                     <div class="sidebar__item">
-                        <h4>Popular Size</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Large
-                                <input type="radio" id="large">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                Medium
-                                <input type="radio" id="medium">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                Small
-                                <input type="radio" id="small">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                Tiny
-                                <input type="radio" id="tiny">
-                            </label>
+                        <h4>Rating</h4>
+                        <div class="rating">
+                            <input type="radio" name="rating" value="5" id="5"><label for="5">&star;</label>
+                            <input type="radio" name="rating" value="4" id="4"><label for="4">&star;</label>
+                            <input type="radio" name="rating" value="3" id="3"><label for="3">&star;</label>
+                            <input type="radio" name="rating" value="2" id="2"><label for="2">&star;</label>
+                            <input type="radio" name="rating" value="1" id="1"><label for="1">&star;</label>
                         </div>
                     </div>
                     <div class="sidebar__item">
                         <div class="latest-product__text">
-                            <h4>Latest Products</h4>
+                            <h4>Coming Soon!</h4>
                             <div class="latest-product__slider owl-carousel">
                                 <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-1.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
+                                    <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="${pro.linkImg1}" alt="">
+                                            </div>
+                                            
+                                        </a>
+                                    </c:forEach>
                                 </div>
                                 <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-1.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
+                                    <c:forEach begin="3" end="5" var="pro" items="${listNew}" >
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="${pro.linkImg1}" alt="">
+                                            </div>
+                                            
+                                        </a>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -194,37 +106,7 @@
             </div>
             <!--Left Side End  -->
 
-            <!-- New Product Begin -->
             <div class="col-lg-9 col-md-7">
-                <div class="product__discount">
-                    <div class="section-title product__discount__title">
-                        <h2>Featured Products</h2>
-                    </div>
-                    <div class="row">
-                        <div class="product__discount__slider owl-carousel">
-                            <c:forEach var="pro" items="${listNew}">
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="${pro.linkImg1}">
-                                            <div class="product__discount__percent">New</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>${pro.genre.genreName}</span>
-                                            <h5><a href="#">${pro.productName}</a></h5>
-                                            <div class="product__item__price"><fmt:formatNumber value="${pro.price}" type="currency" /> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Product End -->
-
                 <!-- List Product Begin -->
                 <div class="filter__item">
                     <div class="row">
@@ -270,7 +152,7 @@
                 <!-- List Product End -->
 
                 <div class="product__pagination">
-                    <a href="#">All</a>
+                    <a href="<c:url value="/shop-grid/listAll.do" />">All</a>
                 </div>
 
 

@@ -26,7 +26,7 @@ import models.Product;
  *
  * @author buile
  */
-@WebServlet(name = "ShopgridController", urlPatterns = {"/home"})
+@WebServlet(name = "HomeController", urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
 
     /**
@@ -59,6 +59,10 @@ public class HomeController extends HttpServlet {
                 List<Consoles> listConsoles = new ArrayList<>();
                 listConsoles = cd.list();
                 int size = listAll.size();
+                int maxPrice = pd.maxPrice();
+                int minPrice = pd.minPrice();
+                request.setAttribute("minPrice", minPrice);
+                request.setAttribute("maxPrice", maxPrice);
                 request.setAttribute("listConsoles", listConsoles);
                 request.setAttribute("listGenre", listGenre);
                 request.setAttribute("size", size);
@@ -66,7 +70,6 @@ public class HomeController extends HttpServlet {
                 request.setAttribute("listNew", listNew);
                 break;
         }
-
         request.setAttribute("controller", controller);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }

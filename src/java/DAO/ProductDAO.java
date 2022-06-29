@@ -98,11 +98,44 @@ public class ProductDAO {
         }
         return list;
     }
+    
+    public int minPrice(){
+        int price = 0;
+        DBUtil db = new DBUtil();
+        try {
+            Connection con = db.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT MIN(ProductPrice) FROM dbo.Product");
+            while (rs.next()) {
+                price = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
+    public int maxPrice(){
+        int price = 0;
+        DBUtil db = new DBUtil();
+        try {
+            Connection con = db.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT MAX( ProductPrice) FROM dbo.Product");
+            while (rs.next()) {
+                price = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
 
 //    public static void main(String[] args) {
+//        ProductDAO pd = new ProductDAO();
+//        int price = pd.maxPrice();
+//        System.out.println(price);
 //        
-//        for (Product product : list) {
-//            System.out.println(product.getLinkImg1());
-//        }
 //    }
 }

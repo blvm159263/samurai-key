@@ -17,87 +17,97 @@
             <!-- Left Side Begin -->
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
-                    <div class="sidebar__item">
-                        <h4>Genre</h4>
-                        <ul>
-                            <c:forEach var="genre" items="${listGenre}">
-                                <li><a href="#">${genre.genreName}</a></li>
+                    <form action="">
+                        <div class="sidebar__item">
+                            <h4>Genre</h4>
+                            <ul>
+                                <c:forEach var="genre" items="${listGenre}">
+                                    <!--<li><a href="#">${genre.genreName}</a></li>-->
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="genre" value="${genre.genreName}">
+                                            ${genre.genreName}
+                                        </label>
+                                    </li>
                                 </c:forEach>
-                        </ul>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Price</h4>
-                        <div class="price-range-wrap">
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                 data-min="10" data-max="540">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
+                            </ul>
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Price</h4>
+                            <div class="price-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                     data-min="${minPrice}" data-max="${maxPrice}">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
+                                <div class="range-slider">
+                                    <div class="price-input">
+                                        <input type="text" id="minamount">
+                                        <input type="text" id="maxamount">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Consoles</h4>
-                        <ul class="console__item row" >
-                            <c:forEach var="consoles" items="${listConsoles}" >
-                                <li class="col-md-5">
-                                    <label class="console__option">
-                                        <input type="radio" name="console" value="${consoles.consolesName}">
-                                        ${consoles.consolesName}
-                                    </label>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Rating</h4>
-                        <div class="rating">
-                            <input type="radio" name="rating" value="5" id="5"><label for="5">&star;</label>
-                            <input type="radio" name="rating" value="4" id="4"><label for="4">&star;</label>
-                            <input type="radio" name="rating" value="3" id="3"><label for="3">&star;</label>
-                            <input type="radio" name="rating" value="2" id="2"><label for="2">&star;</label>
-                            <input type="radio" name="rating" value="1" id="1"><label for="1">&star;</label>
+                        <div class="sidebar__item">
+                            <h4>Consoles</h4>
+                            <ul class="console__item row" >
+                                <c:forEach var="consoles" items="${listConsoles}" >
+                                    <li class="col-md-5">
+                                        <label class="console__option">
+                                            <input type="radio" name="console" value="${consoles.consolesName}">
+                                            ${consoles.consolesName}
+                                        </label>
+                                    </li>
+                                </c:forEach>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="sidebar__item">
-                        <div class="latest-product__text">
-                            <h4>Coming Soon!</h4>
-                            <div class="latest-product__slider owl-carousel">
-                                <div class="latest-prdouct__slider__item">
-                                    <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="${pro.linkImg1}" alt="">
-                                            </div>
-                                            
-                                        </a>
-                                    </c:forEach>
-                                </div>
-                                <div class="latest-prdouct__slider__item">
-                                    <c:forEach begin="3" end="5" var="pro" items="${listNew}" >
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="${pro.linkImg1}" alt="">
-                                            </div>
-                                            
-                                        </a>
-                                    </c:forEach>
+                        <div class="sidebar__item">
+                            <h4>Rating</h4>
+                            <div class="rating">
+                                <input type="radio" name="rating" value="5" id="5"><label for="5">&star;</label>
+                                <input type="radio" name="rating" value="4" id="4"><label for="4">&star;</label>
+                                <input type="radio" name="rating" value="3" id="3"><label for="3">&star;</label>
+                                <input type="radio" name="rating" value="2" id="2"><label for="2">&star;</label>
+                                <input type="radio" name="rating" value="1" id="1"><label for="1">&star;</label>
+                            </div>
+                        </div>
+                        <input class="btn-block btn btn-outline-info" type="button" value="Search" />
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>Coming Soon!</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                        <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="${pro.linkImg1}" alt="">
+                                                </div>
+
+                                            </a>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        <c:forEach begin="3" end="5" var="pro" items="${listNew}" >
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="${pro.linkImg1}" alt="">
+                                                </div>
+
+                                            </a>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!--Left Side End  -->
 
-            <!-- New Product Begin -->
+            <!--Product Begin --> 
             <div class="col-lg-9 col-md-7">
+                <!-- New Product Begin -->
                 <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Featured Products</h2>
@@ -172,7 +182,7 @@
                 <!-- List Product End -->
 
                 <div class="product__pagination">
-                    <a href="<c:url value="shop-grid/listAll.do" />">All</a>
+                    <a href="<c:url value="/shop-grid/listAll.do" />">All</a>
                 </div>
 
 
@@ -184,6 +194,7 @@
                                     <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                                 </div>-->
             </div>
+            <!--Product Begin --> 
         </div>
     </div>
 </section>
