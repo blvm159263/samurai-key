@@ -37,13 +37,15 @@ public class FrontController extends HttpServlet {
         String controller=url.substring(0, url.lastIndexOf("/"));
         //Lấy action 
         String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
-        
+        String op = request.getParameter("op");
         System.out.println("ServletPath: "+url);
         System.out.println("Controller: "+controller);
         System.out.println("Action: "+action);
+        System.out.println("Op: "+op);
         
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
+        request.setAttribute("op", op);
         
         //truyền tới controller để xử lý
         request.getRequestDispatcher(controller).forward(request, response);

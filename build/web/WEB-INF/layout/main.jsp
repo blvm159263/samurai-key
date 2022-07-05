@@ -20,16 +20,16 @@
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+        <c:url value="" />
         <!-- Css Styles -->
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/bootstrap.min.css"/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/font-awesome.min.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/elegant-icons.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/nice-select.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/jquery-ui.min.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/owl.carousel.min.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/slicknav.min.css" />" type="text/css">
+        <link rel="stylesheet" href="<c:url value="css/style.css" />" type="text/css">
     </head>
 
     <body>
@@ -39,7 +39,7 @@
 
         <!-- View -->
         <!-- controller đã lấy từ Servlet -> chỉ cần 1 dòng có thể hiện dc cả 4 trang không cần câu điều kiện  -->
-        <jsp:include page="${context}/WEB-INF/views${controller}.jsp"/>
+        <jsp:include page="${context}/WEB-INF/views/home${controller}.jsp"/>
         <!-- View End-->
 
         <!-- Footer Section Begin -->
@@ -47,14 +47,14 @@
         <!-- Footer Section End -->
 
         <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="<c:url value="js/jquery-3.3.1.min.js" />"></script>
+        <script src="<c:url value="js/bootstrap.min.js" />"></script>
+        <script src="<c:url value="js/jquery.nice-select.min.js" />"></script>
+        <script src="<c:url value="js/jquery-ui.min.js" />"></script>
+        <script src="<c:url value="js/jquery.slicknav.js" />"></script>
+        <script src="<c:url value="js/mixitup.min.js" />"></script>
+        <script src="<c:url value="js/owl.carousel.min.js" />"></script>
+        <script src="<c:url value="js/main.js" />"></script>
         <!-- Js Plugins End-->
 
 
