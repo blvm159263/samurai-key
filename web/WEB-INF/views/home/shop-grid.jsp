@@ -60,7 +60,7 @@
                             <c:forEach var="consoles" items="${listConsoles}" >
                                 <li class="col-md-5">
                                     <label class="console__option">
-                                        <input type="radio" name="console" value="${consoles.consolesName}">
+                                        <input type="radio" name="consoles" value="${consoles.consolesName}">
                                         ${consoles.consolesName}
                                     </label>
                                 </li>

@@ -17,7 +17,7 @@
             <!-- Left Side Begin -->
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
-                    <form action="">
+                    <form action="<c:url value="/home/shop-grid.do" />">
                         <div class="sidebar__item">
                             <h4>Genre</h4>
                             <ul>
@@ -43,8 +43,8 @@
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                                        <input type="text" name="minPrice" id="minamount">
+                                        <input type="text" name="maxPrice" id="maxamount">
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 <c:forEach var="consoles" items="${listConsoles}" >
                                     <li class="col-md-5">
                                         <label class="console__option">
-                                            <input type="radio" name="console" value="${consoles.consolesName}">
+                                            <input type="radio" name="consoles" value="${consoles.consolesName}">
                                             ${consoles.consolesName}
                                         </label>
                                     </li>
@@ -72,7 +72,7 @@
                                 <input type="radio" name="rating" value="1" id="1"><label for="1">&star;</label>
                             </div>
                         </div>
-                        <input class="btn-block btn btn-outline-info" type="button" value="Search" />
+                        <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
                         <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>Coming Soon!</h4>

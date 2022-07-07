@@ -28,6 +28,10 @@ import models.Product;
 @WebServlet(name = "ShopgridController", urlPatterns = {"/shop-grid"})
 public class ShopgridController extends HttpServlet {
 
+    ProductDAO pd = new ProductDAO();
+    GenreDAO gd = new GenreDAO();
+    ConsolesDAO cd = new ConsolesDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,34 +44,56 @@ public class ShopgridController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO pd = new ProductDAO();
-        GenreDAO gd = new GenreDAO();
-        ConsolesDAO cd = new ConsolesDAO();
+
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
         //Lấy op
         String op = (String) request.getAttribute("op");
-
+        op = op.toLowerCase();
+        listBase(request, response);
         switch (op) {
-            case "listAll":
-                List<Product> listAll = new ArrayList<>();
-                listAll = pd.listAll();
-                List<Genre> listGenre = new ArrayList<>();
-                listGenre = gd.list();
-                List<Consoles> listConsoles = new ArrayList<>();
-                listConsoles = cd.list();
-                int size = listAll.size();
-                request.setAttribute("listConsoles", listConsoles);
-                request.setAttribute("listGenre", listGenre);
-                request.setAttribute("size", size);
-                request.setAttribute("listAll", listAll);
+            case "listall":
+                
+                listAll(request, response);
+                break;
+            case "filter":
+                filter(request, response);
                 break;
         }
         request.setAttribute("controller", controller);
         request.setAttribute("ation", action);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
+    }
+    
+    protected void listBase(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Genre> listGenre = new ArrayList<>();
+        listGenre = gd.list();
+        List<Consoles> listConsoles = new ArrayList<>();
+        listConsoles = cd.list();
+        request.setAttribute("listConsoles", listConsoles);
+        request.setAttribute("listGenre", listGenre);
+    }
+
+    protected void listAll(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Product> listAll = new ArrayList<>();
+        listAll = pd.listAll();
+        int size = listAll.size();
+        request.setAttribute("size", size);
+        request.setAttribute("listAll", listAll);
+    }
+
+    protected void filter(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String genre = request.getParameter("genre");
+        int minPrice = Integer.parseInt(request.getParameter("minPrice").substring(1));
+        int maxPrice = Integer.parseInt(request.getParameter("maxPrice").substring(1));
+        String consoles = request.getParameter("consoles");
+        int rating = Integer.parseInt(request.getParameter("rating"));
+        List<Product> list = new ArrayList<>();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
