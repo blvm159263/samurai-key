@@ -48,6 +48,8 @@ public class HomeController extends HttpServlet {
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
+        //Lấy op
+        String op = (String) request.getAttribute("op");
         switch (action) {
             case "list":
                 List<Product> listNew = new ArrayList<>();
@@ -71,7 +73,9 @@ public class HomeController extends HttpServlet {
                 break;
         }
         request.setAttribute("controller", controller);
-        request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
+        request.setAttribute("action", action);
+        request.setAttribute("op", op);
+        request.getRequestDispatcher("/"+action).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

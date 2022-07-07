@@ -7,7 +7,7 @@
         <span>GAME KEY</span>
         <h2>REPUTATION <br />100% </h2>
         <p>7 days return and exchange</p>
-        <a href="#" class="primary-btn">SHOP NOW</a>
+        <a href="<c:url value="/home/shop-grid.do?op=listAll" />" class="primary-btn">SHOP NOW</a>
     </div>
 </div>
 <!-- Product Section Begin -->
@@ -182,7 +182,7 @@
                 <!-- List Product End -->
 
                 <div class="product__pagination">
-                    <a href="<c:url value="/shop-grid/listAll.do" />">All</a>
+                    <a href="<c:url value="/home/shop-grid.do?op=listAll" />">All</a>
                 </div>
 
 

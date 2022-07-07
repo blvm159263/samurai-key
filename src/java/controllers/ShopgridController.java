@@ -47,7 +47,10 @@ public class ShopgridController extends HttpServlet {
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
-        switch (action) {
+        //Lấy op
+        String op = (String) request.getAttribute("op");
+
+        switch (op) {
             case "listAll":
                 List<Product> listAll = new ArrayList<>();
                 listAll = pd.listAll();
@@ -63,6 +66,7 @@ public class ShopgridController extends HttpServlet {
                 break;
         }
         request.setAttribute("controller", controller);
+        request.setAttribute("ation", action);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }
 

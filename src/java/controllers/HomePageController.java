@@ -5,20 +5,28 @@
  */
 package controllers;
 
+import DAO.ConsolesDAO;
+import DAO.GenreDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Consoles;
+import models.Genre;
+import models.Product;
 
 /**
  *
- * @author Admin
+ * @author buile
  */
-@WebServlet(name = "FrontController", urlPatterns = {"*.do"})
-public class FrontController extends HttpServlet {
+@WebServlet(name = "HomePageController", urlPatterns = {"/homepage"})
+public class HomePageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,27 +39,45 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Lấy URL
-        String url=request.getServletPath();
-        //Lấy controller
-        String controller=url.substring(1, url.lastIndexOf("/"));
-        //Lấy action 
-        String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
-        String op = request.getParameter("op");
-        System.out.println("ServletPath: "+url);
-        System.out.println("Controller: "+controller);
-        System.out.println("Action: "+action);
-        System.out.println("Op: "+op);
-        
+        response.setContentType("text/html;charset=UTF-8");
+        ProductDAO pd = new ProductDAO();
+        GenreDAO gd = new GenreDAO();
+        ConsolesDAO cd = new ConsolesDAO();
+        //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
+        String controller = (String) request.getAttribute("controller");
+        //Lấy action
+        String action = (String) request.getAttribute("action");
+        //Lấy op
+        String op = (String) request.getAttribute("op");
+        switch (op) {
+            case "list":
+                List<Product> listNew = new ArrayList<>();
+                listNew = pd.listNew();
+                List<Product> listAll = new ArrayList<>();
+                listAll = pd.listHome();
+                List<Genre> listGenre = new ArrayList<>();
+                listGenre = gd.list();
+                List<Consoles> listConsoles = new ArrayList<>();
+                listConsoles = cd.list();
+                int size = listAll.size();
+                int maxPrice = pd.maxPrice();
+                int minPrice = pd.minPrice();
+                request.setAttribute("minPrice", minPrice);
+                request.setAttribute("maxPrice", maxPrice);
+                request.setAttribute("listConsoles", listConsoles);
+                request.setAttribute("listGenre", listGenre);
+                request.setAttribute("size", size);
+                request.setAttribute("listAll", listAll);
+                request.setAttribute("listNew", listNew);
+                break;
+        }
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.setAttribute("op", op);
-        
-        //truyền tới controller để xử lý
-        request.getRequestDispatcher("/"+controller).forward(request, response);
+        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
