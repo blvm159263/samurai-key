@@ -7,6 +7,7 @@ package DAO;
 
 import Context.DBUtil;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -131,11 +132,31 @@ public class ProductDAO {
         }
         return price;
     }
+    public Product getProductbyID(String id) {
+        DBUtil db = new DBUtil();
+        String query = "SELECT ProductPrice,ProductName,ProductQuantity, ProductDesc,Rating,"
+                + "LinkIMG1,LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5 "
+                + "FROM dbo.Product WHERE ProductID=?";
+        try {
+            Connection con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Product( rs.getInt(1), rs.getString(2), rs.getByte(3), rs.getString(4), 
+                        rs.getByte(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-//    public static void main(String[] args) {
-//        ProductDAO pd = new ProductDAO();
-//        int price = pd.maxPrice();
-//        System.out.println(price);
-//        
-//    }
+    public static void main(String[] args) {
+        ProductDAO pd = new ProductDAO();
+        Product pr = pd.getProductbyID("1");
+        System.out.println(pr);
+        
+    }
 }
