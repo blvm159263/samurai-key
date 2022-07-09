@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>${pro.genre.genreName}</span>
-                                            <h5><a href="#">${pro.productName}</a></h5>
+                                            <h5><a href="detail?pid=${pro.productID}">${pro.productName}</a></h5>
                                             <div class="product__item__price"><fmt:formatNumber value="${pro.price}" type="currency" /> </div>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">${pro.productName}</a></h6>
+                                    <h6><a href="detail?pid=${pro.productID}">${pro.productName}</a></h6>
                                     <h5><fmt:formatNumber value="${pro.price}" type="currency" /></h5>
                                 </div>
                             </div>

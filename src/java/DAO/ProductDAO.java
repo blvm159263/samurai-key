@@ -153,10 +153,10 @@ public class ProductDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        ProductDAO pd = new ProductDAO();
-        Product pr = pd.getProductbyID("1");
-        System.out.println(pr);
-        
-    }
+//    public static void main(String[] args) {
+//        ProductDAO pd = new ProductDAO();
+//        Product pr = pd.getProductbyID("1");
+//        System.out.println(pr);
+//        
+//    }
 }
