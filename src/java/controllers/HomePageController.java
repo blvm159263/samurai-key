@@ -51,14 +51,10 @@ public class HomePageController extends HttpServlet {
         String op = (String) request.getAttribute("op");
         switch (op) {
             case "list":
-                List<Product> listNew = new ArrayList<>();
-                listNew = pd.listNew();
-                List<Product> listAll = new ArrayList<>();
-                listAll = pd.listHome();
-                List<Genre> listGenre = new ArrayList<>();
-                listGenre = gd.list();
-                List<Consoles> listConsoles = new ArrayList<>();
-                listConsoles = cd.list();
+                List<Product> listNew =pd.listNew();
+                List<Product> listAll = pd.listHome();
+                List<Genre> listGenre = gd.list();
+                List<Consoles> listConsoles = cd.list();
                 int size = listAll.size();
                 int maxPrice = pd.maxPrice();
                 int minPrice = pd.minPrice();

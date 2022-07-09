@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -70,8 +71,8 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                            <li>Free Shipping for all Order of $99</li>
+                            <li><i class="fa fa-envelope"></i> 4AnhEmSieuNhanGao@fpt.edu.vn</li>
+                            <li>Support 24/24</li>
                         </ul>
                     </div>
                 </div>
@@ -99,20 +100,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./index.jsp"><img src="img/logo.png" alt=""></a>
+                    <a href="./index.jsp"><img src="<c:url value="/img/logo.png" />" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text" placeholder="What do you need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="<c:url value="/home/shop-grid.do" /> ">
+                            <input type="text" placeholder="What do you need?" name="fname" value="${fname}">
+                            <button type="submit" class="site-btn" name="op" value="search">SEARCH</button>
                         </form>
                     </div>
 

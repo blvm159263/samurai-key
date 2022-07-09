@@ -55,26 +55,33 @@ public class ShopgridController extends HttpServlet {
         listBase(request, response);
         switch (op) {
             case "listall":
-                
                 listAll(request, response);
                 break;
             case "filter":
                 filter(request, response);
+                break;
+            case "search":
+                search(request, response);
                 break;
         }
         request.setAttribute("controller", controller);
         request.setAttribute("ation", action);
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }
-    
+
     protected void listBase(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Genre> listGenre = new ArrayList<>();
-        listGenre = gd.list();
-        List<Consoles> listConsoles = new ArrayList<>();
-        listConsoles = cd.list();
+        List<Genre> listGenre = gd.list();
+        List<Consoles> listConsoles = cd.list();
+        int maxPrice = pd.maxPrice();
+        int minPrice = pd.minPrice();
+        List<Product> listNew = pd.listNew();
+        request.setAttribute("listNew", listNew);
+        request.setAttribute("minPrice", minPrice);
+        request.setAttribute("maxPrice", maxPrice);
         request.setAttribute("listConsoles", listConsoles);
         request.setAttribute("listGenre", listGenre);
+
     }
 
     protected void listAll(HttpServletRequest request, HttpServletResponse response)
@@ -83,17 +90,38 @@ public class ShopgridController extends HttpServlet {
         listAll = pd.listAll();
         int size = listAll.size();
         request.setAttribute("size", size);
-        request.setAttribute("listAll", listAll);
+        request.setAttribute("list", listAll);
     }
 
     protected void filter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String genre = request.getParameter("genre");
+        String genreID = request.getParameter("genreID");
         int minPrice = Integer.parseInt(request.getParameter("minPrice").substring(1));
         int maxPrice = Integer.parseInt(request.getParameter("maxPrice").substring(1));
-        String consoles = request.getParameter("consoles");
-        int rating = Integer.parseInt(request.getParameter("rating"));
-        List<Product> list = new ArrayList<>();
+        String consolesID = request.getParameter("consolesID");
+        String rating = request.getParameter("rating");
+        List<Product> list = pd.filter(genreID, consolesID, minPrice, maxPrice, rating);
+        int size = list.size();
+        request.setAttribute("curGen", genreID);
+        request.setAttribute("curCons", consolesID);
+        request.setAttribute("curRating", rating);
+        request.setAttribute("curMin", minPrice);
+        request.setAttribute("curMax", maxPrice);
+        request.setAttribute("curRating", rating);
+        request.setAttribute("list", list);
+        request.setAttribute("size", size);
+
+    }
+
+    protected void search(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String fname = request.getParameter("fname");
+        List<Product> list = pd.findProductByName(fname);
+        int size = list.size();
+        request.setAttribute("list", list);
+        request.setAttribute("fname", fname);
+        request.setAttribute("size", size);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -25,7 +25,7 @@
                                     <!--<li><a href="#">${genre.genreName}</a></li>-->
                                     <li>
                                         <label>
-                                            <input type="radio" name="genre" value="${genre.genreName}">
+                                            <input type="radio" name="genreID" value="${genre.genreID}">
                                             ${genre.genreName}
                                         </label>
                                     </li>
@@ -55,7 +55,7 @@
                                 <c:forEach var="consoles" items="${listConsoles}" >
                                     <li class="col-md-5">
                                         <label class="console__option">
-                                            <input type="radio" name="consoles" value="${consoles.consolesName}">
+                                            <input type="radio" name="consolesID" value="${consoles.consolesID}">
                                             ${consoles.consolesName}
                                         </label>
                                     </li>
@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>${pro.genre.genreName}</span>
-                                            <h5><a href="detail?pid=${pro.productID}">${pro.productName}</a></h5>
+                                            <h5><a href="<c:url value="/home/details.do?pid=${pro.productID}" />">${pro.productName}</a></h5>
                                             <div class="product__item__price"><fmt:formatNumber value="${pro.price}" type="currency" /> </div>
                                         </div>
                                     </div>
@@ -145,7 +145,6 @@
                                 <span>Sort By</span>
                                 <select>
                                     <option value="0">Default</option>
-                                    <option value="0">Default</option>
                                 </select>
                             </div>
                         </div>
@@ -157,7 +156,6 @@
                         <div class="col-lg-4 col-md-3">
                             <div class="filter__option">
                                 <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
                             </div>
                         </div>
                     </div>

@@ -12,4 +12,3 @@
   ->  đưa tới FrontController xử lý tiếp
 --%>
 <jsp:forward page="${context}/home/homepage.do?op=list"/>
-<%--<jsp:forward page="${context}/shop-grid/listAll.do"/>--%>

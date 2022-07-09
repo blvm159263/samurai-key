@@ -50,28 +50,7 @@ public class HomeController extends HttpServlet {
         String action = (String) request.getAttribute("action");
         //Lấy op
         String op = (String) request.getAttribute("op");
-        switch (action) {
-            case "list":
-                List<Product> listNew = new ArrayList<>();
-                listNew = pd.listNew();
-                List<Product> listAll = new ArrayList<>();
-                listAll = pd.listHome();
-                List<Genre> listGenre = new ArrayList<>();
-                listGenre = gd.list();
-                List<Consoles> listConsoles = new ArrayList<>();
-                listConsoles = cd.list();
-                int size = listAll.size();
-                int maxPrice = pd.maxPrice();
-                int minPrice = pd.minPrice();
-                request.setAttribute("minPrice", minPrice);
-                request.setAttribute("maxPrice", maxPrice);
-                request.setAttribute("listConsoles", listConsoles);
-                request.setAttribute("listGenre", listGenre);
-                request.setAttribute("size", size);
-                request.setAttribute("listAll", listAll);
-                request.setAttribute("listNew", listNew);
-                break;
-        }
+        
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.setAttribute("op", op);

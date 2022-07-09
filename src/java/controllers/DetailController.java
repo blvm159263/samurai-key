@@ -18,7 +18,7 @@ import models.Product;
  *
  * @author Le Nguyen Nhat Minh
  */
-@WebServlet(name = "DetailController", urlPatterns = {"/detail"})
+@WebServlet(name = "DetailController", urlPatterns = {"/details"})
 public class DetailController extends HttpServlet {
 
     /**
