@@ -35,8 +35,8 @@ public class Product {
         this.genre = genre;
     }
 
-    public Product(int price, String productName, byte quantity, String desc, byte rating, String linkImg1, String linkImg2, String linkImg3, String linkImg4, String linkImg5) {
-
+    public Product(int id, int price, String productName, byte quantity, String desc, byte rating, String linkImg1, String linkImg2, String linkImg3, String linkImg4, String linkImg5) {
+        this.productID = id;
         this.price = price;
         this.productName = productName;
         this.quantity = quantity;

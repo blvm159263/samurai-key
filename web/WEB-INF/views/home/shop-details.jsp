@@ -9,7 +9,7 @@
                     <div class="breadcrumb__option">
                         <a href="index.jsp">Home</a>
                         <a href="index.jsp">Vegetables</a>
-                        <span>Vegetable?s Package</span>
+                        <span>Vegetables Package</span>
                     </div>
                 </div>
             </div>
@@ -22,27 +22,28 @@
 <section class="product-details spad">
     <div class="container">
         <div class="row">
+<!--Picture of product -->
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="img/product/details/product-details-1.jpg" alt="">
+                             src="${detail.linkImg1}" alt="Hinh anh Game">
                     </div>
+                    <!--Picture of gameplay-->
                     <div class="product__details__pic__slider owl-carousel">
-                        <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                             src="img/product/details/thumb-1.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                             src="img/product/details/thumb-2.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                             src="img/product/details/thumb-3.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                             src="img/product/details/thumb-4.jpg" alt="">
+                        <img src="${detail.linkImg2}" alt="Hinh anh Game">
+                        <img src="${detail.linkImg3}" alt="Hinh anh Game">
+                        <img src="${detail.linkImg4}" alt="Hinh anh Game">
+                        <img src="${detail.linkImg5}" alt="Hinh anh Game">
                     </div>
                 </div>
             </div>
+                    
             <div class="col-lg-6 col-md-6">
+                
                 <div class="product__details__text">
-                    <h3>Vetgetable?s Package</h3>
+                    <h3>Vegetables Package</h3>
+                    <!--Rating ???? -->
                     <div class="product__details__rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -52,9 +53,8 @@
                         <span>(18 reviews)</span>
                     </div>
                     <div class="product__details__price">$50.00</div>
-                    <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                        vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                        quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                    <!--Description -->
+                    <p>${detail.desc}</p>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
+                    <a href="#" class="primary-btn">Add to cart</a>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
