@@ -32,11 +32,15 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String controller = (String) request.getParameter("controller");
+        String action = (String) request.getParameter("action");
         String id = request.getParameter("pid");
         ProductDAO dao = new ProductDAO();
         Product p = dao.getProductbyID(id);
+        request.setAttribute("controller", controller);
+        request.setAttribute("action", action);
         request.setAttribute("detail", p);
-        request.getRequestDispatcher("shop-details.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
 
     }
 

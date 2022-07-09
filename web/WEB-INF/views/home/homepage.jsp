@@ -170,7 +170,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="detail?pid=${pro.productID}">${pro.productName}</a></h6>
+                                    <h6><a href="<c:url value="/home/details?pid=${pro.productID}">">${pro.productName}"</a></h6>
                                     <h5><fmt:formatNumber value="${pro.price}" type="currency" /></h5>
                                 </div>
                             </div>
