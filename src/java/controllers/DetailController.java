@@ -7,6 +7,7 @@ package controllers;
 
 import DAO.ProductDAO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,13 +33,15 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String controller =  (String) request.getAttribute("controller");
-        String action =  (String) request.getAttribute("action");
+        String controller = (String) request.getAttribute("controller");
+        String action = (String) request.getAttribute("action");
         String id = request.getParameter("pid");
         ProductDAO dao = new ProductDAO();
         Product p = dao.getProductbyID(id);
+        List<Product> listNew = dao.listNew();
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
+        request.setAttribute("listNew", listNew);
         request.setAttribute("detail", p);
         request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
 

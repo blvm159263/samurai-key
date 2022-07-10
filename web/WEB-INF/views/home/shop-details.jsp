@@ -3,21 +3,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="<c:url value="img/bread.jpg" />">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
-                    <h2>Vegetable?s Package</h2>
-                    <div class="breadcrumb__option">
-                        <a href="index.jsp">Home</a>
-                        <a href="index.jsp">Vegetables</a>
-                        <span>Vegetables Package</span>
-                    </div>
+<section class="breadcrumb-section set-bg"  />">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb__text">
+                <h2>Vegetable?s Package</h2>
+                <div class="breadcrumb__option">
+                    <a href="index.jsp">Home</a>
+                    <a href="index.jsp">Vegetables</a>
+                    <span>Vegetables Package</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 <!-- Breadcrumb Section End -->
 
@@ -69,7 +69,7 @@
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping.</span></li>
                         <li><b>Weight</b> <span>0.5 kg</span></li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -91,9 +91,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
+            <c:forEach begin="2" end="7" var="pro" items="${listNew}" >
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -101,57 +102,12 @@
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
-                            <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
+                            <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${pro.productName}</a></h6>
+                            <h5><fmt:formatNumber value="${pro.price}" type="currency" /></h5>
                         </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
-                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
-                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
-                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
-                    </div>
-                </div>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
 </section>

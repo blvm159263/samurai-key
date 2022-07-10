@@ -93,7 +93,6 @@
                                                 <div class="latest-product__item__pic">
                                                     <img src="${pro.linkImg1}" alt="">
                                                 </div>
-
                                             </a>
                                         </c:forEach>
                                     </div>
