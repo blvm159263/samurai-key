@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
@@ -56,12 +57,18 @@ public class ShopgridController extends HttpServlet {
         switch (op) {
             case "listall":
                 listAll(request, response);
+                paging(request, response);
                 break;
             case "filter":
                 filter(request, response);
+                paging(request, response);
                 break;
             case "search":
                 search(request, response);
+                paging(request, response);
+                break;
+            case "showpage":
+                paging(request, response);
                 break;
         }
         request.setAttribute("controller", controller);
@@ -84,17 +91,49 @@ public class ShopgridController extends HttpServlet {
 
     }
 
+    protected int countP(int size) {
+        int endP = size / 15;
+        if (endP % 15 != 0) {
+            endP++;
+        }
+        return endP;
+    }
+
     protected void listAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Product> listAll = new ArrayList<>();
         listAll = pd.listAll();
         int size = listAll.size();
-        request.setAttribute("size", size);
-        request.setAttribute("list", listAll);
+        int endP = countP(size);
+        HttpSession session = request.getSession();
+        session.setAttribute("endP", endP);
+        session.setAttribute("list", listAll);
+        session.setAttribute("size", size);
+    }
+
+    protected void paging(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        List<Product> list = (ArrayList<Product>) session.getAttribute("list");
+        String curPage = request.getParameter("page");
+        if (curPage == null) {
+            curPage = "1";
+        }
+        int index = (Integer.parseInt(curPage) - 1) * 15;
+        List<Product> listP = new ArrayList<>();
+        for (int i = index; i < index + 15; i++) {
+            Product p = list.get(i);
+            listP.add(p);
+            if (i == (Integer) session.getAttribute("size") - 1) {
+                break;
+            }
+        }
+        request.setAttribute("listP", listP);
     }
 
     protected void filter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String genreID = request.getParameter("genreID");
         int minPrice = Integer.parseInt(request.getParameter("minPrice").substring(1));
         int maxPrice = Integer.parseInt(request.getParameter("maxPrice").substring(1));
@@ -102,25 +141,30 @@ public class ShopgridController extends HttpServlet {
         String rating = request.getParameter("rating");
         List<Product> list = pd.filter(genreID, consolesID, minPrice, maxPrice, rating);
         int size = list.size();
-        request.setAttribute("curGen", genreID);
-        request.setAttribute("curCons", consolesID);
-        request.setAttribute("curRating", rating);
-        request.setAttribute("curMin", minPrice);
-        request.setAttribute("curMax", maxPrice);
-        request.setAttribute("curRating", rating);
-        request.setAttribute("list", list);
-        request.setAttribute("size", size);
+        int endP = countP(size);
+        session.setAttribute("curGen", genreID);
+        session.setAttribute("curCons", consolesID);
+        session.setAttribute("curRating", rating);
+        session.setAttribute("curMin", minPrice);
+        session.setAttribute("curMax", maxPrice);
+        session.setAttribute("curRating", rating);
+        session.setAttribute("list", list);
+        session.setAttribute("size", size);
+        session.setAttribute("endP", endP);
 
     }
 
     protected void search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String fname = request.getParameter("fname");
         List<Product> list = pd.findProductByName(fname);
         int size = list.size();
-        request.setAttribute("list", list);
-        request.setAttribute("fname", fname);
-        request.setAttribute("size", size);
+        int endP = countP(size);
+        session.setAttribute("list", list);
+        session.setAttribute("fname", fname);
+        session.setAttribute("size", size);
+        session.setAttribute("endP", endP);
 
     }
 

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
-<div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+<div class="hero__item set-bg" data-setbg="<c:url value="/img/hero/banner.jpg" />">
     <div class="hero__text">
         <span>GAME KEY</span>
         <h2>REPUTATION <br />100% </h2>
@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>${pro.genre.genreName}</span>
-                                            <h5><a href="<c:url value="/home/details.do?pid=${pro.productID}" />">${pro.productName}</a></h5>
+                                            <h5><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${pro.productName}</a></h5>
                                             <div class="product__item__price"><fmt:formatNumber value="${pro.price}" type="currency" /> </div>
                                         </div>
                                     </div>
@@ -170,7 +170,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="<c:url value="/home/details?pid=${pro.productID}">">${pro.productName}"</a></h6>
+                                    <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${pro.productName}"</a></h6>
                                     <h5><fmt:formatNumber value="${pro.price}" type="currency" /></h5>
                                 </div>
                             </div>

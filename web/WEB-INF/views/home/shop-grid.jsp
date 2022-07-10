@@ -128,7 +128,6 @@
                                 <span>Sort By</span>
                                 <select>
                                     <option value="0">Default</option>
-                                    <option value="0">Default</option>
                                 </select>
                             </div>
                         </div>
@@ -145,7 +144,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <c:forEach var="pro" items="${list}" >
+                    <c:forEach var="pro" items="${listP}" >
                         <div  class="col-lg-4 col-md-6 col-sm-6 ">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
@@ -154,27 +153,21 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">${pro.productName}</a></h6>
+                                    <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${pro.productName}</a></h6>
                                     <h5><fmt:formatNumber value="${pro.price}" type="currency" /></h5>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+
                 <!-- List Product End -->
 
                 <div class="product__pagination">
-                    <a href="<c:url value="/shop-grid/listAll.do" />">All</a>
+                    <c:forEach begin="1" end="${endP}" varStatus="loop">
+                        <a href="<c:url value="/home/shop-grid.do?op=showPage&page=${loop.count}" />">${loop.count}</a>
+                    </c:forEach>
                 </div>
-
-
-
-                <!--                <div class="product__pagination">
-                                    <a href="#">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#">3</a>
-                                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                                </div>-->
             </div>
         </div>
     </div>

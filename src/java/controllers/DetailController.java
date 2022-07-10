@@ -18,7 +18,7 @@ import models.Product;
  *
  * @author Le Nguyen Nhat Minh
  */
-@WebServlet(name = "DetailController", urlPatterns = {"/details"})
+@WebServlet(name = "DetailController", urlPatterns = {"/shop-details"})
 public class DetailController extends HttpServlet {
 
     /**
@@ -32,8 +32,8 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String controller = (String) request.getParameter("controller");
-        String action = (String) request.getParameter("action");
+        String controller =  (String) request.getAttribute("controller");
+        String action =  (String) request.getAttribute("action");
         String id = request.getParameter("pid");
         ProductDAO dao = new ProductDAO();
         Product p = dao.getProductbyID(id);

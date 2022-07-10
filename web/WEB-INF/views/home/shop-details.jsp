@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="img/bread.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="<c:url value="img/bread.jpg" />">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="<c:url value="/WEB-INF/home/checkout.do">" class="primary-btn">Add to cart</a>
+                    <a href="<c:url value="/WEB-INF/home/checkout.do"/>" class="primary-btn">Add to cart</a>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
