@@ -5,16 +5,12 @@
         <group>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-grid.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/header.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/footer.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/HomeController.java</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/DAO/ProductDAO.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/index.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shoping-cart.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Cart.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/HomePageController.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/homepage.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/Context/DBUtil.java</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/checkout.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-details.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/DetailController.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/ShopgridController.java</file>
