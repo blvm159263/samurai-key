@@ -40,7 +40,6 @@
         <!-- controller đã lấy từ Servlet -> chỉ cần 1 dòng có thể hiện dc cả 4 trang không cần câu điều kiện  -->
         <jsp:include page="${context}/WEB-INF/views/${controller}/${action}.jsp"/>
         <!-- View End-->
-
         <!-- Footer Section Begin -->
         <jsp:include page="${context}/WEB-INF/layout/footer.jsp"/>
         <!-- Footer Section End -->
@@ -55,8 +54,6 @@
         <script src="<c:url value="/js/owl.carousel.min.js" />"></script>
         <script src="<c:url value="/js/main.js" />"></script>
         <!-- Js Plugins End-->
-
-
     </body>
 
 </html>

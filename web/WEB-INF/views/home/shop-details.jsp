@@ -1,5 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en-us"/>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="<c:url value="img/bread.jpg" />">
     <div class="container">
@@ -23,7 +25,7 @@
 <section class="product-details spad">
     <div class="container">
         <div class="row">
-<!--Picture of product -->
+            <!--Picture of product -->
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
@@ -39,9 +41,9 @@
                     </div>
                 </div>
             </div>
-                    
+
             <div class="col-lg-6 col-md-6">
-                
+
                 <div class="product__details__text">
                     <h3>${detail.productName}</h3>
                     <!--Rating ???? -->
@@ -52,7 +54,7 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-half-o"></i>
                     </div>
-                    <div class="product__details__price">${detail.price}</div>
+                    <div class="product__details__price"><fmt:formatNumber value="${detail.price}" type="currency" /> </div>
                     <!--Description -->
                     <p>${detail.desc}</p>
                     <div class="product__details__quantity">
@@ -65,9 +67,9 @@
                     <a href="<c:url value="/WEB-INF/home/checkout.do"/>" class="primary-btn">Add to cart</a>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                        <li><b>Shipping</b> <span>01 day shipping.</span></li>
                         <li><b>Weight</b> <span>0.5 kg</span></li>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -91,7 +93,22 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
+                            <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -99,14 +116,14 @@
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
+                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
+                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -114,14 +131,14 @@
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
+                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
+                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${detail.linkImg1}">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -129,26 +146,12 @@
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
+                        <h6><a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />">${detail.productName}</a></h6>
+                        <h5><fmt:formatNumber value="${detail.price}" type="currency" /></h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>

@@ -203,15 +203,15 @@ public class ProductDAO {
         return list;
     }
 
-    public Product getProductbyID(String id) {
+public Product getProductbyID(String pid) {
         DBUtil db = new DBUtil();
-        String query = "SELECT ProductPrice,ProductName,ProductQuantity, ProductDesc,Rating,"
+        String query = "SELECT ProductID,ProductPrice,ProductName,ProductQuantity, ProductDesc,Rating,"
                 + "LinkIMG1,LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5 "
                 + "FROM dbo.Product WHERE ProductID=?";
         try {
             Connection con = db.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, id);
+            ps.setString(1, pid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return new Product(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getByte(4), rs.getString(5),
@@ -224,12 +224,12 @@ public class ProductDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        ProductDAO pd = new ProductDAO();
-        List<Product> list = null;
-        list = pd.findProductByName(null);
-        for (Product p : list) {
-            System.out.println(p.getProductID());
-        }
-    }
+//    public static void main(String[] args) {
+//        ProductDAO pd = new ProductDAO();
+//        List<Product> list = null;
+//        list = pd.findProductByName(null);
+//        for (Product p : list) {
+//            System.out.println(p.getProductID());
+//        }
+//    }
 }
