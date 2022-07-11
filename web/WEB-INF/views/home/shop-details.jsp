@@ -2,25 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="<c:url value="/img/bread.jpg" />">
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="breadcrumb__text">
-                <h2>Vegetable?s Package</h2>
-                <div class="breadcrumb__option">
-                    <a href="index.jsp">Home</a>
-                    <a href="index.jsp">Vegetables</a>
-                    <span>Vegetables Package</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-<!-- Breadcrumb Section End -->
-
 <!-- Product Details Section Begin -->
 <section class="product-details spad">
     <div class="container">
@@ -48,6 +29,7 @@
                     <h3>${detail.productName}</h3>
                     <!--Rating ???? -->
                     <div class="product__details__rating">
+                        <i>${detail.rating}</i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
