@@ -73,13 +73,16 @@ public class LoginController extends HttpServlet {
         }
         if (cUserName != null
                 && cPassword != null
-                && cUserName.getValue().equals("admin")
-                && cPassword.getValue().equals("12345")) {
+                && cUserName.getValue().toLowerCase().equals("admin")
+                && cPassword.getValue().toLowerCase().equals("12345")) {
             //Lưu userName vào session để ghi nhận đã login thành công
             HttpSession session = request.getSession();
-            session.setAttribute("userName", "admin");
-            //Lưu userName truyền đến header để thay tên
-            request.setAttribute("userName", "admin");
+            session.setAttribute("userName", "admin");    
+            
+            //Lưu userName truyền đến header để thay tên vào phần login avatar
+            String userName = cUserName.getValue().toLowerCase();
+            request.setAttribute("userName", userName);
+            
             //Chuyển đến trang index.jsp => header.jsp
             request.getRequestDispatcher("index.jsp").forward(request, response);
              
@@ -91,8 +94,8 @@ public class LoginController extends HttpServlet {
     
         protected void loginHandler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
+        String userName = request.getParameter("userName").toLowerCase();
+        String password = request.getParameter("password").toLowerCase();
         boolean rememberMe = request.getParameter("rememberMe") != null;
 
         // If login successfully
@@ -110,11 +113,18 @@ public class LoginController extends HttpServlet {
                 response.addCookie(cUserName);
                 response.addCookie(cPassword);
 
-                System.out.println("Cookies have been stored");
             }
             //Lưu userName vào session để ghi nhận đã login thành công
             HttpSession session = request.getSession();
             session.setAttribute("userName", userName);
+            
+            //Lưu userName + viết hoa chữ cái đầu rồi truyền đến header để thay tên vào phần welcome back
+            String firstLetter = userName.substring(0, 1);
+            String remainingLetters = userName.substring(1, userName.length());
+            firstLetter = firstLetter.toUpperCase();
+            String output = firstLetter + remainingLetters;
+            request.setAttribute("cap_userName", output);
+            
             //Chuyển đến trang index.jsp => header.jsp
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
@@ -122,7 +132,7 @@ public class LoginController extends HttpServlet {
             request.setAttribute("userName", userName);
             request.setAttribute("password", password);
             //Lưu thông báo lỗi vào request
-            request.setAttribute("message", "Please check your username and password.");
+            request.setAttribute("message", "Wrong username or password.");
             //Cho hiện lại trang login.jsp
             request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
         }

@@ -15,6 +15,7 @@
                         <ul>
                             <li><i class="fa fa-envelope"></i> 4AnhEmSieuNhanGao@fpt.edu.vn</li>
                             <li>Support 24/24</li>
+                            <li>Gaming Market Site</li>
                         </ul>
                     </div>
                 </div>
@@ -59,9 +60,8 @@
                                 <button type="submit" class="site-btn" name="op" value="search">SEARCH</button>
                             </form>
                         </div>
-
+                                
                     </div>
-
                 </div>
             </div>
             <div class="col-lg-3">
@@ -72,7 +72,14 @@
                     <div class="header__cart__price">item: <span>$150.00</span></div>
                 </div>
             </div>
+            <c:if test="${cap_userName != null}">
+                <div class="col-lg-12">
+                    <p style="font-size: 35px; text-align: center; color: #000">Welcome back, ${cap_userName}</p>
+                </div>
+            </c:if>
+            
         </div>
+                    
         <div class="humberger__open">
             <i class="fa fa-bars"></i>
         </div>
