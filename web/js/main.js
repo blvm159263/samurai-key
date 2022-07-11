@@ -215,7 +215,3 @@
     });
 
 })(jQuery);
-
-$('.btn btn-primary more').on('click', function(){
-    $(".more").remove(".more");
-});

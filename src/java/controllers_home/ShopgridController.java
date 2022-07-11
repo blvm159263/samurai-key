@@ -116,18 +116,22 @@ public class ShopgridController extends HttpServlet {
         HttpSession session = request.getSession();
         List<Product> list = (ArrayList<Product>) session.getAttribute("list");
         String curPage = request.getParameter("page");
+        int size = (Integer) session.getAttribute("size");
         if (curPage == null) {
             curPage = "1";
         }
         int index = (Integer.parseInt(curPage) - 1) * 15;
         List<Product> listP = new ArrayList<>();
-        for (int i = index; i < index + 15; i++) {
-            Product p = list.get(i);
-            listP.add(p);
-            if (i == (Integer) session.getAttribute("size") - 1) {
-                break;
+        if (size != 0) {
+            for (int i = index; i < index + 15; i++) {
+                Product p = list.get(i);
+                listP.add(p);
+                if (i == size - 1) {
+                    break;
+                }
             }
         }
+
         request.setAttribute("listP", listP);
     }
 

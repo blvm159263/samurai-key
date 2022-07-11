@@ -4,6 +4,7 @@
 <fmt:setLocale value="en-us"/>
 
 
+
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="<c:url value="/img/bread.jpg" />">
     <div class="container">
@@ -87,6 +88,8 @@
                             </div>
                         </div>
                         <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
+                        <input class="btn-block btn btn-outline-info" type="reset" />
+
                         <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>Coming Soon!</h4>

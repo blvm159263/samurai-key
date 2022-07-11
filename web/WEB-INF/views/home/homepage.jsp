@@ -55,7 +55,7 @@
                                 <c:forEach var="consoles" items="${listConsoles}" >
                                     <li class="col-md-5">
                                         <label class="console__option">
-                                            <input type="radio" name="consolesID" value="${consoles.consolesID}">
+                                            <input type="radio" class="test" name="consolesID" value="${consoles.consolesID}">
                                             ${consoles.consolesName}
                                         </label>
                                     </li>
@@ -73,6 +73,7 @@
                             </div>
                         </div>
                         <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
+                        <input class="btn-block btn btn-outline-info" type="reset" />
                         <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>Coming Soon!</h4>
