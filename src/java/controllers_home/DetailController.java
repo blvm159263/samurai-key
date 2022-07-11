@@ -3,26 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllers_home;
 
+import DAO.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Product;
 
 /**
  *
- * @author Admin
+ * @author Le Nguyen Nhat Minh
  */
-@WebServlet(name = "FrontController", urlPatterns = {"*.do"})
-public class FrontController extends HttpServlet {
+@WebServlet(name = "DetailController", urlPatterns = {"/shop-details"})
+public class DetailController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -31,24 +32,19 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Lấy URL
-        String url=request.getServletPath();
-        //Lấy controller
-        String controller=url.substring(1, url.lastIndexOf("/"));
-        //Lấy action 
-        String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
-        String op = request.getParameter("op");
-        System.out.println("ServletPath: "+url);
-        System.out.println("Controller: "+controller);
-        System.out.println("Action: "+action);
-        System.out.println("Op: "+op);
-        
+        response.setContentType("text/html;charset=UTF-8");
+        String controller = (String) request.getAttribute("controller");
+        String action = (String) request.getAttribute("action");
+        String id = request.getParameter("pid");
+        ProductDAO dao = new ProductDAO();
+        Product p = dao.getProductbyID(id);
+        List<Product> listNew = dao.listNew();
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
-        request.setAttribute("op", op);
-        
-        //truyền tới controller để xử lý
-        request.getRequestDispatcher("/"+controller).forward(request, response);
+        request.setAttribute("listNew", listNew);
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

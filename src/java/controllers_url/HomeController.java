@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllers_url;
 
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
@@ -25,8 +26,8 @@ import models.Product;
  *
  * @author buile
  */
-@WebServlet(name = "HomePageController", urlPatterns = {"/homepage"})
-public class HomePageController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,31 +50,14 @@ public class HomePageController extends HttpServlet {
         String action = (String) request.getAttribute("action");
         //Lấy op
         String op = (String) request.getAttribute("op");
-        switch (op) {
-            case "list":
-                List<Product> listNew =pd.listNew();
-                List<Product> listAll = pd.listHome();
-                List<Genre> listGenre = gd.list();
-                List<Consoles> listConsoles = cd.list();
-                int size = listAll.size();
-                int maxPrice = pd.maxPrice();
-                int minPrice = pd.minPrice();
-                request.setAttribute("minPrice", minPrice);
-                request.setAttribute("maxPrice", maxPrice);
-                request.setAttribute("listConsoles", listConsoles);
-                request.setAttribute("listGenre", listGenre);
-                request.setAttribute("size", size);
-                request.setAttribute("listAll", listAll);
-                request.setAttribute("listNew", listNew);
-                break;
-        }
+        
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.setAttribute("op", op);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
+        request.getRequestDispatcher("/"+action).forward(request, response);
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

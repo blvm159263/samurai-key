@@ -3,31 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllers_url;
 
-import DAO.ConsolesDAO;
-import DAO.GenreDAO;
-import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.Consoles;
-import models.Genre;
-import models.Product;
 
 /**
  *
- * @author buile
+ * @author Admin
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "FrontController", urlPatterns = {"*.do"})
+public class FrontController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +31,24 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ProductDAO pd = new ProductDAO();
-        GenreDAO gd = new GenreDAO();
-        ConsolesDAO cd = new ConsolesDAO();
-        //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
-        String controller = (String) request.getAttribute("controller");
-        //Lấy action
-        String action = (String) request.getAttribute("action");
-        //Lấy op
-        String op = (String) request.getAttribute("op");
+        //Lấy URL
+        String url=request.getServletPath();
+        //Lấy controller
+        String controller=url.substring(1, url.lastIndexOf("/"));
+        //Lấy action 
+        String action=url.substring(url.lastIndexOf("/")+1,url.lastIndexOf("."));
+        String op = request.getParameter("op");
+        System.out.println("ServletPath: "+url);
+        System.out.println("Controller: "+controller);
+        System.out.println("Action: "+action);
+        System.out.println("Op: "+op);
         
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.setAttribute("op", op);
-        request.getRequestDispatcher("/"+action).forward(request, response);
+        
+        //truyền tới controller để xử lý
+        request.getRequestDispatcher("/"+controller).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

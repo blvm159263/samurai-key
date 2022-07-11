@@ -31,7 +31,12 @@
                             </ul>
                         </div>-->
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> Login</a>
+                            <c:if test="${userName == null}">
+                                <a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>
+                            </c:if>
+                            <c:if test="${userName != null}">
+                                <a href="<c:url value="/user/logout.do" />"><i class="fa fa-user"></i> ${userName}</a>
+                            </c:if>    
                         </div>
                     </div>
                 </div>
@@ -47,22 +52,22 @@
             </div>
             <div class="col-lg-6">
                 <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="<c:url value="/home/shop-grid.do" /> ">
-                            <input type="text" placeholder="What do you need?" name="fname" value="${fname}">
-                            <button type="submit" class="site-btn" name="op" value="search">SEARCH</button>
-                        </form>
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="<c:url value="/home/shop-grid.do" /> ">
+                                <input type="text" placeholder="What do you need?" name="fname" value="${fname}">
+                                <button type="submit" class="site-btn" name="op" value="search">SEARCH</button>
+                            </form>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
             </div>
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="<c:url value="/home/shoping-cart.do" />"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>                       
                     </ul>
                     <div class="header__cart__price">item: <span>$150.00</span></div>
                 </div>

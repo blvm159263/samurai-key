@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg"  />">
+<section class="breadcrumb-section set-bg" data-setbg="<c:url value="/img/bread.jpg" />">
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
