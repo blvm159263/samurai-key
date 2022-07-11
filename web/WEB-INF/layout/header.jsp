@@ -36,6 +36,17 @@
                                 <a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>
                             </c:if>
                             <c:if test="${userName != null}">
+                                <%--<div class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="fa fa-user"></i>
+                                        <span class="d-none d-lg-inline-flex">${userName}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item">My Profile</a>
+                                        <a href="#" class="dropdown-item">Settings</a>
+                                        <a href="<c:url value="/user/logout.do" />" class="dropdown-item">Log Out</a>
+                                    </div>
+                                </div>--%>
                                 <a href="<c:url value="/user/logout.do" />"><i class="fa fa-user"></i> ${userName}</a>
                             </c:if>    
                         </div>
@@ -60,7 +71,7 @@
                                 <button type="submit" class="site-btn" name="op" value="search">SEARCH</button>
                             </form>
                         </div>
-                                
+
                     </div>
                 </div>
             </div>
@@ -77,9 +88,9 @@
                     <p style="font-size: 35px; text-align: center; color: #000">Welcome back, ${cap_userName}</p>
                 </div>
             </c:if>
-            
+
         </div>
-                    
+
         <div class="humberger__open">
             <i class="fa fa-bars"></i>
         </div>

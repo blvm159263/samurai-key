@@ -87,9 +87,12 @@
                                 <input type="radio" name="rating" value="1" id="1" ${curRating == 1?"checked":""}><label for="1">&star;</label>
                             </div>
                         </div>
-                        <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
-                        <input class="btn-block btn btn-outline-info" type="reset" />
-
+                        <div class="sidebar__item">
+                            <div class="confirm_find">
+                                <input style="width: 48%; display: inline-block; " class="btn-block btn btn-outline-info left_input" type="submit" name="op" value="Filter" />
+                                <input style="width: 48%; float: right; margin-top: 0px " class="btn-block btn btn-outline-info right_input" type="reset" />
+                            </div>
+                        </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>Coming Soon!</h4>
