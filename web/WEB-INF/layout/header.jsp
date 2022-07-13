@@ -21,16 +21,14 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                        <!-- Language 
                         <div class="header__top__right__language">
-                            <img src="img/language.png" alt="">
                             <div>English</div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
                                 <li><a href="#">Spanis</a></li>
                                 <li><a href="#">English</a></li>
                             </ul>
-                        </div>-->
+                        </div>
                         <div class="header__top__right__auth">
                             <c:if test="${userName == null}">
                                 <a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>

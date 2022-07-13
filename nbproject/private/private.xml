@@ -5,14 +5,18 @@
         <group>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-grid.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/header.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/index.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/js/main.js</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shoping-cart.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/css/style.css</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/js/bootstrap.min.js</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/homepage.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/img/logo.png</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/index.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shoping-cart.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-details.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/checkout.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/css/style.css</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/homepage.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers_home/ShopgridController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/js/login.js</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/main.jsp</file>
         </group>
     </open-files>
