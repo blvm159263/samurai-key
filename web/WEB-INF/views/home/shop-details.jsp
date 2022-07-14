@@ -39,14 +39,12 @@
                     <div class="product__details__price"><fmt:formatNumber value="${detail.price}" type="currency" /> </div>
                     <!--Description -->
                     <p>${detail.desc}</p>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="<c:url value="/WEB-INF/home/checkout.do"/>" class="primary-btn">Add to cart</a>
+                    
+                    
+                        
+                    <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
+                    
+                        
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping.</span></li>

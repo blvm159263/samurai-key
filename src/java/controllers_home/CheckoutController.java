@@ -16,19 +16,18 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.Cart;
 import models.Product;
 
 /**
  *
- * @author Le Nguyen Nhat Minh
+ * @author Admin
  */
-@WebServlet(name = "CartController", urlPatterns = {"/shoping-cart"})
-public class CartController extends HttpServlet {
+@WebServlet(name = "CheckoutController", urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -38,10 +37,7 @@ public class CartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String controller = (String) request.getAttribute("controller");
-        String action = (String) request.getAttribute("action");
         Cookie arr[] = request.getCookies();
-        PrintWriter out = response.getWriter();
         List<Product> list = new ArrayList<>();
         ProductDAO dao = new ProductDAO();
         for (Cookie o : arr) {
@@ -52,7 +48,7 @@ public class CartController extends HttpServlet {
                 }
             }
         }
-        for (int i =0; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             int count = 1;
             for (int j = i+1; j < list.size(); j++) {
                 if(list.get(i).getProductID()== list.get(j).getProductID()){
@@ -63,20 +59,13 @@ public class CartController extends HttpServlet {
                 }
             }
         }
-        double total = 0;
-        for (Product o : list) {
-            total = total + o.getQuantity() * o.getPrice();
+        for (Cookie o : arr) {
+            o.setMaxAge(0);
+            response.addCookie(o);
+              
         }
-        request.setAttribute("list", list);
-        request.setAttribute("total", total);
-        request.setAttribute("vat", Math.round(( 0.1 * total)*100)/100);
-        request.setAttribute("sum", Math.round(( 1.1 * total)*100)/100);
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("/").forward(request, response);
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -116,42 +105,5 @@ public class CartController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    protected void view(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cookie arr[] = request.getCookies();
-        PrintWriter out = response.getWriter();
-        List<Product> list = new ArrayList<>();
-        ProductDAO dao = new ProductDAO();
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split(",");
-                for (String s : txt) {
-                    list.add(dao.getProductbyID(s));
-                }
-            }
-        }
-        for (int i =0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = i+1; j < list.size(); j++) {
-                if(list.get(i).getProductID()== list.get(j).getProductID()){
-                    count++;
-                    list.remove(j);
-                    j--;
-                    list.get(i).setQuantity((byte) count);
-                }
-            }
-        }
-        double total = 0;
-        for (Product o : list) {
-            total = total + o.getQuantity() * o.getPrice();
-        }
-        request.setAttribute("list", list);
-        request.setAttribute("total", total);
-        request.setAttribute("vat", 0.1 * total);
-        request.setAttribute("sum", 1.1 * total);
-    }
 
-    
 }

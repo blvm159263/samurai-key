@@ -43,6 +43,7 @@ public class DetailController extends HttpServlet {
         request.setAttribute("action", action);
         request.setAttribute("listNew", listNew);
         request.setAttribute("detail", p);
+        request.setAttribute("pid", id);
         request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
 
     }
