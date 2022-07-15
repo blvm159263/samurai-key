@@ -105,6 +105,16 @@ body {
   box-shadow: inset 4px 4px 4px #d1d9e6, inset -4px -4px 4px #f9f9f9;
 }
 
+/* hide and show password */
+i.toggle{
+  color: black;
+  font-size: 20px;
+  position: absolute; 
+  margin-left: 50%; 
+  margin-top: 70px;
+}
+/* end pwd */
+
 /* checkbox */
 .form-check{
   margin-right: 35%;
