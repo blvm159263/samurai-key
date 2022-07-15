@@ -351,7 +351,7 @@ ol {
 }
 
 .header__top__right__language div {
-    font-size: 14px;
+    font-size: 1rem;
     color: #1c1c1c;
     display: inline-block;
     margin-right: 4px;
