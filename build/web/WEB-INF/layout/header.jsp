@@ -21,22 +21,29 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                        <!-- Language 
+                         <!--Language--> 
                         <div class="header__top__right__language">
-                            <img src="img/language.png" alt="">
-                            <div>English</div>
-                            <span class="arrow_carrot-down"></span>
-                            <ul>
-                                <li><a href="#">Spanis</a></li>
-                                <li><a href="#">English</a></li>
-                            </ul>
-                        </div>-->
-                        <div class="header__top__right__auth">
+                            <!--for user-->
                             <c:if test="${userName == null}">
-                                <a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>
+                                <a href="<c:url value="/user/login.do?op=login_form" />"><i style="margin-right: 8px" class="fa fa-user"></i>Login</a>
                             </c:if>
                             <c:if test="${userName != null}">
-                                <%--<div class="nav-item dropdown">
+                                <div><i style="margin-right: 8px" class="fa fa-user"></i>${userName}</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">My Profile</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="<c:url value="/user/logout.do" />">Log Out</a></li>
+                                </ul>
+                            </c:if>  
+                            
+                        </div>
+                        <!--<div class="header__top__right__auth">-->
+                            <%--<c:if test="${userName == null}">--%>
+                                <%--<a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>--%>
+                            <%--</c:if>--%>
+                            <%--<c:if test="${userName != null}">--%>
+                               <%--<div class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                         <i class="fa fa-user"></i>
                                         <span class="d-none d-lg-inline-flex">${userName}</span>
@@ -47,9 +54,9 @@
                                         <a href="<c:url value="/user/logout.do" />" class="dropdown-item">Log Out</a>
                                     </div>
                                 </div>--%>
-                                <a href="<c:url value="/user/logout.do" />"><i class="fa fa-user"></i> ${userName}</a>
-                            </c:if>    
-                        </div>
+                                <%--<a href="<c:url value="/user/logout.do" />"><i class="fa fa-user"></i> ${userName}</a>--%>
+                            <%--</c:if>--%>    
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
