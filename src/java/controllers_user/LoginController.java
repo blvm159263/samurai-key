@@ -96,11 +96,12 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String userName = request.getParameter("userName").toLowerCase();
         String password = request.getParameter("password").toLowerCase();
-        boolean rememberMe = request.getParameter("rememberMe") != null;
-
+        String rememberMe = request.getParameter("rememberMe");
+        if (rememberMe == null) rememberMe = "off";
+        
         // If login successfully
         if (userName.equals("admin") && password.equals("12345")) {
-            if (rememberMe) {
+            if (rememberMe.equals("on")) {
                 // Create cookies for username and password     
                 Cookie cUserName = new Cookie("userName", userName);
                 Cookie cPassword = new Cookie("password", password);
@@ -131,6 +132,7 @@ public class LoginController extends HttpServlet {
             //Lưu thông tin đã nhập vào request để bảo tồn trạng thái của form
             request.setAttribute("userName", userName);
             request.setAttribute("password", password);
+            request.setAttribute("rememberMe", rememberMe);
             //Lưu thông báo lỗi vào request
             request.setAttribute("message", "Wrong username or password.");
             //Cho hiện lại trang login.jsp
