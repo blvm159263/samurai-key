@@ -84,7 +84,7 @@ p {
 }
 
 img {
-    max-width: 100%;
+    max-width: 75%;
 }
 
 input:focus,
@@ -417,7 +417,8 @@ ol {
 }
 
 .header__menu {
-    padding: 24px 0;
+    padding: 7px 0;
+    margin-left: 50px;
 }
 
 .header__menu ul li {
@@ -496,7 +497,7 @@ ol {
 .header__cart {
     text-align: right;
     padding: 24px 0;
-    padding-top:32px;
+    padding-top:46px;
 }
 
 .header__cart ul {
@@ -639,7 +640,7 @@ ol {
     overflow: hidden;
     margin-bottom: 30px;
     display: inline-block;
-    padding-top: 19px;
+    padding-top: 32px;
 }
 
 .hero__search__form {

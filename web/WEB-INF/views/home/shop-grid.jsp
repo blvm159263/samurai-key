@@ -91,6 +91,7 @@
                             <div class="confirm_find">
                                 <input style="width: 48%; display: inline-block; " class="btn-block btn btn-outline-info left_input" type="submit" name="op" value="Filter" />
                                 <input style="width: 48%; float: right; margin-top: 0px " class="btn-block btn btn-outline-info right_input" type="reset" />
+                                <input class="btn-block btn btn-outline-info right_input" type="submit" name="op" value="ListAll" />
                             </div>
                         </div>
                         <div class="sidebar__item">
