@@ -23,6 +23,7 @@ public class Product {
     private String linkImg4;
     private String linkImg5;
     Genre genre = new Genre();
+    Consoles console = new Consoles();
 
     public Product() {
     }
@@ -47,6 +48,22 @@ public class Product {
         this.linkImg3 = linkImg3;
         this.linkImg4 = linkImg4;
         this.linkImg5 = linkImg5;
+    }
+
+    public Product(int id, int price, String productName, byte quantity, String desc, byte rating, String linkImg1, String linkImg2, String linkImg3, String linkImg4, String linkImg5, Genre genre, Consoles console) {
+        this.productID = id;
+        this.price = price;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.desc = desc;
+        this.rating = rating;
+        this.linkImg1 = linkImg1;
+        this.linkImg2 = linkImg2;
+        this.linkImg3 = linkImg3;
+        this.linkImg4 = linkImg4;
+        this.linkImg5 = linkImg5;
+        this.genre = genre;
+        this.console = console;
     }
 
     public Product(int productID, int price, String productName, String linkImg1) {

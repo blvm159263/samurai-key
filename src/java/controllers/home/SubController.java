@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers_home;
+package controllers.home;
 
-import DAO.ProductDAO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Product;
 
 /**
  *
- * @author Le Nguyen Nhat Minh
+ * @author Admin
  */
-@WebServlet(name = "DetailController", urlPatterns = {"/shop-details"})
-public class DetailController extends HttpServlet {
+@WebServlet(name = "SubController", urlPatterns = {"/sub-cart"})
+public class SubController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -33,18 +33,39 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String controller = (String) request.getAttribute("controller");
-        String action = (String) request.getAttribute("action");
         String id = request.getParameter("pid");
-        ProductDAO dao = new ProductDAO();
-        Product p = dao.getProductbyID(id);
-        List<Product> listNew = dao.listNew();
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.setAttribute("listNew", listNew);
-        request.setAttribute("detail", p);
-        request.setAttribute("pid", id);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
+        Cookie arr[] = request.getCookies();
+        String txt = "";
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                txt = txt + o.getValue();
+                o.setMaxAge(0);
+                response.addCookie(o);
+            }
+        }
+        String ids[] = txt.split(",");
+        String txtOutPut = "";
+        int check = 0;
+        for (int i = 0; i < ids.length; i++) {
+            if (ids[i].equals(id)) {
+                check++;
+            }
+            if (check != 1) {
+                if (txtOutPut.isEmpty()) {
+                    txtOutPut = ids[i];
+                } else {
+                    txtOutPut = txtOutPut + "," + ids[i];
+                }
+            } else {
+                check++;
+            }
+        }
+        if (!txtOutPut.isEmpty()) {
+            Cookie c = new Cookie("id", txtOutPut);
+            c.setMaxAge(60 * 60 * 24);
+            response.addCookie(c);
+        }
+        request.getRequestDispatcher("/home/shoping-cart.do").forward(request, response);
 
     }
 

@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers_url;
+package controllers.home;
 
-import DAO.ConsolesDAO;
-import DAO.GenreDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,20 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.Consoles;
-import models.Genre;
 import models.Product;
 
 /**
  *
- * @author buile
+ * @author Admin
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "ShowCartControl", urlPatterns = {"/add-cart"})
+public class AddToCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +36,26 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ProductDAO pd = new ProductDAO();
-        GenreDAO gd = new GenreDAO();
-        ConsolesDAO cd = new ConsolesDAO();
-        //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
-        String controller = (String) request.getAttribute("controller");
-        //Lấy action
-        String action = (String) request.getAttribute("action");
-        //Lấy op
-        String op = (String) request.getAttribute("op");
-        
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.setAttribute("op", op);
-        request.getRequestDispatcher("/"+action).forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");       
+        String id = request.getParameter("pid");
+        Cookie arr[] = request.getCookies();
+        String txt = "";
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                txt = txt + o.getValue();
+                o.setMaxAge(0);
+                response.addCookie(o);
+            }
+        }
+        if (txt.isEmpty()) {
+            txt = id;
+        } else {
+            txt = txt + "," + id; 
+        }
+        Cookie c = new Cookie("id", txt);
+        c.setMaxAge(60 * 60 * 24);
+        response.addCookie(c);        
+        request.getRequestDispatcher("/home/shoping-cart.do").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

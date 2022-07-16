@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers_home;
+package controllers.home;
 
-import DAO.ConsolesDAO;
-import DAO.GenreDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,19 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Consoles;
-import models.Genre;
 import models.Product;
 
 /**
  *
- * @author buile
+ * @author Admin
  */
-@WebServlet(name = "HomePageController", urlPatterns = {"/homepage"})
-public class HomePageController extends HttpServlet {
+@WebServlet(name = "CheckoutController", urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,40 +37,37 @@ public class HomePageController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO pd = new ProductDAO();
-        GenreDAO gd = new GenreDAO();
-        ConsolesDAO cd = new ConsolesDAO();
-        //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
-        String controller = (String) request.getAttribute("controller");
-        //Lấy action
-        String action = (String) request.getAttribute("action");
-        //Lấy op
-        String op = (String) request.getAttribute("op");
-        switch (op) {
-            case "list":
-                List<Product> listNew =pd.listNew();
-                List<Product> listAll = pd.listHome();
-                List<Genre> listGenre = gd.list();
-                List<Consoles> listConsoles = cd.list();
-                int size = listAll.size();
-                int maxPrice = pd.maxPrice();
-                int minPrice = pd.minPrice();
-                request.setAttribute("minPrice", minPrice);
-                request.setAttribute("maxPrice", maxPrice);
-                request.setAttribute("listConsoles", listConsoles);
-                request.setAttribute("listGenre", listGenre);
-                request.setAttribute("size", size);
-                request.setAttribute("listAll", listAll);
-                request.setAttribute("listNew", listNew);
-                break;
+        Cookie arr[] = request.getCookies();
+        List<Product> list = new ArrayList<>();
+        ProductDAO dao = new ProductDAO();
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                String txt[] = o.getValue().split(",");
+                for (String s : txt) {
+                    list.add(dao.getProductbyID(s));
+                }
+            }
         }
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.setAttribute("op", op);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
+        for (int i = 0; i < list.size(); i++) {
+            int count = 1;
+            for (int j = i+1; j < list.size(); j++) {
+                if(list.get(i).getProductID()== list.get(j).getProductID()){
+                    count++;
+                    list.remove(j);
+                    j--;
+                    list.get(i).setQuantity((byte) count);
+                }
+            }
+        }
+        for (Cookie o : arr) {
+            o.setMaxAge(0);
+            response.addCookie(o);
+              
+        }
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

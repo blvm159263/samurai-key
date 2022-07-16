@@ -9,9 +9,11 @@ import Context.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import models.Consoles;
 import models.Genre;
 import models.Product;
 
@@ -187,7 +189,7 @@ public class ProductDAO {
             PreparedStatement pstm = con.prepareStatement("SELECT ProductID, ProductPrice,ProductName,LinkIMG1\n"
                     + "FROM dbo.Product \n"
                     + "Where ProductName LIKE ?");
-            pstm.setString(1, "%"+fname+"%");
+            pstm.setString(1, "%" + fname + "%");
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 int productID = rs.getInt(1);
@@ -203,7 +205,7 @@ public class ProductDAO {
         return list;
     }
 
-public Product getProductbyID(String pid) {
+    public Product getProductbyID(String pid) {
         DBUtil db = new DBUtil();
         String query = "SELECT ProductID,ProductPrice,ProductName,ProductQuantity, ProductDesc,Rating,"
                 + "LinkIMG1,LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5 "
@@ -224,12 +226,86 @@ public Product getProductbyID(String pid) {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        ProductDAO pd = new ProductDAO();
-//        List<Product> list = null;
-//        list = pd.findProductByName(null);
-//        for (Product p : list) {
-//            System.out.println(p.getProductID());
-//        }
-//    }
+    public List<Product> listFull() {
+        List<Product> list = null;
+        DBUtil db = new DBUtil();
+
+        try {
+            list = new ArrayList<>();
+            Connection con = db.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT ProductID,ProductPrice,ProductName,\n"
+                    + "	   ProductQuantity,ProductDesc,Rating,LinkIMG1,\n"
+                    + "       LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5,\n"
+                    + "	   Product.GenreID,GenreName,Product.ConsolesID,ConsolesName \n"
+                    + "FROM dbo.Product LEFT JOIN dbo.Genre  \n"
+                    + "ON Genre.GenreID = Product.GenreID \n"
+                    + "LEFT JOIN dbo.Consoles \n"
+                    + "ON Consoles.ConsolesID = Product.ConsolesID\n");
+            while (rs.next()) {
+                int productID = rs.getInt(1);
+                int price = rs.getInt(2);
+                String productName = rs.getString(3);
+                byte quantity = rs.getByte(4);
+                String desc = rs.getString(5);
+                byte rating = rs.getByte(6);
+                String linkImg1 = rs.getString(7);
+                String linkImg2 = rs.getString(8);
+                String linkImg3 = rs.getString(9);
+                String linkImg4 = rs.getString(10);
+                String linkImg5 = rs.getString(11);
+                int genreID = rs.getInt(12);
+                String genreName = rs.getString(13);
+                int consolesID = rs.getInt(14);
+                String consolesName = rs.getString(15);
+                Genre genre = new Genre(genreID, genreName);
+                Consoles console = new Consoles(consolesID, consolesName);
+                Product pro = new Product(productID, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genre, console);
+                list.add(pro);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean updateProduct(int productID, int price, String productName,
+            byte quantity, String desc, byte rating, String linkImg1,
+            String linkImg2, String linkImg3, String linkImg4,
+            String linkImg5, int genreID, int consolesID) throws SQLException {
+        DBUtil db = new DBUtil();
+        Connection con = db.getConnection();
+        String sql = "UPDATE dbo.Product\n"
+                + "SET ProductPrice = ?,ProductName =?, ProductQuantity=?,ProductDesc=?,\n"
+                + "Rating=?,LinkIMG1=?,LinkIMG2=?,LinkIMG3=?,LinkIMG4=?,LinkIMG5=?,GenreID=?,ConsolesID=?\n"
+                + "WHERE ProductID=?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, price);
+        stm.setString(2, productName);
+        stm.setByte(3, quantity);
+        stm.setString(4, desc);
+        stm.setByte(5, rating);
+        stm.setString(6, linkImg1);
+        stm.setString(7, linkImg2);
+        stm.setString(8, linkImg3);
+        stm.setString(9, linkImg4);
+        stm.setString(10, linkImg5);
+        stm.setInt(11, genreID);
+        stm.setInt(12, consolesID);
+        stm.setInt(13, productID);
+        int count = stm.executeUpdate();
+        return count == 1;
+    }
+
+    public boolean delete(int productID) throws SQLException {
+        DBUtil db = new DBUtil();
+        Connection con = db.getConnection();
+        String sql = "DELETE FROM dbo.Product WHERE ProductID = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, productID);
+        int count = stm.executeUpdate();
+        return count == 1;
+    }
+
 }
