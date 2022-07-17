@@ -424,5 +424,29 @@ public class ProductDAO {
         }
         return list;
     }
-
+    
+    public List<Product> findProductByGenreID(int id) {
+        List<Product> list = null;
+        DBUtil db = new DBUtil();
+        try {
+            list = new ArrayList<>();
+            Connection con = db.getConnection();
+            PreparedStatement pstm = con.prepareStatement("SELECT ProductID, ProductPrice,ProductName,LinkIMG1\n"
+                    + "FROM dbo.Product \n"
+                    + "Where genreID = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int productID = rs.getInt(1);
+                int price = rs.getInt(2);
+                String productName = rs.getString(3);
+                String linkImg1 = rs.getString(4);
+                Product pro = new Product(productID, price, productName, linkImg1);
+                list.add(pro);
+            }
+            con.close();
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }

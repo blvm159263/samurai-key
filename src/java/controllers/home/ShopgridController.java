@@ -32,6 +32,7 @@ public class ShopgridController extends HttpServlet {
     ProductDAO pd = new ProductDAO();
     GenreDAO gd = new GenreDAO();
     ConsolesDAO cd = new ConsolesDAO();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +46,6 @@ public class ShopgridController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
@@ -68,6 +68,10 @@ public class ShopgridController extends HttpServlet {
                 paging(request, response);
                 break;
             case "showpage":
+                paging(request, response);
+                break;
+            case "listbygenre":
+                listByGenre(request, response);
                 paging(request, response);
                 break;
         }
@@ -101,11 +105,11 @@ public class ShopgridController extends HttpServlet {
 
     protected void listAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         List<Product> listAll = new ArrayList<>();
         listAll = pd.listAll();
         int size = listAll.size();
         int endP = countP(size);
-        HttpSession session = request.getSession();
         session.setAttribute("endP", endP);
         session.setAttribute("list", listAll);
         session.setAttribute("size", size);
@@ -155,7 +159,6 @@ public class ShopgridController extends HttpServlet {
         session.setAttribute("list", list);
         session.setAttribute("size", size);
         session.setAttribute("endP", endP);
-
     }
 
     protected void search(HttpServletRequest request, HttpServletResponse response)
@@ -170,6 +173,18 @@ public class ShopgridController extends HttpServlet {
         session.setAttribute("size", size);
         session.setAttribute("endP", endP);
 
+    }
+
+    protected void listByGenre(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int genreID = Integer.parseInt(request.getParameter("genreID"));
+        List<Product> list = pd.findProductByGenreID(genreID);
+        int size = list.size();
+        int endP = countP(size);
+        session.setAttribute("endP", endP);
+        session.setAttribute("list", list);
+        session.setAttribute("size", size);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

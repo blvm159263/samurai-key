@@ -122,7 +122,7 @@
                     </div>
                     <ul>
                         <c:forEach var="genre" items="${listGenre}">
-                            <li><a href="#">${genre.genreName}</a></li>
+                            <li><a href="<c:url value="/home/shop-grid.do?op=listByGenre&genreID=${genre.genreID}" />">${genre.genreName}</a></li>
                             </c:forEach>
                     </ul>
                 </div>
