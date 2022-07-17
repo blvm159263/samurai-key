@@ -1,4 +1,5 @@
 <<<<<<< Upstream, based on origin/main
+<<<<<<< Upstream, based on origin/main
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -19,6 +20,9 @@
     </open-files>
 </project-private>
 =======
+=======
+<<<<<<< HEAD
+>>>>>>> 973d34e cart-function
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -26,4 +30,28 @@
         <group/>
     </open-files>
 </project-private>
+<<<<<<< Upstream, based on origin/main
 >>>>>>> 54599e5 cart-function
+=======
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-grid.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/HomePageController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/DetailController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/admin/ManageController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Product.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/DAO/ProductDAO.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/ShopgridController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/css/bootstrap.min.css</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/admin/manage-product.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Consoles.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/main.jsp</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> origin/main
+>>>>>>> 973d34e cart-function

@@ -89,7 +89,11 @@
                     <ul>
                         <li><a href="<c:url value="/home/shoping-cart.do" />"><i class="fa fa-shopping-bag"></i></a></li>                       
                     </ul>
+
                     <div class="header__cart__price">item: <span>$${total}</span></div>
+
+
+
                 </div>
             </div>
 

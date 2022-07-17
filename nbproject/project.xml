@@ -11,6 +11,12 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< Upstream, based on origin/main
+=======
+                    <file>${file.reference.mssql-jdbc-9.4.1.jre8.jar}</file>
+                </library>
+                <library dirs="200">
+>>>>>>> 973d34e cart-function
                     <file>${file.reference.mssql-jdbc-9.4.1.jre8.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
