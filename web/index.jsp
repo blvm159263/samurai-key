@@ -11,6 +11,6 @@
 <%-- cú pháp là : .../[controller]/[action].do
   ->  đưa tới FrontController xử lý tiếp
 --%>
-<jsp:forward page="${context}/home/homepage.do?op=list"/>
+<jsp:forward page="/home/homepage.do?op=list"/>
 <%--<jsp:forward page="${context}/admin/manage.do?op=listFull"/>--%>
 

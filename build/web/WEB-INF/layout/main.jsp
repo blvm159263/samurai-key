@@ -33,15 +33,15 @@
 
     <body>
         <!-- Header -->
-        <jsp:include page="${context}/WEB-INF/layout/header.jsp"/>
+        <jsp:include page="/WEB-INF/layout/header.jsp"/>
         <!-- Header End -->
 
         <!-- View -->
         <!-- controller đã lấy từ Servlet -> chỉ cần 1 dòng có thể hiện dc cả 4 trang không cần câu điều kiện  -->
-        <jsp:include page="${context}/WEB-INF/views/${controller}/${action}.jsp"/>
+        <jsp:include page="/WEB-INF/views/${controller}/${action}.jsp"/>
         <!-- View End-->
         <!-- Footer Section Begin -->
-        <jsp:include page="${context}/WEB-INF/layout/footer.jsp"/>
+        <jsp:include page="/WEB-INF/layout/footer.jsp"/>
         <!-- Footer Section End -->
 
         <!-- Js Plugins -->
