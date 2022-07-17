@@ -42,8 +42,6 @@
                     <!--Description -->
                     <p>${detail.desc}</p>
 
-
-
                     <c:choose>
                         <c:when test="${not empty userName}">
                             <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
@@ -51,7 +49,7 @@
                         <c:otherwise>
                             <a href="<c:url value="/user/login.do?op=login_form" />" class="primary-btn" > Add to Cart</a>
                         </c:otherwise>
-                    </c:choose>
+                    </c:choose> 
                 </div>
             </div>
 
