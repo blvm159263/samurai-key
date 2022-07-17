@@ -8,25 +8,25 @@
                         <a href="./index.jsp"><img src="<c:url value="/img/logo.png" />" alt=""></a>
                     </div>
                     <ul>
-                        <li>Address: 60-49 Road 11378 New York</li>
-                        <li>Phone: +65 11.188.888</li>
-                        <li>Email: hello@colorlib.com</li>
+                        <li>Address: FPT University HCM</li>
+                        <li>Phone: +84 765.xxx.xxx </li>
+                        <li>Email: 4AnhEmSieuNhan@fpt.edu.vn</li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                 <div class="footer__widget">
-                    <h6>Useful Links</h6>
+                    <h6>Source Links</h6>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">About Our Shop</a></li>
+                        <li><a href="https://themewagon.com/themes/free-bootstrap-4-html5-responsive-ecommerce-website-template-ogani/">Original Template</a></li>
+                        <li><a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">Bootstrap 4.1</a></li>
                         <li><a href="#">Secure Shopping</a></li>
                         <li><a href="#">Delivery information</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Our Site map</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">Who We Are</a></li>
+                        <li><a href="https://blog.jquery.com/2018/01/20/jquery-3-3-1-fixed-dependencies-in-release-tag/">jQuery 3.3.1</a></li>
                         <li><a href="#">Our Services</a></li>
                         <li><a href="#">Projects</a></li>
                         <li><a href="#">Contact</a></li>

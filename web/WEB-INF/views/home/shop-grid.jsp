@@ -96,11 +96,11 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Coming Soon!</h4>
+                                <h4>Featured Product</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
-                                            <a href="#" class="latest-product__item">
+                                            <a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />" class="latest-product__item">
                                                 <div class="latest-product__item__pic">
                                                     <img src="${pro.linkImg1}" alt="">
                                                 </div>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="latest-prdouct__slider__item">
                                         <c:forEach begin="3" end="5" var="pro" items="${listNew}" >
-                                            <a href="#" class="latest-product__item">
+                                            <a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />" class="latest-product__item">
                                                 <div class="latest-product__item__pic">
                                                     <img src="${pro.linkImg1}" alt="">
                                                 </div>

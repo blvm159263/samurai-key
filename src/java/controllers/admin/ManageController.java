@@ -74,6 +74,14 @@ public class ManageController extends HttpServlet {
                     listFull(request, response);
                     paging(request, response);
                     break;
+                case "findbyid":
+                    findByID(request, response);
+                    paging(request, response);
+                    break;
+                case "findbyname":
+                    findByName(request, response);
+                    paging(request, response);
+                    break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ManageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,8 +133,6 @@ public class ManageController extends HttpServlet {
     protected void listFull(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        List<Genre> listGenre = gd.list();
-        List<Consoles> listConsoles = cd.list();
         List<Product> list = pd.listFull();
         session.setAttribute("list", list);
         int size = list.size();
@@ -183,12 +189,38 @@ public class ManageController extends HttpServlet {
         String linkImg5 = request.getParameter("linkImg5");
         int genreID = Integer.parseInt(request.getParameter("genre"));
         int consolesID = Integer.parseInt(request.getParameter("console"));
-        boolean status = pd.createProduct(51,price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+        boolean status = pd.createProduct(51, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
         if (status) {
             request.setAttribute("message", "Create Successful!");
         } else {
             request.setAttribute("message", "Create Fail!");
         }
+    }
+
+    protected void findByID(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("productID"));
+        List<Product> list = pd.listByID(id);
+        HttpSession session = request.getSession();
+        session.setAttribute("list", list);
+        int size = list.size();
+        int endP = countP(size);
+        session.setAttribute("size", size);
+        session.setAttribute("endP", endP);
+        request.setAttribute("fID", id);
+    }
+
+    protected void findByName(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String name = request.getParameter("productName");
+        List<Product> list = pd.listByName(name);
+        HttpSession session = request.getSession();
+        session.setAttribute("list", list);
+        int size = list.size();
+        int endP = countP(size);
+        session.setAttribute("size", size);
+        session.setAttribute("endP", endP);
+        request.setAttribute("fName", name);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

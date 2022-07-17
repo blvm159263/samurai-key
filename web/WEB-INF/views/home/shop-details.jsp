@@ -29,28 +29,22 @@
                     <h3>${detail.productName}</h3>
                     <!--Rating ???? -->
                     <div class="product__details__rating">
-                        <i>${detail.rating}</i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
+                        <c:forEach begin="1" end="${detail.rating}">
+                            <i class="fa fa-star"></i>
+                        </c:forEach>
+                        <c:if test="${detail.rating < 5}">
+                            <c:forEach begin="${detail.rating+1}" end="5">
+                                <i class="fa fa-star-o"></i>
+                            </c:forEach>
+                        </c:if>
                     </div>
                     <div class="product__details__price"><fmt:formatNumber value="${detail.price}" type="currency" /> </div>
                     <!--Description -->
                     <p>${detail.desc}</p>
-                    
-                    
-                        
-                    <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
-                    
-                        
-                    <ul>
-                        <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping.</span></li>
-                        <li><b>Weight</b> <span>0.5 kg</span></li>
 
-                    </ul>
+
+
+                    <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
                 </div>
             </div>
 

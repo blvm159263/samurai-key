@@ -332,5 +332,97 @@ public class ProductDAO {
         int count = stm.executeUpdate();
         return count == 1;
     }
+    
+    public List<Product> listByID(int id) {
+        List<Product> list = null;
+        DBUtil db = new DBUtil();
+        try {
+            list = new ArrayList<>();
+            Connection con = db.getConnection();
+            String sql = "SELECT ProductID,ProductPrice,ProductName,\n"
+                    + "	   ProductQuantity,ProductDesc,Rating,LinkIMG1,\n"
+                    + "       LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5,\n"
+                    + "	   Product.GenreID,GenreName,Product.ConsolesID,ConsolesName \n"
+                    + "FROM dbo.Product LEFT JOIN dbo.Genre  \n"
+                    + "ON Genre.GenreID = Product.GenreID \n"
+                    + "LEFT JOIN dbo.Consoles \n"
+                    + "ON Consoles.ConsolesID = Product.ConsolesID\n"
+                    + "Where productID = ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int productID = rs.getInt(1);
+                int price = rs.getInt(2);
+                String productName = rs.getString(3);
+                byte quantity = rs.getByte(4);
+                String desc = rs.getString(5);
+                byte rating = rs.getByte(6);
+                String linkImg1 = rs.getString(7);
+                String linkImg2 = rs.getString(8);
+                String linkImg3 = rs.getString(9);
+                String linkImg4 = rs.getString(10);
+                String linkImg5 = rs.getString(11);
+                int genreID = rs.getInt(12);
+                String genreName = rs.getString(13);
+                int consolesID = rs.getInt(14);
+                String consolesName = rs.getString(15);
+                Genre genre = new Genre(genreID, genreName);
+                Consoles console = new Consoles(consolesID, consolesName);
+                Product pro = new Product(productID, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genre, console);
+                list.add(pro);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public List<Product> listByName(String name) {
+        List<Product> list = null;
+        DBUtil db = new DBUtil();
+        try {
+            list = new ArrayList<>();
+            Connection con = db.getConnection();
+            String sql = "SELECT ProductID,ProductPrice,ProductName,\n"
+                    + "	   ProductQuantity,ProductDesc,Rating,LinkIMG1,\n"
+                    + "       LinkIMG2,LinkIMG3,LinkIMG4,LinkIMG5,\n"
+                    + "	   Product.GenreID,GenreName,Product.ConsolesID,ConsolesName \n"
+                    + "FROM dbo.Product LEFT JOIN dbo.Genre  \n"
+                    + "ON Genre.GenreID = Product.GenreID \n"
+                    + "LEFT JOIN dbo.Consoles \n"
+                    + "ON Consoles.ConsolesID = Product.ConsolesID\n"
+                    + "Where productName like ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + name + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int productID = rs.getInt(1);
+                int price = rs.getInt(2);
+                String productName = rs.getString(3);
+                byte quantity = rs.getByte(4);
+                String desc = rs.getString(5);
+                byte rating = rs.getByte(6);
+                String linkImg1 = rs.getString(7);
+                String linkImg2 = rs.getString(8);
+                String linkImg3 = rs.getString(9);
+                String linkImg4 = rs.getString(10);
+                String linkImg5 = rs.getString(11);
+                int genreID = rs.getInt(12);
+                String genreName = rs.getString(13);
+                int consolesID = rs.getInt(14);
+                String consolesName = rs.getString(15);
+                Genre genre = new Genre(genreID, genreName);
+                Consoles console = new Consoles(consolesID, consolesName);
+                Product pro = new Product(productID, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genre, console);
+                list.add(pro);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }
