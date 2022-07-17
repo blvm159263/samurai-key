@@ -84,12 +84,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="<c:url value="/home/shoping-cart.do                                                                                                                                                                                                                                                                                                                                                        " />"><i class="fa fa-shopping-bag"></i> </a></li>                       
+                        <li><a href="<c:url value="/home/shoping-cart.do" />"><i class="fa fa-shopping-bag"></i></a></li>                       
                     </ul>
-
+                    <div class="header__cart__price">item: <span>$${total}</span></div>
                 </div>
             </div>
 

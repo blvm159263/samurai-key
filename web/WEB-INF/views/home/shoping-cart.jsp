@@ -86,7 +86,7 @@
                                 <li>VAT <span>$${vat}</span></li>                               
                                 <li>Total <span>$${sum}</span></li>
                             </ul>
-                            <a href="<c:url value="/checkout" />" class="primary-btn">PROCEED TO CHECKOUT</a>
+                            <a href="<c:url value="/home/checkout.do" />" class="primary-btn">PROCEED TO CHECKOUT</a>
                         </div>
                     </div>
                 </div>
