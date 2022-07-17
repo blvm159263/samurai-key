@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -40,6 +41,7 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
+        HttpSession session = request.getSession();
         Cookie arr[] = request.getCookies();
         PrintWriter out = response.getWriter();
         List<Product> list = new ArrayList<>();
@@ -67,10 +69,10 @@ public class CartController extends HttpServlet {
         for (Product o : list) {
             total = total + o.getQuantity() * o.getPrice();
         }
-        request.setAttribute("list", list);
-        request.setAttribute("total", total);
-        request.setAttribute("vat", Math.round(( 0.1 * total)*100)/100);
-        request.setAttribute("sum", Math.round(( 1.1 * total)*100)/100);
+        session.setAttribute("list", list);
+        session.setAttribute("total", total);
+        session.setAttribute("vat", Math.round(( 0.1 * total)*100)/100);
+        session.setAttribute("sum", Math.round(( 1.1 * total)*100)/100);
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
@@ -117,41 +119,8 @@ public class CartController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    protected void view(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cookie arr[] = request.getCookies();
-        PrintWriter out = response.getWriter();
-        List<Product> list = new ArrayList<>();
-        ProductDAO dao = new ProductDAO();
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split(",");
-                for (String s : txt) {
-                    list.add(dao.getProductbyID(s));
-                }
-            }
-        }
-        for (int i =0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = i+1; j < list.size(); j++) {
-                if(list.get(i).getProductID()== list.get(j).getProductID()){
-                    count++;
-                    list.remove(j);
-                    j--;
-                    list.get(i).setQuantity((byte) count);
-                }
-            }
-        }
-        double total = 0;
-        for (Product o : list) {
-            total = total + o.getQuantity() * o.getPrice();
-        }
-        request.setAttribute("list", list);
-        request.setAttribute("total", total);
-        request.setAttribute("vat", 0.1 * total);
-        request.setAttribute("sum", 1.1 * total);
-    }
+  
 
     
 }
+

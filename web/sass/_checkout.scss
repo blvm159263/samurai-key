@@ -140,32 +140,7 @@
         margin-bottom: 20px;
     }
 
-    .checkout__order__products {
-        font-size: 18px;
-        color: $normal-color;
-        font-weight: 700;
-        margin-bottom: 10px;
-
-        span {
-            float: right;
-        }
-    }
-
-    ul {
-        margin-bottom: 12px;
-
-        li {
-            font-size: 16px;
-            color: $para-color;
-            line-height: 40px;
-            list-style: none;
-
-            span {
-                font-weight: 700;
-                float: right;
-            }
-        }
-    }
+    
 
     .checkout__order__subtotal {
         font-size: 18px;
@@ -181,6 +156,7 @@
             float: right;
         }
     }
+    
 
     .checkout__input__checkbox {
 
