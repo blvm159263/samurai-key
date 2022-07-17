@@ -5,22 +5,31 @@
         <group>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-grid.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/header.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/HomePageController.java</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/AddToCartController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/footer.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/admin/ManageController.java</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Product.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/DAO/ProductDAO.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/index.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shoping-cart.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/img/banner/banner-1.jpg</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/admin/manage-product.jsp</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/css/style.css</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/DetailController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/user/login.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/ShopgridController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/build/web/WEB-INF/layout/main.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/main.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/HomePageController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/AddToCartController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Product.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/css/style.css</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/homepage.jsp</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/DetailController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/img/banner/banner-2.jpg</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/FrontController/FrontController.java</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/CartController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/img/hero/banner1.jpg</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/views/home/shop-details.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/models/Consoles.java</file>
-            <file>file:/C:/Users/buile/Documents/GitHub/prj/web/WEB-INF/layout/main.jsp</file>
             <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/FrontController/HomeController.java</file>
+            <file>file:/C:/Users/buile/Documents/GitHub/prj/src/java/controllers/home/SubController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -29,28 +29,27 @@
                     <h3>${detail.productName}</h3>
                     <!--Rating ???? -->
                     <div class="product__details__rating">
-                        <i>${detail.rating}</i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
+                        <c:forEach begin="1" end="${detail.rating}">
+                            <i class="fa fa-star"></i>
+                        </c:forEach>
+                        <c:if test="${detail.rating < 5}">
+                            <c:forEach begin="${detail.rating+1}" end="5">
+                                <i class="fa fa-star-o"></i>
+                            </c:forEach>
+                        </c:if>
                     </div>
                     <div class="product__details__price"><fmt:formatNumber value="${detail.price}" type="currency" /> </div>
                     <!--Description -->
                     <p>${detail.desc}</p>
-                    
-                    
-                        
-                    <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
-                    
-                        
-                    <ul>
-                        <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping.</span></li>
-                        <li><b>Weight</b> <span>0.5 kg</span></li>
 
-                    </ul>
+                    <c:choose>
+                        <c:when test="${not empty userName}">
+                            <a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pid}" />" class="primary-btn" > Add to Cart</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/user/login.do?op=login_form" />" class="primary-btn" > Add to Cart</a>
+                        </c:otherwise>
+                    </c:choose> 
                 </div>
             </div>
 
@@ -75,10 +74,8 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                            <ul class="product__item__pic__hover">                                
+                                <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">

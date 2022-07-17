@@ -96,11 +96,11 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Coming Soon!</h4>
+                                <h4>Featured Product</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
-                                            <a href="#" class="latest-product__item">
+                                            <a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />" class="latest-product__item">
                                                 <div class="latest-product__item__pic">
                                                     <img src="${pro.linkImg1}" alt="">
                                                 </div>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="latest-prdouct__slider__item">
                                         <c:forEach begin="3" end="5" var="pro" items="${listNew}" >
-                                            <a href="#" class="latest-product__item">
+                                            <a href="<c:url value="/home/shop-details.do?pid=${pro.productID}" />" class="latest-product__item">
                                                 <div class="latest-product__item__pic">
                                                     <img src="${pro.linkImg1}" alt="">
                                                 </div>
@@ -156,7 +156,14 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <c:choose>
+                                            <c:when test="${not empty userName}">
+                                                <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:otherwise>
+                                        </c:choose> 
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

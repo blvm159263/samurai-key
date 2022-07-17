@@ -44,12 +44,12 @@
                                             $${o.price}
                                         </td>
                                         <td class="align-middle">
-                                                        <a href="<c:url value="/sub-cart?pid=${o.productID}" />"<button class="secondary-btn">-</button></a> <strong>${o.quantity}</strong>
-                                                        <a href="<c:url value="/add-cart?pid=${o.productID}" />"<button class="secondary-btn">+</button></a>
+                                                        <a href="<c:url value="/home/shoping-cart.do?op=sub&pid=${o.productID}" />"<button class="secondary-btn">-</button></a> <strong>${o.quantity}</strong>
+                                                        <a href="<c:url value="/home/shoping-cart.do?op=add&pid=${o.productID}" />"<button class="secondary-btn">+</button></a>
                                                     </td>
                                         
                                         <td class="shoping__cart__item__close">
-                                            <a href="<c:url value="/delete-cart?pid=${o.productID}" />" class="secondary-btn">Delete</a>
+                                            <a href="<c:url value="/home/shoping-cart.do?op=delete&pid=${o.productID}" />" class="secondary-btn">Delete</a>
                                             
                                         </td>
                                     </tr> 
@@ -62,9 +62,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="shoping__cart__btns">
-                            <a href="<c:url value="/" />" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                            <a href="<c:url value="/home/shoping-cart.do" />" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                                Upadate Cart</a>
+                            <a href="<c:url value="/home/homepage.do?op=list" />" class="primary-btn cart-btn">CONTINUE SHOPPING</a>                          
                         </div>
                     </div>
                     <div class="col-lg-6">

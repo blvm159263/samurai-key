@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en-us"/>
-<div class="hero__item set-bg" data-setbg="<c:url value="/img/hero/banner.jpg" />">
+<div class="hero__item set-bg" data-setbg="<c:url value="/img/hero/banner1.jpg" />">
     <div class="hero__text">
         <span>GAME KEY</span>
         <h2>REPUTATION <br />100% </h2>
@@ -72,8 +72,8 @@
                                 <input type="radio" name="rating" value="1" id="1"><label for="1">&star;</label>
                             </div>
                         </div>
-<!--                        <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
-                        <input class="btn-block btn btn-outline-info" type="reset" />-->
+                        <!--                        <input class="btn-block btn btn-outline-info" type="submit" name="op" value="Filter" />
+                                                <input class="btn-block btn btn-outline-info" type="reset" />-->
                         <div class="sidebar__item">
                             <div class="confirm_find">
                                 <input style="width: 48%; display: inline-block; " class="btn-block btn btn-outline-info left_input" type="submit" name="op" value="Filter" />
@@ -82,7 +82,7 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Coming Soon!</h4>
+                                <h4>Featured Product </h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <c:forEach begin="0" end="2" var="pro" items="${listNew}" >
@@ -127,7 +127,16 @@
                                              data-setbg="${pro.linkImg1}">
                                             <div class="product__discount__percent">New</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+
+                                                <c:choose>
+                                                    <c:when test="${not empty userName}">
+                                                        <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                        <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            </c:otherwise>
+                                                        </c:choose> 
+
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
@@ -172,7 +181,14 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <c:choose>
+                                            <c:when test="${not empty userName}">
+                                                <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:otherwise>
+                                        </c:choose> 
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

@@ -1,4 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en-us" />
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -33,8 +35,7 @@
                                 <ul>
                                     <li><a href="#">My Profile</a></li>
                                     <li><a href="#">History</a></li>
-                                    <li><a href="<c:url value="/admin/" />">Admin Area</a></li>
-                                    <li><a href="#">History</a></li>
+                                    <li><a href="<c:url value="/admin/manage.do?op=listFull" />">Management</a></li>
                                     <li><a href="<c:url value="/user/logout.do" />">Log Out</a></li>
                                 </ul>
                             </c:if>  
@@ -84,13 +85,13 @@
                     </div>
                 </div>
             </div>
-             <div class="col-lg-3">
+            <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="<c:url value="/home/shoping-cart.do" />"><i class="fa fa-shopping-bag"></i></a></li>                       
+                        <li><a href="<c:url value="/home/shoping-cart.do?op=view" />"><i class="fa fa-shopping-bag"></i></a></li>                       
                     </ul>
 
-                    <div class="header__cart__price">item: <span>$${total}</span></div>
+                        <div class="header__cart__price">item: <span><fmt:formatNumber value="${total}" type="currency" /></span></div>
 
 
 
@@ -122,7 +123,7 @@
                     <ul>
                         <c:forEach var="genre" items="${listGenre}">
                             <li><a href="#">${genre.genreName}</a></li>
-                        </c:forEach>
+                            </c:forEach>
                     </ul>
                 </div>
             </div>

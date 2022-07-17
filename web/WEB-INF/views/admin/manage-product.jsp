@@ -28,9 +28,9 @@
                     <div class="card p-3">
                         <div class="e-navlist e-navlist--active-bg">
                             <ul class="nav">
-                                <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2  " href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Manage Product</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2 " href="<c:url value="/home/homepage.do?op=list" />"><i class="fa fa-shopping-cart mr-1"></i><span>Back to Shoping Site</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2 " href="<c:url value="/user/logout.do" />"><i class="fa fa-sign-out mr-1"></i><span>Log Out</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                 <div class="col">
                     <div class="e-tabs mb-3 px-3">
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a class="nav-link active" href="#">Product</a></li>
+                            <li class="nav-item"><a class="nav-link active">Product</a></li>
                         </ul>
                     </div>
 
@@ -104,20 +104,20 @@
                                         <form action="<c:url value="/admin/manage.do" />">
                                             <div class="form-group">
                                                 <label>Search by ID:</label>
-                                                <div><input class="form-control w-100" type="text" placeholder="ID" value=""></div>
-                                                <button class="btn btn-success btn-block" type="submit" value="findByID" >Find</button>
+                                                <div><input class="form-control w-100" type="text" name="productID" placeholder="ID" value="${fID}"></div>
+                                                <button class="btn btn-success btn-block" type="submit" name="op" value="findByID" >Find</button>
 
                                             </div>
                                         </form>
                                         <form action="<c:url value="/admin/manage.do" />">
                                             <div class="form-group">
                                                 <label>Search by Name:</label>
-                                                <div><input class="form-control w-100" type="text" placeholder="Name" value=""></div>
-                                                <button class="btn btn-success btn-block" type="submit" value="findByName">Find</button>
+                                                <div><input class="form-control w-100" type="text" name="productName" placeholder="Name" value="${fName}"></div>
+                                                <button class="btn btn-success btn-block" type="submit" name="op" value="findByName">Find</button>
                                             </div>
                                         </form>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
