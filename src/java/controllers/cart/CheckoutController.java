@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.cart;
+package controllers.cart;
 
 import DAO.ProductDAO;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Product;
 
 /**
@@ -37,6 +38,17 @@ public class CheckoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String op = (String) request.getAttribute("op");
+        op = op.toLowerCase();
+        switch (op) {
+            case "placeorder":
+                placeOrder(request, response);
+               
+                break;
+            case "view":
+                view(request, response);
+                break;
+        }
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
         request.setAttribute("controller", controller);
@@ -82,5 +94,48 @@ public class CheckoutController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    protected void view(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String controller = (String) request.getAttribute("controller");
+        String action = (String) request.getAttribute("action");
+        request.setAttribute("controller", controller);
+        request.setAttribute("action", action);
+        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
 
+}
+    protected void placeOrder(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Cookie arr[] = request.getCookies();
+        List<Product> list = new ArrayList<>();
+        HttpSession session = request.getSession();
+        ProductDAO dao = new ProductDAO();
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                String txt[] = o.getValue().split(",");
+                for (String s : txt) {
+                    list.add(dao.getProductbyID(s));
+                }
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            int count = 1;
+            for (int j = i+1; j < list.size(); j++) {
+                if(list.get(i).getProductID()== list.get(j).getProductID()){
+                    count++;
+                    list.remove(j);
+                    j--;
+                    list.get(i).setQuantity((byte) count);
+                }
+            }
+        }
+        for (Cookie o : arr) {
+            o.setMaxAge(0);
+            response.addCookie(o);
+              
+        }
+        session.invalidate();
+        response.sendRedirect("index.jsp");
+}
 }

@@ -84,7 +84,7 @@
                                      <div class="checkout__order__total">VAT <span>$${vat}</span></div>
                                     <div class="checkout__order__total">Total <span>$${sum}</span></div>
                                     
-                                    <a href="<c:url value="/placeorder" />" class="primary-btn">PLACE ORDER</a>
+                                    <a href="<c:url value="/home/checkout.do?op=placeorder" />" class="primary-btn">PLACE ORDER</a>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.cart;
+package controllers.cart;
 
 import DAO.ProductDAO;
 import java.io.IOException;
