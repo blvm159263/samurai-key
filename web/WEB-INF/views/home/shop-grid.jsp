@@ -156,7 +156,14 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <c:choose>
+                                            <c:when test="${not empty userName}">
+                                                <li><a href="<c:url value="/add-cart?pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </c:otherwise>
+                                        </c:choose> 
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

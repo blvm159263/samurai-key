@@ -39,12 +39,19 @@
                     <div class="product__details__price"><fmt:formatNumber value="${detail.price}" type="currency" /> </div>
                     <!--Description -->
                     <p>${detail.desc}</p>
-                    
-                    
-                        
-                    <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
-                    
-                        
+
+                    <c:choose>
+                        <c:when test="${not empty userName}">
+                            <a href="<c:url value="/add-cart?pid=${pid}" />" class="primary-btn" > Add to Cart</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/user/login.do?op=login_form" />" class="primary-btn" > Add to Cart</a>
+                        </c:otherwise>
+                    </c:choose> 
+
+
+
+
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
                         <li><b>Shipping</b> <span>01 day shipping.</span></li>
