@@ -98,49 +98,26 @@
                                     <div class="text-center px-xl-3">
                                         <button class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#user-form-modal">New User</button>
                                     </div>
-                                    <hr class="my-3">
-                                    <div class="e-navlist e-navlist--active-bold">
-                                        <ul class="nav">
-                                            <li class="nav-item active"><a href="" class="nav-link"><span>All</span>&nbsp;<small>/&nbsp;32</small></a></li>
-                                            <li class="nav-item"><a href="" class="nav-link"><span>Active</span>&nbsp;<small>/&nbsp;16</small></a></li>
-                                            <li class="nav-item"><a href="" class="nav-link"><span>Selected</span>&nbsp;<small>/&nbsp;0</small></a></li>
-                                        </ul>
-                                    </div>
+
                                     <hr class="my-3">
                                     <div>
-                                        <div class="form-group">
-                                            <label>Date from - to:</label>
-                                            <div>
-                                                <input id="dates-range" class="form-control flatpickr-input" placeholder="01 Dec 17 - 27 Jan 18" type="text" readonly="readonly">
+                                        <form action="<c:url value="/admin/manage.do" />">
+                                            <div class="form-group">
+                                                <label>Search by ID:</label>
+                                                <div><input class="form-control w-100" type="text" placeholder="ID" value=""></div>
+                                                <button class="btn btn-success btn-block" type="submit" value="findByID" >Find</button>
+
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Search by Name:</label>
-                                            <div><input class="form-control w-100" type="text" placeholder="Name" value=""></div>
-                                        </div>
+                                        </form>
+                                        <form action="<c:url value="/admin/manage.do" />">
+                                            <div class="form-group">
+                                                <label>Search by Name:</label>
+                                                <div><input class="form-control w-100" type="text" placeholder="Name" value=""></div>
+                                                <button class="btn btn-success btn-block" type="submit" value="findByName">Find</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <hr class="my-3">
-                                    <div class="">
-                                        <label>Status:</label>
-                                        <div class="px-2">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="user-status" id="users-status-disabled">
-                                                <label class="custom-control-label" for="users-status-disabled">Disabled</label>
-                                            </div>
-                                        </div>
-                                        <div class="px-2">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="user-status" id="users-status-active">
-                                                <label class="custom-control-label" for="users-status-active">Active</label>
-                                            </div>
-                                        </div>
-                                        <div class="px-2">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="user-status" id="users-status-any" checked="">
-                                                <label class="custom-control-label" for="users-status-any">Any</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -279,6 +256,135 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create New Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="py-1">
+                                        <form class="form" action="<c:url value="/admin/manage.do" />" >
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Product Name</label>
+                                                                <input class="form-control" type="text" name="productName" value="${pro.productName}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Price ($)</label>
+                                                                <input class="form-control" type="text" name="price" value="${pro.price}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Quantity</label>
+                                                                <input class="form-control" type="text" name="quantity" value="${pro.quantity}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Rating</label>
+                                                                <select name="rating" class="form-control">
+                                                                    <c:forEach begin="1" end="5" varStatus="loop">
+                                                                        <option >${loop.count}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <div class="form-group">
+                                                                <label>Description</label>
+                                                                <textarea class="form-control" rows="3" name="desc"  ></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Link Image 1</label>
+                                                                <input class="form-control" type="text" name="linkImg1" value="${pro.linkImg1}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Link Image 2</label>
+                                                                <input class="form-control" type="text" name="linkImg2" value="${pro.linkImg2} ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Link Image 3</label>
+                                                                <input class="form-control" type="text" name="linkImg3" value="${pro.linkImg3}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Link Image 4</label>
+                                                                <input class="form-control" type="text" name="linkImg4" value="${pro.linkImg4}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Link Image 5</label>
+                                                                <input class="form-control" type="text" name="linkImg5" value="${pro.linkImg5}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Genre</label>
+                                                                <select name="genre" class="form-control">
+                                                                    <c:forEach var="genre" items="${listGenre}" >
+                                                                        <option value="${genre.genreID}"  ${genre.genreName==pro.genre.genreName?'selected':''} >${genre.genreName}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Consoles</label>
+                                                                <select name="console" class="form-control">
+                                                                    <c:forEach var="consoles" items="${listConsoles}" >
+                                                                        <option value="${consoles.consolesID}" >${consoles.consolesName}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col d-flex justify-content-end">
+                                                    <input class="btn btn-primary" type="submit" name="op" value="Create">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

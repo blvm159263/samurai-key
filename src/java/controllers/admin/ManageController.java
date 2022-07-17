@@ -55,28 +55,31 @@ public class ManageController extends HttpServlet {
                 case "listfull":
                     listFull(request, response);
                     paging(request, response);
-                    request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
                     break;
                 case "showpage":
                     paging(request, response);
-                    request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
                     break;
                 case "update":
                     update(request, response);
                     listFull(request, response);
                     paging(request, response);
-                    request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
                     break;
                 case "delete":
                     delete(request, response);
                     listFull(request, response);
                     paging(request, response);
-                    request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
+                    break;
+                case "create":
+                    create(request, response);
+                    listFull(request, response);
+                    paging(request, response);
                     break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ManageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
+
     }
 
     protected void paging(HttpServletRequest request, HttpServletResponse response)
@@ -163,6 +166,28 @@ public class ManageController extends HttpServlet {
             request.setAttribute("message", "Delete Successful!");
         } else {
             request.setAttribute("message", "Delete Fail!");
+        }
+    }
+
+    protected void create(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        int price = Integer.parseInt(request.getParameter("price"));
+        String productName = request.getParameter("productName");
+        byte quantity = Byte.parseByte(request.getParameter("quantity"));
+        String desc = request.getParameter("desc");
+        byte rating = Byte.parseByte(request.getParameter("rating"));
+        String linkImg1 = request.getParameter("linkImg1");
+        String linkImg2 = request.getParameter("linkImg2");
+        String linkImg3 = request.getParameter("linkImg3");
+        String linkImg4 = request.getParameter("linkImg4");
+        String linkImg5 = request.getParameter("linkImg5");
+        int genreID = Integer.parseInt(request.getParameter("genre"));
+        int consolesID = Integer.parseInt(request.getParameter("console"));
+        boolean status = pd.createProduct(51,price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+        if (status) {
+            request.setAttribute("message", "Create Successful!");
+        } else {
+            request.setAttribute("message", "Create Fail!");
         }
     }
 
