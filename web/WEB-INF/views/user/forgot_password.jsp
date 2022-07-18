@@ -14,30 +14,46 @@
         <link href="<c:url value="/css/forgot_password.css"/>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="create-table" >
-            <span onclick="location.href = '<c:url value="/user/login_form.do" />'" class="close" title="Cancel">&times;</span>
-            <form action="<c:url value="/user/reset_password.do" />">
-                <div class="table-content">  
-                    <h1>Reset Password</h1>
-                    <hr>
-                    <label for="id"><b>ID:</b></label>
-                    <input class="id" type="text" name="id" value="${student.id}" readonly /><br/>
-                    <label for="name"><b>Name:</b></label>
-                    <input type="text" name="name" placeholder="student name" value="${student.name}" required /><br/>
-                    <label class="gender-label" for="gender"><b>Gender: </b></label>
-                    <div class="gender">
-                        <input type="radio" name="gender" value="true" ${student.gender == "true" ? "checked" : ""} required/>
-                        <label for="true">Male</label>
-                        <input type="radio" name="gender" value="false" ${student.gender == "false" ? "checked" : ""} required />
-                        <label for="false">Female</label>
-                    </div>        
-                    <br/>
-                    <label for="dob"><b>Date of birth:</b></label>
-                    <input type="date" name="dob" value="<fmt:formatDate value="${student.dob}" pattern="yyyy-MM-dd" />" required /><br/>
-                    <input type="submit" name="op" value="Update" /><br/>
-                </div>
-            </form>
-            <i style="color: red">${result}</i> 
-        </div>
+        <c:if test="${empty user.userName}">
+            <div class="create-table" >
+                <span onclick="location.href = '<c:url value="/user/login_form.do" />'" class="close" title="Cancel">&times;</span>
+                <form action="<c:url value="/user/find_user.do" />">
+                    <div class="table-content">  
+                        <h1>Reset Password</h1>
+                        <hr>
+                        <label for="userName"><b>Enter Name:</b></label>
+                        <input id="userName" type="text" name="userName" placeholder="User name" value="${userName}" required /><br/>                      
+                        <br/>
+                        <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p> 
+                        <input type="submit" value="Next" /><br/>
+                    </div>
+                </form>
+                
+            </div>
+        </c:if>
+        <c:if test="${not empty user.userName}">
+            <div class="create-table" >
+                <span onclick="location.href = '<c:url value="/user/login_form.do" />'" class="close" title="Cancel">&times;</span>
+                <form action="<c:url value="/user/reset_password.do" />">
+                    <div class="table-content">  
+                        <h1>Reset Password</h1>
+                        <hr>
+                        <input type="hidden" name="id" value="${user.id}" />
+                        <input type="hidden" name="userName" value="${user.userName}" />
+                        <input type="hidden" name="role" value="${user.role}" required />
+                        <label for="np1"><b>Enter password:</b></label>
+                        <input id="np1" type="password" name="newPassword1" placeholder="Password" value="${empty newPassword2 ? "" : newPassword}" required /><br/>                      
+                        <br/>
+                        <label for="np2"><b>Confirm password:</b></label>
+                        <input id="np2" type="password" name="newPassword2" placeholder="Confirm password" required /><br/>                      
+                        <br/>
+                        <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p>
+                        <input type="submit" value="Reset" /><br/>
+                    </div>
+                </form>
+                
+            </div>
+        </c:if>
+
     </body>
 </html>

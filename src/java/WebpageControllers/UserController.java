@@ -69,6 +69,12 @@ public class UserController extends HttpServlet {
             case "forgot_password":
                 request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
                 break;
+            case "find_user":
+                findUser(request, response);
+                break;
+            case "reset_password":
+                resetPassword(request, response);
+                break;
         }
     }
 
@@ -219,6 +225,63 @@ public class UserController extends HttpServlet {
 
         } catch (Exception ex) {
             log("Error at Register: " + ex.toString());
+        }
+    }
+    
+    protected void findUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String userName = request.getParameter("userName").toLowerCase();
+            User account = UserDAO.find(userName);
+            if (account != null){
+                request.setAttribute("user", account);
+            }else{
+                // save wrong name
+                request.setAttribute("userName", userName);
+                // send message
+                request.setAttribute("message", "User name not found.");                
+            }
+            //Cho hiện lại trang forgot_password.jsp
+                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at Find User: " + ex.toString());
+        }
+    }
+    
+    protected void resetPassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String userName = request.getParameter("userName").toLowerCase();
+            String newPassword = request.getParameter("newPassword1");
+            String newPassword2 = request.getParameter("newPassword2");
+            String role = request.getParameter("role");
+            User account = UserDAO.find(userName);
+            if (newPassword.equals(newPassword2)){
+                // create new user
+                User user = new User();
+                user.setId(id);;
+                user.setUserName(userName);
+                user.setPassword(newPassword);
+                user.setRole(role);
+                //Update user
+                UserDAO ud = new UserDAO();
+                ud.update(user);
+               //Cho hiện lại trang login.jsp
+               
+                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);  
+            }else{
+                // save unmatched password
+                request.setAttribute("user", account);
+                request.setAttribute("newPassword", newPassword);
+                request.setAttribute("newPassword2", newPassword2);
+                // send message
+                request.setAttribute("message", "Confirm Password not matched.");                
+            }
+            //Cho hiện lại trang forgot_password.jsp
+                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at Reser Password: " + ex.toString());
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

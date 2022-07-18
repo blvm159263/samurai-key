@@ -153,7 +153,7 @@ public class UserDAO {
         //Connecting to a database
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
-        PreparedStatement stm = con.prepareStatement("update users set Passwords=? where id=?");
+        PreparedStatement stm = con.prepareStatement("update users set Passwords=? where UserID=?");
         stm.setString(1, Hasher.hash(user.getPassword()));
         stm.setInt(2, user.getId());
         stm.executeUpdate();
