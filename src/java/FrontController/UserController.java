@@ -114,7 +114,6 @@ public class UserController extends HttpServlet {
 
                 }
                 //Lưu userName vào session để ghi nhận đã login thành công
-                session.setAttribute("userName", userName);
                 session.setAttribute("user", account);
 
                 //Lưu userName + viết hoa chữ cái đầu rồi truyền đến header để thay tên vào phần welcome back

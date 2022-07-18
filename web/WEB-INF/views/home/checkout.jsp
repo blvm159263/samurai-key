@@ -19,7 +19,7 @@
         <c:if test="${message!=null}">
             <div style="background-color: red;" class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                <strong>Error!</strong> ${message}
+                 ${message}
             </div>
         </c:if>
         <div class="checkout__form">

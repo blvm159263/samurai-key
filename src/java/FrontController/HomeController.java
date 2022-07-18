@@ -86,7 +86,7 @@ public class HomeController extends HttpServlet {
 
         }
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
-        if (action.compareTo("shoping-cart") != 0) {
+        if (action.compareTo("shoping-cart") != 0 || action.compareTo("checkout") != 0) {
             request.setAttribute("controller", controller);
             request.setAttribute("action", action);
             request.getRequestDispatcher(Layout).forward(request, response);
@@ -193,17 +193,19 @@ public class HomeController extends HttpServlet {
             }
             String userName = cUserName.getValue().toLowerCase();
             String password = cPassword.getValue();
+            User account = UserDAO.check_web(userName, password);
             if (cUserName != null
                     && cPassword != null
                     && cRememberMe != null //new
-                    //&& UserDAO.check_web(userName, password) != null
+                    && account != null
                     //&& cUserName.getValue().toLowerCase().equals("admin")
                     //&& cPassword.getValue().toLowerCase().equals("12345")
                     && cRememberMe.getValue().equals("on")) {
                 //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
                 HttpSession session = request.getSession();
 
-                session.setAttribute("userName", userName);
+                // session.setAttribute("userName", userName);
+                session.setAttribute("user", account);
 
             }
         } catch (Exception ex) {
@@ -512,9 +514,11 @@ public class HomeController extends HttpServlet {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
             String date = current.format(formatter);
             User user = (User) session.getAttribute("user");
+            System.out.println(user.getId() + "," + user.getUserName());
             int userID = user.getId();
-            if (fullName == null || address == null || email == null || phone == null) {
+            if (fullName == "" || address == "" || email == "" || phone == "") {
                 request.setAttribute("message", "Some field are empty. Please check!");
+                request.getRequestDispatcher(Layout).forward(request, response);
             } else {
                 boolean status = check.addOrder(fullName, address, total, email, phone, date, userID);
                 Cookie arr[] = request.getCookies();
@@ -545,8 +549,7 @@ public class HomeController extends HttpServlet {
 
                 }
                 session.invalidate();
-                request.setAttribute("action", "homepage");
-                request.setAttribute("op", "list");
+                response.sendRedirect("home/homepage.do?op=list");
             }
         } catch (Exception e) {
             e.printStackTrace();

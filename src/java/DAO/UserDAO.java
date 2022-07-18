@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.User;
 
 /**
@@ -35,6 +37,7 @@ public class UserDAO {
         //if userId and password are correct
         if (rs.next()) {
             user = new User();
+            user.setId(rs.getInt(1));
             user.setUserName(rs.getString(2));
             user.setPassword(rs.getString(3));
             user.setRole(rs.getString(4));
@@ -59,6 +62,7 @@ public class UserDAO {
         //if userId and password are correct
         if (rs.next()) {
             user = new User();
+            user.setId(rs.getInt(1));
             user.setUserName(rs.getString(2));
             user.setPassword(rs.getString(3));
             user.setRole(rs.getString(4));
@@ -103,7 +107,6 @@ public class UserDAO {
 //        con.close();
 //        return count == 1;
 //    }
-
     public static boolean register2(User user) throws Exception {
         //Connecting to a database
         DBUtil db = new DBUtil();
@@ -125,5 +128,16 @@ public class UserDAO {
         }
 
         return done;
+    }
+
+    public static void main(String[] args) {
+        try {
+            DBUtil db = new DBUtil();
+            Connection con = db.getConnection();
+            User user = UserDAO.check("admin", "1");
+            System.out.println(user.getId());
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -26,11 +26,11 @@
                         <!--Language--> 
                         <div class="header__top__right__language">
                             <!--for user-->
-                            <c:if test="${userName == null}">
+                            <c:if test="${user.userName == null}">
                                 <a href="<c:url value="/user/login_form.do" />"><i style="margin-right: 8px" class="fa fa-user"></i>Login</a>
                             </c:if>
-                            <c:if test="${userName != null}">
-                                <div><i style="margin-right: 8px" class="fa fa-user"></i>${userName}</div>
+                            <c:if test="${user.userName != null}">
+                                <div><i style="margin-right: 8px" class="fa fa-user"></i>${user.userName}</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a href="#">My Profile</a></li>
