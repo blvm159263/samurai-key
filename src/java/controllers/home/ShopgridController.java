@@ -33,7 +33,6 @@ public class ShopgridController extends HttpServlet {
     GenreDAO gd = new GenreDAO();
     ConsolesDAO cd = new ConsolesDAO();
     
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import models.Consoles;
+import models.Genre;
+import models.Product;
 
 /**
  *
@@ -39,18 +42,89 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+//        //Lấy action
+//        String action = (String) request.getAttribute("action");
+//        //Lấy op
+//        //String op = (String) request.getAttribute("op");
+//        //op = op.toLowerCase();
+//        //Check cookies
+//        check_cookies(request, response);
+//        switch (action) {
+//            case "homepage":
+//                homepage(request, response);
+//                break;
+//
+//        }
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
         //Lấy op
         String op = (String) request.getAttribute("op");
-        
+        //Check cookies
+        check_cookies(request, response);
+
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
         request.setAttribute("op", op);
-        request.getRequestDispatcher("/"+action).forward(request, response);
+        request.getRequestDispatcher("/" + action).forward(request, response);
+    }
+
+//    protected void homepage(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        ProductDAO pd = new ProductDAO();
+//        GenreDAO gd = new GenreDAO();
+//        ConsolesDAO cd = new ConsolesDAO();
+//        List<Product> listNew = pd.listNew();
+//        List<Product> listAll = pd.listHome();
+//        List<Genre> listGenre = gd.list();
+//        List<Consoles> listConsoles = cd.list();
+//        int size = listAll.size();
+//        int maxPrice = pd.maxPrice();
+//        int minPrice = pd.minPrice();
+//        request.setAttribute("minPrice", minPrice);
+//        request.setAttribute("maxPrice", maxPrice);
+//        request.setAttribute("listConsoles", listConsoles);
+//        request.setAttribute("listGenre", listGenre);
+//        request.setAttribute("size", size);
+//        request.setAttribute("listAll", listAll);
+//        request.setAttribute("listNew", listNew);
+//        request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
+//    }
+
+    protected void check_cookies(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Read cookies if available
+        Cookie cookie = null;
+        Cookie cUserName = null;
+        Cookie cPassword = null;
+        Cookie[] cookies = null;
+
+        // Get an array of Cookies associated with the this domain
+        cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                cookie = cookies[i];
+                if ((cookie.getName()).equals("userName")) {
+                    cUserName = cookie;
+                } else if ((cookie.getName()).equals("password")) {
+                    cPassword = cookie;
+                }
+            }
+        }
+        if (cUserName != null
+                && cPassword != null
+                && cUserName.getValue().toLowerCase().equals("admin")
+                && cPassword.getValue().toLowerCase().equals("12345")) {
+            //Lưu userName vào session để ghi nhận đã login thành công
+            HttpSession session = request.getSession();
+            session.setAttribute("userName", "admin");
+
+            //Lưu userName truyền đến header để thay tên vào phần login avatar
+            String userName = cUserName.getValue().toLowerCase();
+            request.setAttribute("userName", userName);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

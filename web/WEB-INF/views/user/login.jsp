@@ -21,7 +21,8 @@
     <body>
         <div class="main">
             <div class="container a-container" id="a-container">
-                <form class="form" id="b-form" method="" action="login.do">
+                
+                <form class="form" id="b-form" method="" action="<c:url value="/user/login_handler.do" />">
                     <h2 class="form_title title">Sign in</h2>
                     <c:if test="${not empty message}">
                         <i ${message == null ? "" : ""} style="color:red; font-size: 20px; position: absolute; top: 23%; left: 170px" class="material-icons" style="font-size:15px; color:red;">error_outline</i> 
@@ -39,7 +40,7 @@
                         <label class="form-check-label" for="remember">Remember me</label>
                     </div>
                     <a class="form__link">Forgot your password?</a>
-                    <button class="form__button button" name="op" value="login_handler">SIGN IN</button>
+                    <button class="form__button button" name="login">SIGN IN</button>
                 </form>
             </div>
             <div class="container b-container" id="b-container">

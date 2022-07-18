@@ -27,7 +27,7 @@
                         <div class="header__top__right__language">
                             <!--for user-->
                             <c:if test="${userName == null}">
-                                <a href="<c:url value="/user/login.do?op=login_form" />"><i style="margin-right: 8px" class="fa fa-user"></i>Login</a>
+                                <a href="<c:url value="/user/login_form.do" />"><i style="margin-right: 8px" class="fa fa-user"></i>Login</a>
                             </c:if>
                             <c:if test="${userName != null}">
                                 <div><i style="margin-right: 8px" class="fa fa-user"></i>${userName}</div>
