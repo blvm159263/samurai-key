@@ -157,7 +157,7 @@
                                 <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                                     <ul class="product__item__pic__hover">
                                         <c:choose>
-                                            <c:when test="${not empty userName}">
+                                            <c:when test="${not empty user.userName}">
                                                 <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
                                             </c:when>
                                             <c:otherwise>

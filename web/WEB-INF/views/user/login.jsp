@@ -46,7 +46,7 @@
                         <input type="checkbox" class="form-check-input" id="remember" name="rememberMe" ${empty password ? "checked" : ""} ${rememberMe == "on" ? "checked" : ""}>
                         <label class="form-check-label" for="remember">Remember me</label>
                     </div>
-                    <a class="form__link">Forgot your password?</a>
+                        <a class="form__link" href="">Forgot your password?</a>
                     <button class="form__button button">SIGN IN</button>
                 </form>
             </div>
