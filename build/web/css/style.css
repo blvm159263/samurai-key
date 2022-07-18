@@ -1623,7 +1623,9 @@ ol {
     color: #252525;
     font-weight: 700;
 }
-
+.product__pagination{
+    text-align: center;
+}
 .product__pagination,
 .blog__pagination {
     padding-top: 10px;
@@ -3526,7 +3528,7 @@ ol {
 .alert {
     display: block;
     padding: 20px;
-    
+
     color: white;
 }
 

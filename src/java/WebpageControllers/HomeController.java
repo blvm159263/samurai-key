@@ -57,7 +57,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
@@ -246,6 +246,9 @@ public class HomeController extends HttpServlet {
         listAll = pd.listAll();
         int size = listAll.size();
         int endP = countP(size);
+        session.setAttribute("curGen", null);
+        session.setAttribute("curCons", null);
+        session.setAttribute("curRating", null);
         session.setAttribute("endP", endP);
         session.setAttribute("list", listAll);
         session.setAttribute("size", size);
