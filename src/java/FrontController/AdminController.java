@@ -8,7 +8,6 @@ package FrontController;
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
 import DAO.ProductDAO;
-import controllers.admin.ManageController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -99,7 +98,7 @@ public class AdminController extends HttpServlet {
                     break;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ManageController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
