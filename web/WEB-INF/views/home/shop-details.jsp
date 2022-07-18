@@ -47,7 +47,7 @@
                             <a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pid}" />" class="primary-btn" > Add to Cart</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="<c:url value="/user/login.do?op=login_form" />" class="primary-btn" > Add to Cart</a>
+                            <a href="<c:url value="/user/login_form.do" />" class="primary-btn" > Add to Cart</a>
                         </c:otherwise>
                     </c:choose> 
                 </div>
@@ -75,7 +75,14 @@
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="${pro.linkImg1}">
                             <ul class="product__item__pic__hover">                                
-                                <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                <c:choose>
+                                    <c:when test="${not empty userName}">
+                                        <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:when>
+                                     <c:otherwise>
+                                        <li><a href="<c:url value="/user/login_form.do"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:otherwise>
+                                </c:choose> 
                             </ul>
                         </div>
                         <div class="product__item__text">

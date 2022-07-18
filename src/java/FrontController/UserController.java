@@ -194,7 +194,7 @@ public class UserController extends HttpServlet {
             if (UserDAO.register2(account)) { // check duplicate
                 if (password.equals(password2)) { // check confirm_password
                     //Lưu thông báo lỗi confirm vào request
-                    request.setAttribute("rMessage", "Please Login to complete your registration.");
+                    request.setAttribute("rMessage", "Please login to complete your registration.");
                     //Cho hiện lại trang login.jsp
                     request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 

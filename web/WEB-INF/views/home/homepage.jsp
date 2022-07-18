@@ -133,7 +133,7 @@
                                                         <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
                                                             </c:when>
                                                             <c:otherwise>
-                                                        <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a href="<c:url value="/user/login_form.do"/>"><i class="fa fa-shopping-cart"></i></a></li>
                                                             </c:otherwise>
                                                         </c:choose> 
 
@@ -186,7 +186,7 @@
                                                 <li><a href="<c:url value="/home/shoping-cart.do?op=add&pid=${pro.productID}"/>"><i class="fa fa-shopping-cart"></i></a></li>
                                             </c:when>
                                             <c:otherwise>
-                                                <li><a href="<c:url value="/user/login.do?op=login_form"/>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a href="<c:url value="/user/login_form.do"/>"><i class="fa fa-shopping-cart"></i></a></li>
                                             </c:otherwise>
                                         </c:choose> 
                                     </ul>

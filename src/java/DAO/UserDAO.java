@@ -27,7 +27,7 @@ public class UserDAO {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
         //Creating and executing sql statements            
-        String sql = "select * from Users where UserName=? and Password=?";
+        String sql = "select * from Users where UserName=? and Passwords=?";
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setString(1, userName);
         stm.setString(2, Hasher.hash(password));
@@ -51,7 +51,7 @@ public class UserDAO {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
         //Creating and executing sql statements            
-        String sql = "select * from Users where UserName=? and Password=?";
+        String sql = "select * from Users where UserName=? and Passwords=?";
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setString(1, userName);
         stm.setString(2, password);
@@ -88,21 +88,21 @@ public class UserDAO {
         return noOfUser;
     }
 
-    public static boolean register(User user) throws Exception {
-        //Connecting to a database
-        DBUtil db = new DBUtil();
-        Connection con = db.getConnection();
-        //Creating and executing sql statements            
-        String sql = "insert Users values(?, ?, ?)";
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1, user.getUserName());
-        stm.setString(2, Hasher.hash(user.getPassword()));
-        stm.setString(3, user.getRole());
-        int count = stm.executeUpdate();
-        //Closing the connection
-        con.close();
-        return count == 1;
-    }
+//    public static boolean register(User user) throws Exception {
+//        //Connecting to a database
+//        DBUtil db = new DBUtil();
+//        Connection con = db.getConnection();
+//        //Creating and executing sql statements            
+//        String sql = "insert Users values(?, ?, ?)";
+//        PreparedStatement stm = con.prepareStatement(sql);
+//        stm.setString(1, user.getUserName());
+//        stm.setString(2, Hasher.hash(user.getPassword()));
+//        stm.setString(3, user.getRole());
+//        int count = stm.executeUpdate();
+//        //Closing the connection
+//        con.close();
+//        return count == 1;
+//    }
 
     public static boolean register2(User user) throws Exception {
         //Connecting to a database
@@ -118,7 +118,7 @@ public class UserDAO {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, user.getUserName());
             stm.setString(2, Hasher.hash(user.getPassword()));
-            stm.setString(3, "ADMIN");
+            stm.setString(3, "USER");
             stm.executeUpdate();
             //Closing the connection
             con.close();

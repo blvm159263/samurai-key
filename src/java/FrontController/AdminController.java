@@ -156,57 +156,69 @@ public class AdminController extends HttpServlet {
 
     protected void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        int productID = Integer.parseInt(request.getParameter("productID"));
-        int price = Integer.parseInt(request.getParameter("price"));
-        String productName = request.getParameter("productName");
-        byte quantity = Byte.parseByte(request.getParameter("quantity"));
-        String desc = request.getParameter("desc");
-        byte rating = Byte.parseByte(request.getParameter("rating"));
-        String linkImg1 = request.getParameter("linkImg1");
-        String linkImg2 = request.getParameter("linkImg2");
-        String linkImg3 = request.getParameter("linkImg3");
-        String linkImg4 = request.getParameter("linkImg4");
-        String linkImg5 = request.getParameter("linkImg5");
-        int genreID = Integer.parseInt(request.getParameter("genre"));
-        int consolesID = Integer.parseInt(request.getParameter("console"));
-        boolean status = pd.updateProduct(productID, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
-        if (status) {
-            request.setAttribute("message", "Update Successful!");
-        } else {
-            request.setAttribute("message", "Update Fail!");
+        try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            String productName = request.getParameter("productName");
+            byte quantity = Byte.parseByte(request.getParameter("quantity"));
+            String desc = request.getParameter("desc");
+            byte rating = Byte.parseByte(request.getParameter("rating"));
+            String linkImg1 = request.getParameter("linkImg1");
+            String linkImg2 = request.getParameter("linkImg2");
+            String linkImg3 = request.getParameter("linkImg3");
+            String linkImg4 = request.getParameter("linkImg4");
+            String linkImg5 = request.getParameter("linkImg5");
+            int genreID = Integer.parseInt(request.getParameter("genre"));
+            int consolesID = Integer.parseInt(request.getParameter("console"));
+            boolean status = pd.updateProduct(productID, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+            if (status) {
+                request.setAttribute("message", "Update Successful!");
+            } else {
+                request.setAttribute("message", "Update Fail!");
+            }
+        } catch (Exception ex) {
+            log("Error at Admin update: " + ex.toString());
         }
     }
 
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        int productID = Integer.parseInt(request.getParameter("productID"));
-        boolean status = pd.delete(productID);
-        if (status) {
-            request.setAttribute("message", "Delete Successful!");
-        } else {
-            request.setAttribute("message", "Delete Fail!");
+        try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            boolean status = pd.delete(productID);
+            if (status) {
+                request.setAttribute("message", "Delete Successful!");
+            } else {
+                request.setAttribute("message", "Delete Fail!");
+            }
+        } catch (Exception ex) {
+            log("Error at Admin delete: " + ex.toString());
         }
     }
 
     protected void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        int price = Integer.parseInt(request.getParameter("price"));
-        String productName = request.getParameter("productName");
-        byte quantity = Byte.parseByte(request.getParameter("quantity"));
-        String desc = request.getParameter("desc");
-        byte rating = Byte.parseByte(request.getParameter("rating"));
-        String linkImg1 = request.getParameter("linkImg1");
-        String linkImg2 = request.getParameter("linkImg2");
-        String linkImg3 = request.getParameter("linkImg3");
-        String linkImg4 = request.getParameter("linkImg4");
-        String linkImg5 = request.getParameter("linkImg5");
-        int genreID = Integer.parseInt(request.getParameter("genre"));
-        int consolesID = Integer.parseInt(request.getParameter("console"));
-        boolean status = pd.createProduct( price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
-        if (status) {
-            request.setAttribute("message", "Create Successful!");
-        } else {
-            request.setAttribute("message", "Create Fail!");
+        try {
+            int price = Integer.parseInt(request.getParameter("price"));
+            String productName = request.getParameter("productName");
+            byte quantity = Byte.parseByte(request.getParameter("quantity"));
+            String desc = request.getParameter("desc");
+            byte rating = Byte.parseByte(request.getParameter("rating"));
+            String linkImg1 = request.getParameter("linkImg1");
+            String linkImg2 = request.getParameter("linkImg2");
+            String linkImg3 = request.getParameter("linkImg3");
+            String linkImg4 = request.getParameter("linkImg4");
+            String linkImg5 = request.getParameter("linkImg5");
+            int genreID = Integer.parseInt(request.getParameter("genre"));
+            int consolesID = Integer.parseInt(request.getParameter("console"));
+            boolean status = pd.createProduct( price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+            if (status) {
+                request.setAttribute("message", "Create Successful!");
+            } else {
+                request.setAttribute("message", "Create Fail!");
+            }
+        } catch (Exception ex) {
+            log("Error at Admin create: " + ex.toString());
         }
     }
 
