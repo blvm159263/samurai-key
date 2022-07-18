@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
+import models.User;
 
 /**
  *
@@ -187,17 +188,19 @@ public class HomeController extends HttpServlet {
             }
             String userName = cUserName.getValue().toLowerCase();
             String password = cPassword.getValue();
+            User account = UserDAO.check_web(userName, password);
             if (cUserName != null
                     && cPassword != null
                     && cRememberMe != null //new
-                    //&& UserDAO.check_web(userName, password) != null
+                    && account != null
                     //&& cUserName.getValue().toLowerCase().equals("admin")
                     //&& cPassword.getValue().toLowerCase().equals("12345")
                     && cRememberMe.getValue().equals("on")) {
                 //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
                 HttpSession session = request.getSession();
                 
-                session.setAttribute("userName", userName);
+               // session.setAttribute("userName", userName);
+                session.setAttribute("user", account);
                 
             }
         } catch (Exception ex) {
