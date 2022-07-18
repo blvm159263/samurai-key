@@ -84,7 +84,7 @@
                                         <div class="d-flex justify-content-center">
                                             <ul class="pagination mt-3 mb-0">
                                                 <c:forEach begin="1" end="${endP}" varStatus="loop">
-                                                    <li class="page-item"><a class="page-link" href="<c:url value="/home/manage.do?op=showPage&page=${loop.count}" />">${loop.count}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="<c:url value="/admin/manage.do?op=showPage&page=${loop.count}" />">${loop.count}</a></li>
                                                     </c:forEach>
                                             </ul>
                                         </div>
