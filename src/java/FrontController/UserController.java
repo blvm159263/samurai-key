@@ -5,12 +5,16 @@
  */
 package FrontController;
 
+import Context.Hasher;
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
 import DAO.ProductDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
+import models.User;
 
 /**
  *
@@ -58,6 +63,9 @@ public class UserController extends HttpServlet {
             case "logout":
                 logout(request, response);
                 break;
+            case "register":
+                register(request, response);
+                break;
         }
     }
 
@@ -69,62 +77,68 @@ public class UserController extends HttpServlet {
 
     protected void loginHandler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName").toLowerCase();
-        String password = request.getParameter("password").toLowerCase();
-        String rememberMe = request.getParameter("rememberMe");
-        if (rememberMe == null) {
-            rememberMe = "off";
-        }
-
-        // If login successfully
-        if (userName.equals("admin") && password.equals("12345")) {
-            if (rememberMe.equals("on")) {
-                // Create cookies for username and password     
-                Cookie cUserName = new Cookie("userName", userName);
-                Cookie cPassword = new Cookie("password", password);
-                Cookie cRememberMe = new Cookie("rememberMe", rememberMe); //new
-
-                // Set path to homepage
-                cUserName.setPath("/Group1_Assignment");
-                cPassword.setPath("/Group1_Assignment");
-                cRememberMe.setPath("/Group1_Assignment"); //new
-
-                // Set expiry date after 24 Hrs for both the cookies
-                cUserName.setMaxAge(60 * 60 * 24);
-                cPassword.setMaxAge(60 * 60 * 24);
-                cRememberMe.setMaxAge(60 * 60 * 24); //new
-
-                // Add both the cookies in the response header
-                response.addCookie(cUserName);
-                response.addCookie(cPassword);
-                response.addCookie(cRememberMe); //new
-
+        try {
+            String userName = request.getParameter("userName").toLowerCase();
+            String password = request.getParameter("password");
+            String rememberMe = request.getParameter("rememberMe");
+            if (rememberMe == null) {
+                rememberMe = "off";
             }
-            //Lưu userName vào session để ghi nhận đã login thành công
-            HttpSession session = request.getSession();
-            session.setAttribute("userName", userName);
+            // check account
+            User account = UserDAO.check(userName, password);
+            // If login successfully
+            //if (userName.equals("admin") && password.equals("1")) {
+            if (account != null) {
+                if (rememberMe.equals("on")) {
+                    // Create cookies for username and password
+                    Cookie cUserName = new Cookie("userName", userName);
+                    Cookie cPassword = new Cookie("password", Hasher.hash(password));
+                    Cookie cRememberMe = new Cookie("rememberMe", rememberMe); //new
 
-            //Lưu userName + viết hoa chữ cái đầu rồi truyền đến header để thay tên vào phần welcome back
-            String firstLetter = userName.substring(0, 1);
-            String remainingLetters = userName.substring(1, userName.length());
-            firstLetter = firstLetter.toUpperCase();
-            String output = firstLetter + remainingLetters;
-            request.setAttribute("cap_userName", output);
+                    // Set path to homepage
+                    cUserName.setPath("/Group1_Assignment");
+                    cPassword.setPath("/Group1_Assignment");
+                    cRememberMe.setPath("/Group1_Assignment"); //new
 
-            //Chuyển đến trang index.jsp => header.jsp
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            //Lưu thông tin đã nhập vào request để bảo tồn trạng thái của form
-            request.setAttribute("userName", userName);
-            request.setAttribute("password", password);
-            request.setAttribute("rememberMe", rememberMe);
-            //Lưu thông báo lỗi vào request
-            request.setAttribute("message", "Wrong username or password.");
-            //Cho hiện lại trang login.jsp
-            request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+                    // Set expiry date after 24 Hrs for both the cookies
+                    cUserName.setMaxAge(60 * 60 * 24);
+                    cPassword.setMaxAge(60 * 60 * 24);
+                    cRememberMe.setMaxAge(60 * 60 * 24); //new
+
+                    // Add both the cookies in the response header
+                    response.addCookie(cUserName);
+                    response.addCookie(cPassword);
+                    response.addCookie(cRememberMe); //new
+
+                }
+                //Lưu userName vào session để ghi nhận đã login thành công
+                HttpSession session = request.getSession();
+                session.setAttribute("userName", userName);
+
+                //Lưu userName + viết hoa chữ cái đầu rồi truyền đến header để thay tên vào phần welcome back
+                String firstLetter = userName.substring(0, 1);
+                String remainingLetters = userName.substring(1, userName.length());
+                firstLetter = firstLetter.toUpperCase();
+                String output = firstLetter + remainingLetters;
+                request.setAttribute("cap_userName", output);
+
+                //Chuyển đến trang index.jsp => header.jsp
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                //Lưu thông tin đã nhập vào request để bảo tồn trạng thái của form
+                request.setAttribute("userName", userName);
+                request.setAttribute("password", password);
+                request.setAttribute("rememberMe", rememberMe);
+                //Lưu thông báo lỗi vào request
+                request.setAttribute("message", "Wrong username or password.");
+                //Cho hiện lại trang login.jsp
+                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+            }
+        } catch (Exception ex) {
+            log("Error at Login_Handler: " + ex.toString());
         }
     }
-    
+
     protected void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Destroy session
@@ -147,7 +161,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("action", "homepage");
         request.getRequestDispatcher("/WEB-INF/layout/main.jsp").forward(request, response);
     }
-    
+
     protected void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
@@ -167,6 +181,47 @@ public class UserController extends HttpServlet {
         request.setAttribute("size", size);
         request.setAttribute("listAll", listAll);
         request.setAttribute("listNew", listNew);
+    }
+
+    protected void register(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String userName = request.getParameter("userName").toLowerCase();
+            String password = request.getParameter("password");
+            String password2 = request.getParameter("password2");
+
+            User account = new User(userName, password);
+            if (UserDAO.register2(account)) { // check duplicate
+                if (password.equals(password2)) { // check confirm_password
+                    //Lưu thông báo lỗi confirm vào request
+                    request.setAttribute("rMessage", "Please Login to complete your registration.");
+                    //Cho hiện lại trang login.jsp
+                    request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+
+                } else { // check confirm_password
+                    //Lưu thông tin đã nhập vào request để bảo tồn trạng thái của form
+                    request.setAttribute("rUserName", userName);
+                    request.setAttribute("rPassword", password);
+                    request.setAttribute("rPassword2", password2);
+                    //Lưu thông báo lỗi vào request
+                    request.setAttribute("rMessage", "Confirm Password not matched.");
+                    //Cho hiện lại trang login.jsp
+                    request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+                }
+            } else { // check duplicate
+                //Lưu thông tin đã nhập vào request để bảo tồn trạng thái của form
+                request.setAttribute("rUserName", userName);
+                request.setAttribute("rPassword", password);
+                //Lưu thông báo lỗi vào request
+                request.setAttribute("rMessage", "Username has been used.");
+                //Cho hiện lại trang login.jsp
+                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+
+            }
+
+        } catch (Exception ex) {
+            log("Error at Register: " + ex.toString());
+        }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 

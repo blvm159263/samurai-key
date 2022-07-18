@@ -8,10 +8,13 @@ package FrontController;
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
 import DAO.ProductDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -94,36 +97,46 @@ public class HomeController extends HttpServlet {
 
     protected void check_cookies(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Read cookies if available
-        Cookie cookie = null;
-        Cookie cUserName = null;
-        Cookie cPassword = null;
-        Cookie[] cookies = null;
-
-        // Get an array of Cookies associated with the this domain
-        cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
-                if ((cookie.getName()).equals("userName")) {
-                    cUserName = cookie;
-                } else if ((cookie.getName()).equals("password")) {
-                    cPassword = cookie;
+        try {
+            // Read cookies if available
+            Cookie cookie = null;
+            Cookie cUserName = null;
+            Cookie cPassword = null;
+            Cookie cRememberMe = null; // new
+            Cookie[] cookies = null;
+            
+            // Get an array of Cookies associated with the this domain
+            cookies = request.getCookies();
+            
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    cookie = cookies[i];
+                    if ((cookie.getName()).equals("userName")) {
+                        cUserName = cookie;
+                    } else if ((cookie.getName()).equals("password")) {
+                        cPassword = cookie;
+                    } else if ((cookie.getName()).equals("rememberMe")) {
+                        cRememberMe = cookie;
+                    }
                 }
             }
-        }
-        if (cUserName != null
-                && cPassword != null
-                && cUserName.getValue().toLowerCase().equals("admin")
-                && cPassword.getValue().toLowerCase().equals("12345")) {
-            //Lưu userName vào session để ghi nhận đã login thành công
-            HttpSession session = request.getSession();
-            session.setAttribute("userName", "admin");
-
-            //Lưu userName truyền đến header để thay tên vào phần login avatar
             String userName = cUserName.getValue().toLowerCase();
-            request.setAttribute("userName", userName);
+            String password = cPassword.getValue();
+            if (cUserName != null
+                    && cPassword != null
+                    && cRememberMe != null //new
+                    //&& UserDAO.check_web(userName, password) != null
+                    //&& cUserName.getValue().toLowerCase().equals("admin")
+                    //&& cPassword.getValue().toLowerCase().equals("12345")
+                    && cRememberMe.getValue().equals("on")) {
+                //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
+                HttpSession session = request.getSession();
+                
+                session.setAttribute("userName", userName);
+                
+            }
+        } catch (Exception ex) {
+            log("Error at Check_cookies: " + ex.toString());
         }
     }
 

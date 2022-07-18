@@ -273,7 +273,7 @@ public class ProductDAO {
     public boolean updateProduct(int productID, int price, String productName,
             byte quantity, String desc, byte rating, String linkImg1,
             String linkImg2, String linkImg3, String linkImg4,
-            String linkImg5, int genreID, int consolesID) throws SQLException {
+            String linkImg5, int genreID, int consolesID) throws SQLException, Exception {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
         String sql = "UPDATE dbo.Product\n"
@@ -298,7 +298,7 @@ public class ProductDAO {
         return count == 1;
     }
 
-    public boolean delete(int productID) throws SQLException {
+    public boolean delete(int productID) throws SQLException, Exception {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
         String sql = "DELETE FROM dbo.Product WHERE ProductID = ?";
@@ -311,7 +311,7 @@ public class ProductDAO {
     public boolean createProduct(int productID, int price, String productName,
             byte quantity, String desc, byte rating, String linkImg1,
             String linkImg2, String linkImg3, String linkImg4,
-            String linkImg5, int genreID, int consolesID) throws SQLException {
+            String linkImg5, int genreID, int consolesID) throws SQLException, Exception {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
         String sql = "insert into dbo.Product values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -332,7 +332,7 @@ public class ProductDAO {
         int count = stm.executeUpdate();
         return count == 1;
     }
-    
+
     public List<Product> listByID(int id) {
         List<Product> list = null;
         DBUtil db = new DBUtil();
@@ -378,7 +378,7 @@ public class ProductDAO {
         }
         return list;
     }
-    
+
     public List<Product> listByName(String name) {
         List<Product> list = null;
         DBUtil db = new DBUtil();
@@ -424,7 +424,7 @@ public class ProductDAO {
         }
         return list;
     }
-    
+
     public List<Product> findProductByGenreID(int id) {
         List<Product> list = null;
         DBUtil db = new DBUtil();

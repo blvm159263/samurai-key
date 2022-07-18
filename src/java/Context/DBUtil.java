@@ -14,20 +14,14 @@ import java.sql.DriverManager;
  */
 public class DBUtil {
 
-    public Connection getConnection() {
+    public Connection getConnection() throws Exception{
         String url = "jdbc:sqlserver://localhost;databaseName=PRJShop;user=sa;password=12345";
         Connection con = null;
-        try {
-            //Loading a driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            //Creating a connection
-            con = DriverManager.getConnection(url);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        //Loading a driver
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        //Creating a connection
+        con = DriverManager.getConnection(url);
         return con;
 
     }
 }
-
-
