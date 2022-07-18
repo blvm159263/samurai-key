@@ -71,6 +71,9 @@ public class HomeController extends HttpServlet {
             case "shoping-cart":
                 shoping_cart(request, response);
                 break;
+            case "checkout":
+                checkout(request, response);
+                break;
 
         }
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
@@ -512,7 +515,11 @@ public class HomeController extends HttpServlet {
 
         }
         session.invalidate();
-        response.sendRedirect("index.jsp");
+        String controller = (String) request.getAttribute("controller");
+        String action = (String) request.getAttribute("action");
+        request.setAttribute("controller", controller);
+        request.setAttribute("action", action);
+        request.getRequestDispatcher("/home/homepage.do?op=list").forward(request, response);
     }
     
     
