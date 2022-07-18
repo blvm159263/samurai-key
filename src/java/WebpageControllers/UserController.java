@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FrontController;
+package WebpageControllers;
 
 import Context.Hasher;
 import DAO.ConsolesDAO;
@@ -191,7 +191,7 @@ public class UserController extends HttpServlet {
             String password2 = request.getParameter("password2");
 
             User account = new User(userName, password);
-            if (UserDAO.register2(account)) { // check duplicate
+            if (UserDAO.register(account)) { // check duplicate
                 if (password.equals(password2)) { // check confirm_password
                     //Lưu thông báo lỗi confirm vào request
                     request.setAttribute("rMessage", "Please login to complete your registration.");

@@ -103,8 +103,7 @@ public class UserDAO {
 //        con.close();
 //        return count == 1;
 //    }
-
-    public static boolean register2(User user) throws Exception {
+    public static boolean register(User user) throws Exception {
         //Connecting to a database
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
@@ -125,5 +124,38 @@ public class UserDAO {
         }
 
         return done;
+    }
+
+    public static User find(String userName) throws Exception {
+        User user = null;
+        //Connecting to a database
+        DBUtil db = new DBUtil();
+        Connection con = db.getConnection();
+        //Creating and executing sql statements            
+        String sql = "select * from Users where UserName=?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, userName);
+        ResultSet rs = stm.executeQuery();
+        //if userId and password are correct
+        if (rs.next()) {
+            user = new User();
+            user.setId(rs.getInt(1));
+            user.setUserName(rs.getString(2));
+            user.setPassword(rs.getString(3));
+            user.setRole(rs.getString(4));
+        }
+        //Closing the connection
+        con.close();
+        return user;
+    }
+
+    public void update(User user) throws Exception {
+        //Connecting to a database
+        DBUtil db = new DBUtil();
+        Connection con = db.getConnection();
+        PreparedStatement stm = con.prepareStatement("update users set Passwords=? where id=?");
+        stm.setString(1, Hasher.hash(user.getPassword()));
+        stm.setInt(2, user.getId());
+        stm.executeUpdate();
     }
 }

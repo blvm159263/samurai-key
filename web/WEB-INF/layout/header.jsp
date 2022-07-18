@@ -35,7 +35,9 @@
                                 <ul>
                                     <li><a href="#">My Profile</a></li>
                                     <li><a href="#">History</a></li>
-                                    <li><a href="<c:url value="/admin/manage.do?op=listFull" />">Management</a></li>
+                                    <c:if test="${user.role == 'ADMIN'}">
+                                        <li><a href="<c:url value="/admin/manage.do?op=listFull" />">Management</a></li>
+                                    </c:if>
                                     <li><a href="<c:url value="/user/logout.do" />">Log Out</a></li>
                                 </ul>
                             </c:if>  
