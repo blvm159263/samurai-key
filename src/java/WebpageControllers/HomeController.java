@@ -57,6 +57,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
@@ -67,6 +68,7 @@ public class HomeController extends HttpServlet {
             op = op.toLowerCase();
         }
         //Check cookies
+        create_cartCookie(request, response);
         check_cookies(request, response);
         switch (action) {
             case "homepage":
@@ -442,6 +444,42 @@ public class HomeController extends HttpServlet {
         }
         response.sendRedirect("shoping-cart.do?op=view");
 
+    }
+
+    protected void create_cartCookie(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Cookie arr[] = request.getCookies();
+        PrintWriter out = response.getWriter();
+        List<Product> list = new ArrayList<>();
+        ProductDAO dao = new ProductDAO();
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                String txt[] = o.getValue().split(",");
+                for (String s : txt) {
+                    list.add(dao.getProductbyID(s));
+                }
+            }
+        }
+        for (int i = 0; i <= list.size(); i++) {
+            int count = 1;
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i).getProductID() == list.get(j).getProductID()) {
+                    count++;
+                    list.remove(j);
+                    j--;
+                    list.get(i).setQuantity((byte) count);
+                }
+            }
+        }
+        double total = 0;
+        for (Product o : list) {
+            total = total + o.getQuantity() * o.getPrice();
+        }
+        session.setAttribute("list", list);
+        session.setAttribute("total", total);
+        session.setAttribute("vat", Math.round((0.1 * total) * 100) / 100);
+        session.setAttribute("sum", Math.round((1.1 * total) * 100) / 100);
     }
 
     protected void view(HttpServletRequest request, HttpServletResponse response)
