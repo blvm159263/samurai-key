@@ -5,13 +5,17 @@
  */
 package FrontController;
 
+import DAO.CheckoutDAO;
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
+import models.User;
 
 /**
  *
@@ -37,6 +42,7 @@ public class HomeController extends HttpServlet {
     ProductDAO pd = new ProductDAO();
     GenreDAO gd = new GenreDAO();
     ConsolesDAO cd = new ConsolesDAO();
+    CheckoutDAO check = new CheckoutDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -169,10 +175,10 @@ public class HomeController extends HttpServlet {
             Cookie cPassword = null;
             Cookie cRememberMe = null; // new
             Cookie[] cookies = null;
-            
+
             // Get an array of Cookies associated with the this domain
             cookies = request.getCookies();
-            
+
             if (cookies != null) {
                 for (int i = 0; i < cookies.length; i++) {
                     cookie = cookies[i];
@@ -196,9 +202,9 @@ public class HomeController extends HttpServlet {
                     && cRememberMe.getValue().equals("on")) {
                 //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
                 HttpSession session = request.getSession();
-                
+
                 session.setAttribute("userName", userName);
-                
+
             }
         } catch (Exception ex) {
             log("Error at Check_cookies: " + ex.toString());
@@ -479,63 +485,74 @@ public class HomeController extends HttpServlet {
     protected void checkout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String op = (String) request.getAttribute("op");
-        op = op.toLowerCase();
-        switch (op) {
-            case "placeorder":
-                placeOrder(request, response);
-                break;
-            case "view":
-                
-                break;
+        try {
+            String op = (String) request.getAttribute("op");
+            op = op.toLowerCase();
+            switch (op) {
+                case "order":
+                    placeOrder(request, response);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String controller = (String) request.getAttribute("controller");
-        String action = (String) request.getAttribute("action");
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
     }
-    
-    protected void placeOrder(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cookie arr[] = request.getCookies();
-        List<Product> list = new ArrayList<>();
-        HttpSession session = request.getSession();
-        ProductDAO dao = new ProductDAO();
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split(",");
-                for (String s : txt) {
-                    list.add(dao.getProductbyID(s));
-                }
-            }
-        }
-        for (int i = 0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getProductID() == list.get(j).getProductID()) {
-                    count++;
-                    list.remove(j);
-                    j--;
-                    list.get(i).setQuantity((byte) count);
-                }
-            }
-        }
-        for (Cookie o : arr) {
-            o.setMaxAge(0);
-            response.addCookie(o);
 
-        }
-        session.invalidate();
-        String controller = (String) request.getAttribute("controller");
+    protected void placeOrder(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
         String action = (String) request.getAttribute("action");
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.getRequestDispatcher("/home/homepage.do?op=list").forward(request, response);
+        HttpSession session = request.getSession();
+        try {
+            String fullName = request.getParameter("fullName");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            double total = (Double) session.getAttribute("total");
+            LocalDateTime current = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = current.format(formatter);
+            User user = (User) session.getAttribute("user");
+            int userID = user.getId();
+            if (fullName == null || address == null || email == null || phone == null) {
+                request.setAttribute("message", "Some field are empty. Please check!");
+            } else {
+                boolean status = check.addOrder(fullName, address, total, email, phone, date, userID);
+                Cookie arr[] = request.getCookies();
+                List<Product> list = new ArrayList<>();
+                ProductDAO dao = new ProductDAO();
+                for (Cookie o : arr) {
+                    if (o.getName().equals("id")) {
+                        String txt[] = o.getValue().split(",");
+                        for (String s : txt) {
+                            list.add(dao.getProductbyID(s));
+                        }
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    int count = 1;
+                    for (int j = i + 1; j < list.size(); j++) {
+                        if (list.get(i).getProductID() == list.get(j).getProductID()) {
+                            count++;
+                            list.remove(j);
+                            j--;
+                            list.get(i).setQuantity((byte) count);
+                        }
+                    }
+                }
+                for (Cookie o : arr) {
+                    o.setMaxAge(0);
+                    response.addCookie(o);
+
+                }
+                session.invalidate();
+                request.setAttribute("action", "homepage");
+                request.setAttribute("op", "list");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -77,6 +77,7 @@ public class UserController extends HttpServlet {
 
     protected void loginHandler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         try {
             String userName = request.getParameter("userName").toLowerCase();
             String password = request.getParameter("password");
@@ -86,6 +87,7 @@ public class UserController extends HttpServlet {
             }
             // check account
             User account = UserDAO.check(userName, password);
+            
             // If login successfully
             //if (userName.equals("admin") && password.equals("1")) {
             if (account != null) {
@@ -112,8 +114,8 @@ public class UserController extends HttpServlet {
 
                 }
                 //Lưu userName vào session để ghi nhận đã login thành công
-                HttpSession session = request.getSession();
                 session.setAttribute("userName", userName);
+                session.setAttribute("user", account);
 
                 //Lưu userName + viết hoa chữ cái đầu rồi truyền đến header để thay tên vào phần welcome back
                 String firstLetter = userName.substring(0, 1);
