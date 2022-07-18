@@ -46,7 +46,7 @@
                         <input type="checkbox" class="form-check-input" id="remember" name="rememberMe" ${empty password ? "checked" : ""} ${rememberMe == "on" ? "checked" : ""}>
                         <label class="form-check-label" for="remember">Remember me</label>
                     </div>
-                        <a style="text-decoration: none;" class="form__link" href="<c:url value="/user/forgot_password.do" />">Forgot your password?</a>
+                        <a style="text-decoration: none;" class="form__link" href="<c:url value="/user/reset_form.do" />">Forgot your password?</a>
                     <button class="form__button button">SIGN IN</button>
                 </form>
             </div>

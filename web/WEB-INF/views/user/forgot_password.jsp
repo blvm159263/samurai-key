@@ -41,10 +41,10 @@
                         <input type="hidden" name="id" value="${user.id}" />
                         <input type="hidden" name="userName" value="${user.userName}" />
                         <input type="hidden" name="role" value="${user.role}" required />
-                        <label for="np1"><b>Enter password:</b></label>
+                        <label for="np1"><b>Enter new password:</b></label>
                         <input id="np1" type="password" name="newPassword1" placeholder="Password" value="${empty newPassword2 ? "" : newPassword}" required /><br/>                      
                         <br/>
-                        <label for="np2"><b>Confirm password:</b></label>
+                        <label for="np2"><b>Confirm new password:</b></label>
                         <input id="np2" type="password" name="newPassword2" placeholder="Confirm password" required /><br/>                      
                         <br/>
                         <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p>

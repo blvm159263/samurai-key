@@ -66,7 +66,7 @@ public class UserController extends HttpServlet {
             case "register":
                 register(request, response);
                 break;
-            case "forgot_password":
+            case "reset_form":
                 request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
                 break;
             case "find_user":
@@ -256,6 +256,9 @@ public class UserController extends HttpServlet {
             String newPassword = request.getParameter("newPassword1");
             String newPassword2 = request.getParameter("newPassword2");
             String role = request.getParameter("role");
+            // lấy op
+            String op = request.getParameter("op");
+            
             User account = UserDAO.find(userName);
             if (newPassword.equals(newPassword2)){
                 // create new user
@@ -268,7 +271,6 @@ public class UserController extends HttpServlet {
                 UserDAO ud = new UserDAO();
                 ud.update(user);
                //Cho hiện lại trang login.jsp
-               
                 request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);  
             }else{
                 // save unmatched password

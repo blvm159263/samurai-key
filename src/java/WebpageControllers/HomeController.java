@@ -5,13 +5,17 @@
  */
 package WebpageControllers;
 
+import DAO.CheckoutDAO;
 import DAO.ConsolesDAO;
 import DAO.GenreDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,9 +39,11 @@ import models.User;
 public class HomeController extends HttpServlet {
 
     private static final String Layout = "/WEB-INF/layout/main.jsp";
+
     ProductDAO pd = new ProductDAO();
     GenreDAO gd = new GenreDAO();
     ConsolesDAO cd = new ConsolesDAO();
+    CheckoutDAO check = new CheckoutDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,6 +57,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
         String controller = (String) request.getAttribute("controller");
         //Lấy action
@@ -61,6 +68,7 @@ public class HomeController extends HttpServlet {
             op = op.toLowerCase();
         }
         //Check cookies
+        create_cartCookie(request, response);
         check_cookies(request, response);
         switch (action) {
             case "homepage":
@@ -81,7 +89,7 @@ public class HomeController extends HttpServlet {
 
         }
         //Lấy controller để sau truyền lại cho main hiện view cần hiển thị
-        if (action.compareTo("shoping-cart") != 0) {
+        if (action.compareTo("shoping-cart") != 0 && action.compareTo("checkout") != 0) {
             request.setAttribute("controller", controller);
             request.setAttribute("action", action);
             request.getRequestDispatcher(Layout).forward(request, response);
@@ -170,10 +178,10 @@ public class HomeController extends HttpServlet {
             Cookie cPassword = null;
             Cookie cRememberMe = null; // new
             Cookie[] cookies = null;
-            
+
             // Get an array of Cookies associated with the this domain
             cookies = request.getCookies();
-            
+
             if (cookies != null) {
                 for (int i = 0; i < cookies.length; i++) {
                     cookie = cookies[i];
@@ -198,10 +206,10 @@ public class HomeController extends HttpServlet {
                     && cRememberMe.getValue().equals("on")) {
                 //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
                 HttpSession session = request.getSession();
-                
-               // session.setAttribute("userName", userName);
+
+                // session.setAttribute("userName", userName);
                 session.setAttribute("user", account);
-                
+
             }
         } catch (Exception ex) {
             log("Error at Check_cookies: " + ex.toString());
@@ -238,6 +246,9 @@ public class HomeController extends HttpServlet {
         listAll = pd.listAll();
         int size = listAll.size();
         int endP = countP(size);
+        session.setAttribute("curGen", null);
+        session.setAttribute("curCons", null);
+        session.setAttribute("curRating", null);
         session.setAttribute("endP", endP);
         session.setAttribute("list", listAll);
         session.setAttribute("size", size);
@@ -438,6 +449,42 @@ public class HomeController extends HttpServlet {
 
     }
 
+    protected void create_cartCookie(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Cookie arr[] = request.getCookies();
+        PrintWriter out = response.getWriter();
+        List<Product> list = new ArrayList<>();
+        ProductDAO dao = new ProductDAO();
+        for (Cookie o : arr) {
+            if (o.getName().equals("id")) {
+                String txt[] = o.getValue().split(",");
+                for (String s : txt) {
+                    list.add(dao.getProductbyID(s));
+                }
+            }
+        }
+        for (int i = 0; i <= list.size(); i++) {
+            int count = 1;
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i).getProductID() == list.get(j).getProductID()) {
+                    count++;
+                    list.remove(j);
+                    j--;
+                    list.get(i).setQuantity((byte) count);
+                }
+            }
+        }
+        double total = 0;
+        for (Product o : list) {
+            total = total + o.getQuantity() * o.getPrice();
+        }
+        session.setAttribute("listC", list);
+        session.setAttribute("total", total);
+        session.setAttribute("vat", Math.round((0.1 * total) * 100) / 100);
+        session.setAttribute("sum", Math.round((1.1 * total) * 100) / 100);
+    }
+
     protected void view(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String controller = (String) request.getAttribute("controller");
@@ -470,7 +517,7 @@ public class HomeController extends HttpServlet {
         for (Product o : list) {
             total = total + o.getQuantity() * o.getPrice();
         }
-        session.setAttribute("list", list);
+        session.setAttribute("listC", list);
         session.setAttribute("total", total);
         session.setAttribute("vat", Math.round((0.1 * total) * 100) / 100);
         session.setAttribute("sum", Math.round((1.1 * total) * 100) / 100);
@@ -482,63 +529,89 @@ public class HomeController extends HttpServlet {
     protected void checkout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String op = (String) request.getAttribute("op");
-        op = op.toLowerCase();
-        switch (op) {
-            case "placeorder":
-                placeOrder(request, response);
-                break;
-            case "view":
-                
-                break;
+        try {
+            String op = (String) request.getAttribute("op");
+            op = op.toLowerCase();
+            switch (op) {
+                case "order":
+                    placeOrder(request, response);
+                    break;
+                case "view":
+                    view_checkout(request, response);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String controller = (String) request.getAttribute("controller");
-        String action = (String) request.getAttribute("action");
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.getRequestDispatcher("WEB-INF/layout/main.jsp").forward(request, response);
     }
-    
-    protected void placeOrder(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cookie arr[] = request.getCookies();
-        List<Product> list = new ArrayList<>();
-        HttpSession session = request.getSession();
-        ProductDAO dao = new ProductDAO();
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split(",");
-                for (String s : txt) {
-                    list.add(dao.getProductbyID(s));
-                }
-            }
-        }
-        for (int i = 0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getProductID() == list.get(j).getProductID()) {
-                    count++;
-                    list.remove(j);
-                    j--;
-                    list.get(i).setQuantity((byte) count);
-                }
-            }
-        }
-        for (Cookie o : arr) {
-            o.setMaxAge(0);
-            response.addCookie(o);
 
-        }
-        session.invalidate();
+    protected void view_checkout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        request.setAttribute("controller", controller);
-        request.setAttribute("action", action);
-        request.getRequestDispatcher("/home/homepage.do?op=list").forward(request, response);
+        request.getRequestDispatcher(Layout).forward(request, response);
     }
-    
-    
+
+    protected void placeOrder(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        String action = (String) request.getAttribute("action");
+        HttpSession session = request.getSession();
+        try {
+            String fullName = request.getParameter("fullName");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            double total = (Double) session.getAttribute("total");
+            LocalDateTime current = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = current.format(formatter);
+            User user = (User) session.getAttribute("user");
+            int userID = user.getId();
+            if (total == 0) {
+                request.setAttribute("message", "There is no product!");
+                request.getRequestDispatcher(Layout).forward(request, response);
+            } else {
+                if (fullName == "" || address == "" || email == "" || phone == "") {
+                    request.setAttribute("message", "Some field are empty. Please check!");
+                    request.getRequestDispatcher(Layout).forward(request, response);
+                } else {
+                    boolean status = check.addOrder(fullName, address, total, email, phone, date, userID);
+                    Cookie arr[] = request.getCookies();
+                    List<Product> list = new ArrayList<>();
+                    ProductDAO dao = new ProductDAO();
+                    for (Cookie o : arr) {
+                        if (o.getName().equals("id")) {
+                            String txt[] = o.getValue().split(",");
+                            for (String s : txt) {
+                                list.add(dao.getProductbyID(s));
+                            }
+                        }
+                    }
+                    for (int i = 0; i < list.size(); i++) {
+                        int count = 1;
+                        for (int j = i + 1; j < list.size(); j++) {
+                            if (list.get(i).getProductID() == list.get(j).getProductID()) {
+                                count++;
+                                list.remove(j);
+                                j--;
+                                list.get(i).setQuantity((byte) count);
+                            }
+                        }
+                    }
+                    for (Cookie o : arr) {
+                        o.setMaxAge(0);
+                        response.addCookie(o);
+
+                    }
+                    session.invalidate();
+                    response.sendRedirect("homepage.do?op=list");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

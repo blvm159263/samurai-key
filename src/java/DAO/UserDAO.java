@@ -35,6 +35,7 @@ public class UserDAO {
         //if userId and password are correct
         if (rs.next()) {
             user = new User();
+            user.setId(rs.getInt(1));
             user.setUserName(rs.getString(2));
             user.setPassword(rs.getString(3));
             user.setRole(rs.getString(4));
@@ -59,6 +60,7 @@ public class UserDAO {
         //if userId and password are correct
         if (rs.next()) {
             user = new User();
+            user.setId(rs.getInt(1));
             user.setUserName(rs.getString(2));
             user.setPassword(rs.getString(3));
             user.setRole(rs.getString(4));

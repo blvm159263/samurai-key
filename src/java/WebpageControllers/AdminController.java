@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import models.Consoles;
 import models.Genre;
 import models.Product;
+import models.User;
 
 /**
  *
@@ -48,15 +49,23 @@ public class AdminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         //Lấy action
         String action = (String) request.getAttribute("action");
-        //Lấy op
-        switch (action) {
-            case "manage":
-                mangage_product(request, response);
-                break;
+        //Xác Minh Admin
+        User user = (User) session.getAttribute("user");
+        String role = user.getRole();
+        if (role.compareTo("ADMIN") == 0) {
+            switch (action) {
+                case "manage":
+                    mangage_product(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/WEB-INF/views/admin/manage-product.jsp").forward(request, response);
+
     }
 
     protected void mangage_product(HttpServletRequest request, HttpServletResponse response)
@@ -211,7 +220,7 @@ public class AdminController extends HttpServlet {
             String linkImg5 = request.getParameter("linkImg5");
             int genreID = Integer.parseInt(request.getParameter("genre"));
             int consolesID = Integer.parseInt(request.getParameter("console"));
-            boolean status = pd.createProduct( price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+            boolean status = pd.createProduct(price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
             if (status) {
                 request.setAttribute("message", "Create Successful!");
             } else {

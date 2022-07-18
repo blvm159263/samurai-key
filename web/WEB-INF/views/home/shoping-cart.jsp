@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${list}" var="o">
+                                    <c:forEach items="${listC}" var="o">
                                     <tr>
                                         <td class="shoping__cart__item">
                                             <img src="${o.linkImg1}" alt="" width="70" class="img-fluid rounded shadow-sm">
