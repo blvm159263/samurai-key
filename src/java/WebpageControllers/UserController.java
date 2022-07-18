@@ -54,7 +54,7 @@ public class UserController extends HttpServlet {
         //op = op.toLowerCase();
         switch (action) {
             case "login_form":
-                loginForm(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
                 break;
             case "login_handler":
                 loginHandler(request, response);
@@ -66,14 +66,12 @@ public class UserController extends HttpServlet {
             case "register":
                 register(request, response);
                 break;
+            case "forgot_password":
+                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+                break;
         }
     }
 
-    protected void loginForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //Chuyển đến trang login.jsp
-        request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
-    }
 
     protected void loginHandler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
