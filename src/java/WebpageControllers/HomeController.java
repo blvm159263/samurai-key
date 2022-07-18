@@ -476,7 +476,7 @@ public class HomeController extends HttpServlet {
         for (Product o : list) {
             total = total + o.getQuantity() * o.getPrice();
         }
-        session.setAttribute("list", list);
+        session.setAttribute("listC", list);
         session.setAttribute("total", total);
         session.setAttribute("vat", Math.round((0.1 * total) * 100) / 100);
         session.setAttribute("sum", Math.round((1.1 * total) * 100) / 100);
@@ -514,7 +514,7 @@ public class HomeController extends HttpServlet {
         for (Product o : list) {
             total = total + o.getQuantity() * o.getPrice();
         }
-        session.setAttribute("list", list);
+        session.setAttribute("listC", list);
         session.setAttribute("total", total);
         session.setAttribute("vat", Math.round((0.1 * total) * 100) / 100);
         session.setAttribute("sum", Math.round((1.1 * total) * 100) / 100);
