@@ -134,8 +134,8 @@
                     <ul>
                         <li class="${action=='homepage'?'active':''}"><a href="<c:url value="/home/homepage.do?op=list"/>">Home</a></li>
                         <li class="${action=='shop-grid'?'active':''}"><a href="<c:url value="/home/shop-grid.do?op=listAll"/>">Shop</a></li>
-                        <li class="${action=='shoping-cart'?'active':''}"><a href="<c:url value=""/>">Shoping Cart</a></li>
-                        <li class="${action=='checkout'?'active':''}"><a href="<c:url value=""/>">Check Out</a></li>
+                        <li class="${action=='shoping-cart'?'active':''}"><a href="<c:url value="/home/shoping-cart.do?op=view"/>">Shoping Cart</a></li>
+                        <li class="${action=='checkout'?'active':''}"><a href="<c:url value="/home/checkout.do?op=view"/>">Check Out</a></li>
                     </ul>
                 </nav>
             </div>
