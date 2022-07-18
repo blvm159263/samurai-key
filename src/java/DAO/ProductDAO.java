@@ -308,27 +308,26 @@ public class ProductDAO {
         return count == 1;
     }
 
-    public boolean createProduct(int productID, int price, String productName,
+    public boolean createProduct( int price, String productName,
             byte quantity, String desc, byte rating, String linkImg1,
             String linkImg2, String linkImg3, String linkImg4,
             String linkImg5, int genreID, int consolesID) throws SQLException {
         DBUtil db = new DBUtil();
         Connection con = db.getConnection();
-        String sql = "insert into dbo.Product values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into dbo.Product values(?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, productID);
-        stm.setInt(2, price);
-        stm.setString(3, productName);
-        stm.setByte(4, quantity);
-        stm.setString(5, desc);
-        stm.setByte(6, rating);
-        stm.setString(7, linkImg1);
-        stm.setString(8, linkImg2);
-        stm.setString(9, linkImg3);
-        stm.setString(10, linkImg4);
-        stm.setString(11, linkImg5);
-        stm.setInt(12, genreID);
-        stm.setInt(13, consolesID);
+        stm.setInt(1, price);
+        stm.setString(2, productName);
+        stm.setByte(3, quantity);
+        stm.setString(4, desc);
+        stm.setByte(5, rating);
+        stm.setString(6, linkImg1);
+        stm.setString(7, linkImg2);
+        stm.setString(8, linkImg3);
+        stm.setString(9, linkImg4);
+        stm.setString(10, linkImg5);
+        stm.setInt(11, genreID);
+        stm.setInt(12, consolesID);
         int count = stm.executeUpdate();
         return count == 1;
     }

@@ -31,7 +31,6 @@ import models.Product;
  */
 @WebServlet(name = "ManageController", urlPatterns = {"/manage"})
 public class ManageController extends HttpServlet {
-
     ProductDAO pd = new ProductDAO();
     GenreDAO gd = new GenreDAO();
     ConsolesDAO cd = new ConsolesDAO();
@@ -189,7 +188,7 @@ public class ManageController extends HttpServlet {
         String linkImg5 = request.getParameter("linkImg5");
         int genreID = Integer.parseInt(request.getParameter("genre"));
         int consolesID = Integer.parseInt(request.getParameter("console"));
-        boolean status = pd.createProduct(51, price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
+        boolean status = pd.createProduct( price, productName, quantity, desc, rating, linkImg1, linkImg2, linkImg3, linkImg4, linkImg5, genreID, consolesID);
         if (status) {
             request.setAttribute("message", "Create Successful!");
         } else {

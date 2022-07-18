@@ -20,34 +20,24 @@
                     <ul>
                         <li><a href="https://themewagon.com/themes/free-bootstrap-4-html5-responsive-ecommerce-website-template-ogani/">Original Template</a></li>
                         <li><a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">Bootstrap 4.1</a></li>
-                        <li><a href="#">Secure Shopping</a></li>
-                        <li><a href="#">Delivery information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Our Site map</a></li>
+                        <li><a href="https://github.com/blvm159263/prj">Git Hub</a></li>
                     </ul>
                     <ul>
                         <li><a href="https://blog.jquery.com/2018/01/20/jquery-3-3-1-fixed-dependencies-in-release-tag/">jQuery 3.3.1</a></li>
-                        <li><a href="#">Our Services</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Innovation</a></li>
-                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="https://fontawesome.com/">Font Awesome</a></li>
+                        <li><a href="http://owlcarousel2.github.io/OwlCarousel2/">Owl Carousel</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="footer__widget">
-                    <h6>Join Our Newsletter Now</h6>
-                    <p>Get E-mail updates about our latest shop and special offers.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your mail">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
+                    <h6>Contact to us now</h6>
+                    <p>Link Facebook below</p>
                     <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://www.facebook.com/vanminh.buile/"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/nhatminhlenguyen54"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/Duchoang0372"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100004330187788"><i class="fa fa-facebook"></i></a>
                     </div>
                 </div>
             </div>
@@ -63,7 +53,6 @@
                     <div class="footer__copyright__text authority">
                         <p><i class="fa fa-heart" aria-hidden="true"></i> Made by <a href="https://colorlib.com" target="_blank">Group 1</a></p> 
                     </div>
-                    <div class="footer__copyright__payment"><img src="<c:url value="/img/payment-item.png" />" alt=""></div>
                 </div>
             </div>
         </div>
