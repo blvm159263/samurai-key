@@ -62,11 +62,6 @@ public class HomeController extends HttpServlet {
         String controller = (String) request.getAttribute("controller");
         //Lấy action
         String action = (String) request.getAttribute("action");
-        //Lấy op
-        String op = (String) request.getAttribute("op");
-        if (op != null) {
-            op = op.toLowerCase();
-        }
         //Check cookies
         create_cartCookie(request, response);
         check_cookies(request, response);
