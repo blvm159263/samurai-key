@@ -135,11 +135,11 @@
             <input type="hidden" name="userName" value="${user.userName}" />
             <input type="hidden" name="role" value="${user.role}" />
             <label for="newPassword1"><b>Enter new password</b></label>
-            <input type="password" placeholder="Enter new Password" name="newPassword1" value="${empty newPassword2 ? "" : newPassword}" required>
+            <input type="password" placeholder="Enter new Password" name="newPassword1" value="${empty newPassword2 ? "" : newPassword}"  ${message1=="Reset Password Completed. Login again to see change." ? "disabled" : "required"} >
             <label for="newPassword2"><b>Confirm Password</b></label>
-            <input type="password" placeholder="Confirm Password" name="newPassword2" required>
+            <input type="password" placeholder="Confirm Password" name="newPassword2" ${message1=="Reset Password Completed. Login again to see change." ? "disabled" : "required"}>
             <p style="color: red; position: relative; text-align: center; margin: 0">${message1}</p>
-            <button class="reset" type="submit">Reset</button>
+            <button class="reset" type="submit" ${message1=="Reset Password Completed. Login again to see change." ? "disabled" : ""}>Reset</button>
         </div>
     </form>
 </div>

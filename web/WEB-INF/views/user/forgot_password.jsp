@@ -22,10 +22,10 @@
                         <h1>Reset Password</h1>
                         <hr>
                         <label for="userName"><b>Enter Name:</b></label>
-                        <input id="userName" type="text" name="userName" placeholder="User name" value="${userName}" required /><br/>                      
+                        <input id="userName" type="text" name="userName" placeholder="User name" value="${userName}" ${message=="Reset Password Completed. Please login to see change." ? "disabled" : "required"} /><br/>                      
                         <br/>
-                        <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p> 
-                        <input type="submit" value="Next" /><br/>
+                        <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p>
+                        <input type="submit" value="Next" ${message=="Reset Password Completed. Please login to see change." ? "disabled" : ""}/><br/>
                     </div>
                 </form>
 
@@ -42,10 +42,10 @@
                         <input type="hidden" name="userName" value="${user.userName}" />
                         <input type="hidden" name="role" value="${user.role}" />
                         <label for="np1"><b>Enter new password:</b></label>
-                        <input id="np1" type="password" name="newPassword1" placeholder="Password" value="${empty newPassword2 ? "" : newPassword}" required /><br/>                      
+                        <input id="np1" type="password" name="newPassword1" placeholder="Password" value="${empty newPassword2 ? "" : newPassword}" /><br/>                      
                         <br/>
                         <label for="np2"><b>Confirm new password:</b></label>
-                        <input id="np2" type="password" name="newPassword2" placeholder="Confirm password" required /><br/>                      
+                        <input id="np2" type="password" name="newPassword2" placeholder="Confirm password"  /><br/>                      
                         <br/>
                         <p style="color: red; position: relative; text-align: center; margin: 0">${message}</p>
                         <input type="submit" value="Reset" /><br/>

@@ -276,9 +276,7 @@ public class UserController extends HttpServlet {
                 UserDAO ud = new UserDAO();
                 ud.update(user);               
                 // lưu thông báo 
-                request.setAttribute("message", "Reset Password Completed. Please login to see change");
-                //logout
-                logout(request, response);
+                request.setAttribute("message", "Reset Password Completed. Please login to see change.");
 //                //Cho hiện lại trang login.jsp
 //                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
             } else {
@@ -317,7 +315,9 @@ public class UserController extends HttpServlet {
                 UserDAO ud = new UserDAO();
                 ud.update(user);
                 // lưu thông báo 
-                request.setAttribute("message1", "Reset Password Completed. Login again to see change");
+                request.setAttribute("message1", "Reset Password Completed. Login again to see change.");
+                //logout
+                logout(request, response);
 //                //Cho hiện lại trang login.jsp
 //                request.getRequestDispatcher("/WEB-INF/views/user/ma.jsp").forward(request, response);
             } else {
@@ -327,8 +327,7 @@ public class UserController extends HttpServlet {
                 request.setAttribute("newPassword2", newPassword2);
                 // send message
                 request.setAttribute("message1", "Confirm Password not matched.");
-                //logout
-                logout(request, response);
+                
             }
             //Cho hiện lại trang forgot_password.jsp
             request.getRequestDispatcher("/index.jsp").forward(request, response);
