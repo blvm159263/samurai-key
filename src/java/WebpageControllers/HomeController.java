@@ -176,7 +176,7 @@ public class HomeController extends HttpServlet {
             Cookie cookie = null;
             Cookie cUserName = null;
             Cookie cPassword = null;
-            Cookie cRememberMe = null; // new
+            //Cookie cRememberMe = null; // new
             Cookie[] cookies = null;
 
             // Get an array of Cookies associated with the this domain
@@ -189,9 +189,10 @@ public class HomeController extends HttpServlet {
                         cUserName = cookie;
                     } else if ((cookie.getName()).equals("password")) {
                         cPassword = cookie;
-                    } else if ((cookie.getName()).equals("rememberMe")) {
-                        cRememberMe = cookie;
-                    }
+                    } 
+//                    else if ((cookie.getName()).equals("rememberMe")) {
+//                        cRememberMe = cookie;
+//                    }
                 }
             }
             String userName = cUserName.getValue().toLowerCase();
@@ -199,11 +200,11 @@ public class HomeController extends HttpServlet {
             User account = UserDAO.check_web(userName, password);
             if (cUserName != null
                     && cPassword != null
-                    && cRememberMe != null //new
-                    && account != null
+                    //&& cRememberMe != null //new
+                    && account != null) {
                     //&& cUserName.getValue().toLowerCase().equals("admin")
                     //&& cPassword.getValue().toLowerCase().equals("12345")
-                    && cRememberMe.getValue().equals("on")) {
+                    //&& cRememberMe.getValue().equals("on")
                 //Lưu userName vào session để ghi nhận đã login thành công => thay tên cho user ở header
                 HttpSession session = request.getSession();
 

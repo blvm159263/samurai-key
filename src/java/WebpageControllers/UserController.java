@@ -66,7 +66,7 @@ public class UserController extends HttpServlet {
             case "register":
                 register(request, response);
                 break;
-            case "reset_form":
+            case "forgot_password":
                 request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
                 break;
             case "find_user":
@@ -75,9 +75,11 @@ public class UserController extends HttpServlet {
             case "reset_password":
                 resetPassword(request, response);
                 break;
+            case "reset_form":
+                resetForm(request, response);
+                break;
         }
     }
-
 
     protected void loginHandler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -97,22 +99,22 @@ public class UserController extends HttpServlet {
                     // Create cookies for username and password
                     Cookie cUserName = new Cookie("userName", userName);
                     Cookie cPassword = new Cookie("password", Hasher.hash(password));
-                    Cookie cRememberMe = new Cookie("rememberMe", rememberMe); //new
+                    //Cookie cRememberMe = new Cookie("rememberMe", rememberMe); //new
 
                     // Set path to homepage
                     cUserName.setPath("/Group1_Assignment");
                     cPassword.setPath("/Group1_Assignment");
-                    cRememberMe.setPath("/Group1_Assignment"); //new
+                    //cRememberMe.setPath("/Group1_Assignment"); //new
 
                     // Set expiry date after 24 Hrs for both the cookies
                     cUserName.setMaxAge(60 * 60 * 24);
                     cPassword.setMaxAge(60 * 60 * 24);
-                    cRememberMe.setMaxAge(60 * 60 * 24); //new
+                    //cRememberMe.setMaxAge(60 * 60 * 24); //new
 
                     // Add both the cookies in the response header
                     response.addCookie(cUserName);
                     response.addCookie(cPassword);
-                    response.addCookie(cRememberMe); //new
+                    //response.addCookie(cRememberMe); //new
 
                 }
                 //Lưu userName vào session để ghi nhận đã login thành công
@@ -227,27 +229,32 @@ public class UserController extends HttpServlet {
             log("Error at Register: " + ex.toString());
         }
     }
-    
+
     protected void findUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             String userName = request.getParameter("userName").toLowerCase();
+//            String path = request.getParameter("path");
+//            if(path==null){
+//                path = "off";
+//            }
             User account = UserDAO.find(userName);
-            if (account != null){
+            if (account != null) {
                 request.setAttribute("user", account);
-            }else{
+            } else {
                 // save wrong name
                 request.setAttribute("userName", userName);
                 // send message
-                request.setAttribute("message", "User name not found.");                
+                request.setAttribute("message", "User name not found.");
             }
+//            request.setAttribute("path", path);
             //Cho hiện lại trang forgot_password.jsp
-                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
         } catch (Exception ex) {
             log("Error at Find User: " + ex.toString());
         }
     }
-    
+
     protected void resetPassword(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -256,11 +263,50 @@ public class UserController extends HttpServlet {
             String newPassword = request.getParameter("newPassword1");
             String newPassword2 = request.getParameter("newPassword2");
             String role = request.getParameter("role");
-            // lấy op
-            String op = request.getParameter("op");
-            
+
             User account = UserDAO.find(userName);
-            if (newPassword.equals(newPassword2)){
+            if (newPassword.equals(newPassword2)) {
+                // create new user
+                User user = new User();
+                user.setId(id);;
+                user.setUserName(userName);
+                user.setPassword(newPassword);
+                user.setRole(role);
+                //Update user
+                UserDAO ud = new UserDAO();
+                ud.update(user);               
+                // lưu thông báo 
+                request.setAttribute("message", "Reset Password Completed. Please login to see change");
+                //logout
+                logout(request, response);
+//                //Cho hiện lại trang login.jsp
+//                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+            } else {
+                // save unmatched password
+                request.setAttribute("user", account);
+                request.setAttribute("newPassword", newPassword);
+                request.setAttribute("newPassword2", newPassword2);
+                // send message
+                request.setAttribute("message", "Confirm Password not matched.");
+            }
+            //Cho hiện lại trang forgot_password.jsp
+            request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at Reser Password: " + ex.toString());
+        }
+    }
+    
+    protected void resetForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String userName = request.getParameter("userName").toLowerCase();
+            String newPassword = request.getParameter("newPassword1");
+            String newPassword2 = request.getParameter("newPassword2");
+            String role = request.getParameter("role");
+
+            User account = UserDAO.find(userName);
+            if (newPassword.equals(newPassword2)) {
                 // create new user
                 User user = new User();
                 user.setId(id);;
@@ -270,23 +316,28 @@ public class UserController extends HttpServlet {
                 //Update user
                 UserDAO ud = new UserDAO();
                 ud.update(user);
-               //Cho hiện lại trang login.jsp
-                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);  
-            }else{
+                // lưu thông báo 
+                request.setAttribute("message1", "Reset Password Completed. Login again to see change");
+//                //Cho hiện lại trang login.jsp
+//                request.getRequestDispatcher("/WEB-INF/views/user/ma.jsp").forward(request, response);
+            } else {
                 // save unmatched password
                 request.setAttribute("user", account);
                 request.setAttribute("newPassword", newPassword);
                 request.setAttribute("newPassword2", newPassword2);
                 // send message
-                request.setAttribute("message", "Confirm Password not matched.");                
+                request.setAttribute("message1", "Confirm Password not matched.");
+                //logout
+                logout(request, response);
             }
             //Cho hiện lại trang forgot_password.jsp
-                request.getRequestDispatcher("/WEB-INF/views/user/forgot_password.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (Exception ex) {
-            log("Error at Reser Password: " + ex.toString());
+            log("Error at Reser Form: " + ex.toString());
         }
     }
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**
      * Handles the HTTP <code>GET</code> method.

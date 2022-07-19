@@ -5,7 +5,7 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
-
+<link rel="stylesheet" href="<c:url value="/css/reset_pwd.css" />" type="text/css">
 
 <!-- Header Section Begin -->
 <header class="header">
@@ -34,34 +34,16 @@
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <!--<li><a href="#">My Profile</a></li>-->
-                                    <li><a href="<c:url value="/user/reset_form.do?op=reset" />">Reset Password</a></li>
-                                    <c:if test="${user.role == 'ADMIN'}">
+                                    <li><a onclick="document.getElementById('reset').style.display = 'block'">Reset Password</a></li>
+                                        <%--<li><a href="<c:url value="/user/reset_form.do" />">Reset Password</a></li>--%>
+                                        <c:if test="${user.role == 'ADMIN'}">
                                         <li><a href="<c:url value="/admin/manage.do?op=listFull" />">Management</a></li>
-                                    </c:if>
+                                        </c:if>
                                     <li><a href="<c:url value="/user/logout.do" />">Log Out</a></li>
                                 </ul>
                             </c:if>  
 
                         </div>
-                        <!--<div class="header__top__right__auth">-->
-                        <%--<c:if test="${userName == null}">--%>
-                        <%--<a href="<c:url value="/user/login.do?op=login_form" />"><i class="fa fa-user"></i> Login</a>--%>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${userName != null}">--%>
-                        <%--<div class="nav-item dropdown">
-                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                 <i class="fa fa-user"></i>
-                                 <span class="d-none d-lg-inline-flex">${userName}</span>
-                             </a>
-                             <div class="dropdown-menu">
-                                 <a href="#" class="dropdown-item">My Profile</a>
-                                 <a href="#" class="dropdown-item">Settings</a>
-                                 <a href="<c:url value="/user/logout.do" />" class="dropdown-item">Log Out</a>
-                             </div>
-                         </div>--%>
-                        <%--<a href="<c:url value="/user/logout.do" />"><i class="fa fa-user"></i> ${userName}</a>--%>
-                        <%--</c:if>--%>    
-                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -93,7 +75,7 @@
                         <li><a href="<c:url value="/home/shoping-cart.do?op=view" />"><i class="fa fa-shopping-bag"></i></a></li>                       
                     </ul>
 
-                        <div class="header__cart__price">item: <span><fmt:formatNumber value="${total}" type="currency" /></span></div>
+                    <div class="header__cart__price">item: <span><fmt:formatNumber value="${total}" type="currency" /></span></div>
 
 
 
@@ -143,5 +125,36 @@
         </div>
     </div>
 </section>
+<div style="${not empty message1 ? "display: block;" : ""}" id="reset" class="modal">
+    <form class="modal-content animate" action="<c:url value="/user/reset_form.do" />" method="post">
+        <span onclick="document.getElementById('reset').style.display = 'none'" class="close" title="Close Modal">&times;</span>
+        <div class="container-form">
+            <h1>Reset Password</h1>
+            <hr>
+            <input type="hidden" name="id" value="${user.id}" />
+            <input type="hidden" name="userName" value="${user.userName}" />
+            <input type="hidden" name="role" value="${user.role}" />
+            <label for="newPassword1"><b>Enter new password</b></label>
+            <input type="password" placeholder="Enter new Password" name="newPassword1" value="${empty newPassword2 ? "" : newPassword}" required>
+            <label for="newPassword2"><b>Confirm Password</b></label>
+            <input type="password" placeholder="Confirm Password" name="newPassword2" required>
+            <p style="color: red; position: relative; text-align: center; margin: 0">${message1}</p>
+            <button class="reset" type="submit">Reset</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('reset');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>      
 <!-- Header Section End -->
 

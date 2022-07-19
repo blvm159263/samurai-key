@@ -13,7 +13,7 @@
         <title>Forgot Password</title>
         <link href="<c:url value="/css/forgot_password.css"/>" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body style="background-image: url('<c:url value="/img/pwd.png" />');">
         <c:if test="${empty user.userName}">
             <div class="create-table" >
                 <span onclick="location.href = '<c:url value="/user/login_form.do" />'" class="close" title="Cancel">&times;</span>
@@ -28,7 +28,7 @@
                         <input type="submit" value="Next" /><br/>
                     </div>
                 </form>
-                
+
             </div>
         </c:if>
         <c:if test="${not empty user.userName}">
@@ -40,7 +40,7 @@
                         <hr>
                         <input type="hidden" name="id" value="${user.id}" />
                         <input type="hidden" name="userName" value="${user.userName}" />
-                        <input type="hidden" name="role" value="${user.role}" required />
+                        <input type="hidden" name="role" value="${user.role}" />
                         <label for="np1"><b>Enter new password:</b></label>
                         <input id="np1" type="password" name="newPassword1" placeholder="Password" value="${empty newPassword2 ? "" : newPassword}" required /><br/>                      
                         <br/>
@@ -51,7 +51,7 @@
                         <input type="submit" value="Reset" /><br/>
                     </div>
                 </form>
-                
+
             </div>
         </c:if>
 
