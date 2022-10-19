@@ -62,8 +62,8 @@ This application uses the following open source packages:
 
 ## Contributers
 
-- [Bui Le Van Minh](https://github.com/blvm159263)
-- [Nguyen Duc Hoang](https://github.com/n-d-h)
-- [Le Nguyen Nhat Minh](https://github.com/Le-Nguyen-Nhat-Minh)
-- [Nhan](https://github.com/nhanhan31)
+<a href="https://github.com/blvm159263" > &emsp;:desktop_computer: Bui Le Van Minh <a/> <br/>
+<a href="https://github.com/blvm159263](https://github.com/n-d-h" > &emsp;:desktop_computer: Nguyen Duc Hoang <a/><br/>
+<a href="https://github.com/blvm159263](https://github.com/Le-Nguyen-Nhat-Minh" > &emsp;:desktop_computer: Le Nguyen Nhat Minh <a/><br/>
+<a href="https://github.com/blvm159263](https://github.com/nhanhan31" > &emsp;:desktop_computer: Nhan <a/><br/>
 
