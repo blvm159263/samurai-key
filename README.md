@@ -24,7 +24,7 @@
 * Load products from Database and Display on website
 * Search and Filter Product
 * Pagingation
-* Load and Show prouduct detail
+* Load and Show product detail
 * Shopping Cart
 * Admin site:
   - Manage product: CRUD
@@ -39,17 +39,17 @@
 
 ## How To Use
 
-To clone and run this application, you'll need Java Developing IDE( NetBeans, Eclipe,...), Microsoft SQL Server and Apache Tomcat 8( or higher) installed on your computer.
+To clone and run this application, you'll need Java Developing IDE (NetBeans, Eclipe,...), Microsoft SQL Server and Apache Tomcat 8( or higher) installed on your computer.
 
 ### 1. After cloned, run PRJShop.sql by using SQL Server and excute it to create Database
-### 2. Go to package Context -> DBUtil.java -> Change user and password( match with your SQL Server)
+### 2. Go to package Context -> DBUtil.java -> Change user and password (match with your SQL Server)
 
 <img src="https://github.com/blvm159263/samurai_key/blob/main/screen/setup.png" alt="setup"/>
 
-### 3. Make sure you have Apache Tomcat! Then run application by localhost and enjoy!
+### 3. Make sure you have Apache Tomcat! Then run application as localhost and enjoy!
 
 > **Note**
-> If there is Error in first time you access the website, try to reload website(F5).
+> If there is Error in first time you access the website, try to reload website (F5).
 
 
 ## Credits
